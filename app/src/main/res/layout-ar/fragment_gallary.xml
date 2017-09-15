@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:id="@+id/gallary_fragment"
+    tools:context=".Fragment.GallaryFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/ll_galary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="8dp"
+
+        >
+
+        <TextView
+            android:id="@+id/all_galary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="@string/all"
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel"
+
+            />
+
+        <TextView
+            android:id="@+id/event_gallary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/event"
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel" />
+
+        <TextView
+            android:id="@+id/catering_gallary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/catering"
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel" />
+
+        <TextView
+            android:id="@+id/restaurant_gallary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:text="@string/restaurant"
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerviewGallary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_galary"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground" />
+</LinearLayout>

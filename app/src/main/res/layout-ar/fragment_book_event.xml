@@ -1,0 +1,146 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bookEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="@color/white"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    tools:context=".Fragment.BookEvent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <EditText
+            android:id="@+id/event_first_name"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text"
+            android:hint="الاسم الأول"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="@dimen/textSize" />
+
+        <EditText
+            android:id="@+id/event_last_name"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:background="@drawable/edit_text"
+            android:hint="الاسم الأخير"
+            android:padding="10dp"
+            android:textSize="@dimen/textSize" />
+
+        <EditText
+            android:id="@+id/event_address"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:background="@drawable/edit_text"
+            android:hint="العنوان"
+            android:padding="10dp"
+            android:textSize="@dimen/textSize" />
+
+        <EditText
+            android:id="@+id/event_email"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text"
+            android:hint="الايميل"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textSize="@dimen/textSize" />
+
+        <EditText
+            android:id="@+id/showPopup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text"
+            android:drawableLeft="@drawable/down_arrow_f"
+            android:focusable="false"
+            android:hint="@string/event_type"
+            android:padding="10dp"
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text"
+            android:drawableLeft="@drawable/calendar"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="تاريخ الحدث"
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="عدد الضيوف"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="0.1"
+                android:text="0" />
+
+            <SeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="0.8"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress"
+                android:thumb="@drawable/seekbar_thumb" />
+
+            <TextView
+                android:id="@+id/value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="0.1"
+                android:text="0"
+                android:textSize="@dimen/textSize" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_shape"
+            android:text="إرسال الطلب"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize" />
+
+    </LinearLayout>
+</ScrollView>

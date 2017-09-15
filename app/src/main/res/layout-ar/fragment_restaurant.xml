@@ -1,0 +1,287 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:id="@+id/restaurant_id"
+    tools:context=".Fragment.RestaurantFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hight_slider"
+            android:scaleType="fitXY"
+            android:src="@drawable/resturant" />
+        <RelativeLayout
+            android:id="@+id/ll_imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hight_slider"
+            android:visibility="gone">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true" />
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/back_indicator"
+                android:gravity="bottom|center"
+                android:padding="5dp"
+                app:centered="false"
+                app:fillColor="@color/backLogo"
+                app:pageColor="@color/white"
+                app:radius="5dp"
+                app:snap="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shadow_grey"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="التصنيف"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/titel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Cuisine"
+                    android:visibility="gone"
+                    android:textSize="@dimen/textSize" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="حلويات"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/titel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="travel.cuisine.art"
+                    android:textSize="@dimen/textSize" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="@dimen/rest_icon"
+                    android:layout_height="@dimen/rest_icon"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_like" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:gravity="center"
+                    android:text="إعجاب"
+                    android:textSize="@dimen/textSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="@dimen/rest_icon"
+                    android:layout_height="@dimen/rest_icon"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_chat" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:gravity="center"
+                    android:text="تعليق"
+                    android:textSize="@dimen/textSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="@dimen/rest_icon"
+                    android:layout_height="@dimen/rest_icon"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_twitter_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:gravity="center"
+                    android:text="تويتر"
+                    android:textSize="@dimen/textSize" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:text="سالم الشرق الأوسط رائع يقدم الطعام في جو غير متكلف نظيفة. هناك مجموعة واسعة من الأطباق التى تقدم على طراز الكافيتريا في الستايروفوم حاويات. إنه ليس فخماً ولكنه شهي. فريق العمل ودود ومرحبين، العملاء قطاع عريض من الألوان، الأعمار مناحي الحياة. واحدة الامل تبدو كسر المجتمع."
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="المشاركة مع الأصدقاء"
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_facebook_letter_logo" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_twitter" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_google_plus_logo" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:visibility="gone"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape_black"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_digg" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:visibility="gone"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_reddit_social_logo_character" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:visibility="gone"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_delicious" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_stumbleupon" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_envelope" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

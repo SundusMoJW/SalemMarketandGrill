@@ -1,0 +1,193 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_account"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/white"
+    tools:context="com.twins.osama.salemsmarketandgrill.Fragment.AccountFragment">
+<LinearLayout
+    android:id="@+id/user_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone">
+  <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mineTransport"
+        android:padding="10dp"
+        android:text="الحساب"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/titel" />
+
+     <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="15dp"
+            android:text="تغيير اسم المستخدم "
+            android:textColor="@color/back_digg"
+            android:textSize="@dimen/textSize" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/mineTransport" />
+        <EditText
+            android:id="@+id/new_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="text"
+            android:background="@drawable/edit_text"
+            android:layout_margin="15dp"
+            android:textSize="@dimen/textSize" />
+
+   <Button
+            android:id="@+id/save_new_name"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="حفظ"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@color/rect_rounded"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel" />
+<View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/mineTransport" />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/email_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+ <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mineTransport"
+            android:padding="10dp"
+            android:text="الحساب"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/titel" />
+
+  <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="15dp"
+            android:text="@string/email"
+            android:textColor="@color/back_digg"
+            android:textSize="@dimen/textSize" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+        <EditText
+            android:id="@+id/new_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edit_text"
+            android:layout_margin="15dp"
+            android:textSize="@dimen/textSize" />
+
+   <Button
+            android:id="@+id/save_new_email"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="حفظ"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@color/rect_rounded"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel" />
+
+   <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mineTransport"
+            android:padding="10dp"
+            android:text="الحساب"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/titel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:padding="5dp"
+            android:text="كلمة السر الحالية"
+            android:textColor="@color/back_digg"
+            android:textSize="@dimen/textSize" />
+
+
+
+        <EditText
+            android:id="@+id/old_pass"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/edit_text"
+            android:textSize="@dimen/textSize" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+   <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="15dp"
+            android:text="كلمة السر الجديدة"
+            android:textColor="@color/back_digg"
+            android:textSize="@dimen/textSize" />
+
+        <EditText
+            android:id="@+id/new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edit_text"
+            android:layout_margin="15dp"
+            android:textSize="@dimen/textSize" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+
+        <Button
+            android:id="@+id/save_new_pass"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="حفظ"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@color/rect_rounded"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel" />
+   </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pagerFragment"
+    tools:context="com.twins.osama.salemsmarketandgrill.Helpar.PagerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:id="@+id/imge"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:textColor="@color/backLogo"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/back_text_slider"
+        android:gravity="center"
+        android:textSize="@dimen/titel"
+        android:padding="10dp"
+        />
+</RelativeLayout>

@@ -1,0 +1,473 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/check_out_steps"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:textDirection="ltr"
+    tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CheckOutSteps">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/select1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backLogo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="1"
+                android:background="@color/backLogo"
+                android:clickable="true"
+                android:padding="5dp"
+                android:text="STEP 1 \n Billing Details"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize"
+                android:textStyle="bold"
+                android:visibility="visible"
+
+                />
+
+
+            <ImageView
+                android:id="@+id/arrow_up_step1"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_up_white"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/arrow_down_step1"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_down_white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentStep1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/showPopupCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text"
+                android:drawableRight="@drawable/down_arrow_f"
+                android:hint="@string/country"
+                android:padding="10dp"
+                android:focusable="false"
+                android:textSize="@dimen/textSize" />
+            <EditText
+                android:id="@+id/first_name"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text"
+                android:hint="@string/first_name"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <EditText
+                android:id="@+id/last_name"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:hint="@string/last_name"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <EditText
+                android:id="@+id/company_name"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:hint="@string/company_name"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <EditText
+                android:id="@+id/address"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:hint="@string/address"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <EditText
+                android:id="@+id/town"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:hint="@string/town"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <EditText
+                android:id="@+id/state"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text"
+                android:hint="@string/state"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/select2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backLogo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="1"
+                android:background="@color/backLogo"
+                android:clickable="true"
+                android:padding="5dp"
+                android:text="STEP 2 \n Order Summary"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize"
+                android:textStyle="bold"
+                android:visibility="visible"
+
+                />
+
+            <ImageView
+                android:id="@+id/arrow_up_step2"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_up_white"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/arrow_down_step2"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_down_white"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentStep2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="@string/order_summary"
+                android:textColor="@color/backLogo"
+                android:textSize="@dimen/titel" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="WOO SINGLE #1"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="9$ USD"
+                        android:textSize="@dimen/textSize" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="CART SUB-TOTAL"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="9$ USD"
+                        android:textSize="@dimen/textSize" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="ORDER TOTAL"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:text="9$ USD"
+                        android:textSize="@dimen/textSize" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/select3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backLogo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="1"
+                android:background="@color/backLogo"
+                android:clickable="true"
+                android:padding="5dp"
+                android:text="STEP 3 \n Payment &amp; delivery Method"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/arrow_up_step3"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_up_white"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/arrow_down_step3"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.1"
+                android:background="@color/backLogo"
+                android:src="@drawable/ic_keyboard_arrow_down_white"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentStep3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/backLogo"
+                    android:textSize="@dimen/titel" />
+
+                <TextView
+                    android:id="@+id/direct_transfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/direct_transfer"
+                    android:textColor="@color/back_digg"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/cheque_draft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/cheque_draft"
+                    android:textColor="@color/back_digg"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/pay_pal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/pay_pal"
+                    android:textColor="@color/back_digg"
+                    android:textSize="@dimen/textSize" />
+            </LinearLayout>
+
+            <EditText
+                style="@style/AlertDialog.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text"
+                android:gravity="center"
+                android:hint="example@mail.com"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textSize="@dimen/textSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/delivery_method"
+                android:textColor="@color/backLogo"
+                android:textSize="@dimen/titel" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/with_corner_left"
+                    android:text="@string/delivery"
+                    android:padding="10dp"
+                    android:textColor="@color/back_digg"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/on_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/with_corner_right"
+                    android:text="@string/on_place"
+                    android:padding="10dp"
+                    android:textColor="@color/back_digg"
+                    android:textSize="@dimen/textSize" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_shape"
+                android:text="@string/process_order"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

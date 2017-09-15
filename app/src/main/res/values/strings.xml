@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">Salem\'s Market and Grill</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="gallary">Gallary</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="book_event">Book Event</string>
+    <string name="settings">Settings</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="logout">Logout</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="more_info">more info</string>
+    <string name="suspendisse_gravida">SUSPENDISSE GRAVIDA</string>
+    <string name="login">Login</string>
+    <string name="checkout">Checkout</string>
+    <string name="catering">Catering</string>
+    <string name="event">Event</string>
+    <string name="all">All</string>
+    <string name="connect_with">Connect With </string>
+    <string name="forget_pssword">Forget Pssword ?</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="company_name">Company Name</string>
+    <string name="address">Address</string>
+    <string name="town">Town / City</string>
+    <string name="state">State</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="direct_transfer">Direct Transfer</string>
+    <string name="cheque_draft">Cheque Draft</string>
+    <string name="pay_pal">Pay Pal</string>
+    <string name="delivery_method">Delivery Method</string>
+    <string name="delivery">Delivery</string>
+    <string name="on_place">On Place</string>
+    <string name="process_order">PROCESS ORDER</string>
+    <string name="event_type">Event Type</string>
+    <string name="united_states">United States (US)</string>
+    <string name="country">Country</string>
+    <string name="postal">Postal / Zip</string>
+    <string name="shipping">Shipping Calculator</string>
+    <string name="orderTotal">Order Total</string>
+    <string name="cartSubTotal">CART SUB-TOTAL</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="phone">1(800)555-5555</string>
+    <string name="comp_email">info@vienarestaurant.com</string>
+    <string name="about_app">About App</string>
+    <string name="message">This app is >>>>>>\n >>>>...</string>
+    <string name="signup">Sign Up</string>
+    <string name="new_signup">Sign Up</string>
+    <string name="facebook_app_id">109572556432674</string>
+    <string name="fb_login_protocol_scheme">fb109572556432674</string>
+
+
+    <string-array name="drawerItems">
+        <item>Home</item>
+        <item>Cart</item>
+        <item>Gallary</item>
+        <item>Book Event</item>
+        <item>Settings</item>
+        <item>Contact Us</item>
+        <item>Logout</item>
+    </string-array>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home_color</item>
+        <item>@drawable/ic_shopping_cart_color</item>
+        <item>@drawable/ic_menu_gallery_color</item>
+        <item>@drawable/ic_calendar_color</item>
+        <item>@drawable/ic_settings_color</item>
+        <item>@drawable/ic_phone_call_color</item>
+        <item>@drawable/ic_logout_color</item>
+    </array>
+    <array name="nav_drawer_icons_on">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_shopping_cart</item>
+        <item>@drawable/ic_menu_gallery_white</item>
+        <item>@drawable/ic_calendar</item>
+        <item>@drawable/ic_settings_white</item>
+        <item>@drawable/ic_phone_call_white</item>
+        <item>@drawable/ic_logout</item>
+    </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--<item>@drawable/ic_restaurant_color</item>-->
+    <!--<item>@drawable/ic_restaurant</item>-->
+    <string name="Arabic">Arabic</string>
+    <string name="English">English</string>
+    <string name="title_activity_image_zoom">ImageZoom</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sign_up">SignUp</string>
+</resources>

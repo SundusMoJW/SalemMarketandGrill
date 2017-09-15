@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Salem\'s Market and Grill</string>
+    <string name="home">البداية</string>
+    <string name="cart">السلة</string>
+    <string name="gallary">معرض الصور</string>
+    <string name="restaurant">المطعم</string>
+    <string name="book_event">حجز حدث</string>
+    <string name="settings">الضبط</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="logout">الخروج</string>
+    <string name="name">الاسم</string>
+    <string name="email">الإيميل</string>
+    <string name="more_info">المزيد من المعلومات</string>
+    <string name="suspendisse_gravida">SUSPENDISSE GRAVIDA</string>
+    <string name="checkout">الفحص</string>
+    <string name="password">كلمة السر</string>
+    <string name="catering">الطلبات</string>
+    <string name="event">الأحداث</string>
+    <string name="all">الكل</string>
+    <string name="remember_me">تذكرني</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="first_name">الاسم الأول</string>
+    <string name="last_name">الاسم الأخير</string>
+    <string name="company_name">اسم المؤسسة</string>
+    <string name="address">العنوان</string>
+    <string name="town">المدينة / البلدة</string>
+    <string name="state">الدولة</string>
+    <string name="connect_with">تسجيل الدخول باستخدام</string>
+    <string name="forget_pssword">نسيت كلمة المرور ؟</string>
+    <string name="order_summary">ملخص الطلبات</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="direct_transfer">تحويل مباشر</string>
+    <string name="cheque_draft">عن طريق الشيك</string>
+    <string name="pay_pal">باي بال</string>
+    <string name="delivery_method">طريقة الطلب</string>
+    <string name="delivery">ديليفري</string>
+    <string name="on_place">في المكان</string>
+    <string name="process_order">إعتماد الطلب</string>
+    <string name="event_type">نوع الحدث</string>
+    <string name="united_states">الولايات المتحدة الأمريكية</string>
+    <string name="country">الدولة</string>
+    <string name="postal">الرمز البريدي للدولة</string>
+    <string name="shipping">تكلفة الشحن</string>
+    <string name="orderTotal">الطلب الكلي</string>
+    <string name="cartSubTotal">التكلفة الكلية</string>
+    <string name="about_app">حول التطبيق</string>
+    <string name="message">يقوم هذا التطبيق ب >>>>>>\n >>>>...</string>
+    <string name="signup">تسجيل الدخول</string>
+    <string name="new_signup">تسجيل مستخدم جديد</string>
+
+    <string-array name="drawerItems">
+        <item>البداية</item>
+        <item>السلة</item>
+        <item>معرض الصور</item>
+        <item>حجز حدث</item>
+        <item>الضبط</item>
+        <item>تواصل معنا</item>
+        <item>الخروج</item>
+    </string-array>
+
+    <string name="Arabic">العربية</string>
+    <string name="English">الانجليزية</string>
+</resources>

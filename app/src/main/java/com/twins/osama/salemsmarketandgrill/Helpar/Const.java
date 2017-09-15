@@ -1,0 +1,104 @@
+package com.twins.osama.salemsmarketandgrill.Helpar;
+
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+
+import com.twins.osama.salemsmarketandgrill.R;
+
+import java.util.Locale;
+
+/**
+ * Created by Osama on 8/2/2017.
+ * Exo_ExtraLight
+ */
+
+public class Const {
+
+    public static final String KEY = "key";
+    public static final String IMAGE_PROFILE="imageProfile";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    public static final String LANG = "language";
+
+    public static final String IMAGE_VIEW = "load_image";
+
+    public static final String FONT_NAME = "fonts/Exo_Medium.otf";
+
+    public static final String USER_NAME_SHARED_PREF="loggedInSharedPref";
+    public static final String FULL_NAME_SHARED_PREF="fullNameSharedPref";
+    public static final String ID_SHARED_PREF="idSharedPref";
+    public static final String GUID_SHARED_PREF="guidSharedPref";
+    public static final String EMAIL_SHARED_PREF="emailSharedPref";
+    public static final String STATUS_SHARED_PREF="statusSharedPref";
+    public static final String PASSWORD_SHARED_PREF="passwordSharedPref";
+
+    public static final String URL_LOGIN = "http://saleem.newsolutions.ps/APIs/CustomerLogin";
+    public static final String URL_SIGNUP = "http://saleem.newsolutions.ps/APIs/CustomerSingUp";
+    public static final String URL_CustomerEditProfile = "http://saleem.newsolutions.ps/APIs/CustomerEditProfile";
+    public static final String URL_CustomerEditPassword = "http://saleem.newsolutions.ps/APIs/CustomerEditPassword";
+    public static final String STATIC_URL= "http://saleem.newsolutions.ps/APIs/";
+    public static final String URLF="http://saleem.newsolutions.ps/APIs/getSlider";
+    public static final String IMG_URL="http://saleem.newsolutions.ps";
+
+      public static void setLangSettings(Activity activity) {
+        SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(activity);
+        Resources res = activity.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        if (TextUtils.isEmpty(sharedPrefUtil.getString(Const.LANG))) {
+            if (res.getConfiguration().locale.getDisplayLanguage().equalsIgnoreCase(res.getString(R.string.Arabic))) {
+
+                sharedPrefUtil.saveString(Const.LANG, "Arabic");
+            } else {
+                sharedPrefUtil.saveString(Const.LANG, "English");
+            }
+        } else {
+            conf.locale = new Locale(sharedPrefUtil.getString(Const.LANG).substring(0, 2)
+                    .toLowerCase());
+        }
+        res.updateConfiguration(conf, dm);
+    }
+
+    public static int calculateInSampleSize(BitmapFactory.Options options,
+                                            int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and
+            // keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(String strPath, int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(strPath, options);
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options,reqWidth,
+                reqHeight);
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(strPath, options);
+    }
+
+}
+//

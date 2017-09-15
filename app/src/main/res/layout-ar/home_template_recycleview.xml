@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView_home"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edit_text"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_margin="2dp">
+
+            <ImageView
+                android:id="@+id/img_hom_recview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/crop3" />
+
+            <TextView
+                android:id="@+id/txt_salry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="15dp"
+                android:background="@color/backLogo"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="السعر"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/textSize"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/backLogo" />
+        </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/goToDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="العنوان"
+            android:textSize="@dimen/titel"/>
+
+        <TextView
+            android:id="@+id/text_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:text="الوصف"
+            android:textSize="@dimen/textSize"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/add_to_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="إضافة الى السلة"
+            android:background="@color/backLogo"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSize"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

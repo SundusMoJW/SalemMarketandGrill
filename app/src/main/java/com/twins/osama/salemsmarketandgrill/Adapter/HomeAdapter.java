@@ -36,7 +36,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     ArrayList<Meals> item = new ArrayList<>();
     Context context;
 
-    public HomeAdapter(Context context, ArrayList item,OnDrawerItemClickListener listener) {
+    public HomeAdapter(Context context, ArrayList item, OnDrawerItemClickListener listener) {
         this.context = context;
         this.item = item;
         this.listener = listener;
@@ -54,25 +54,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(HomeAdapter.ViewHolder holder, final int position) {
         holder.text_title.setText(item.get(position).getName());
 
-       if( (item.get(position).Description).equals("null"))
-           holder.text_main.setText(" ");
+        if ((item.get(position).Description).equals("null"))
+            holder.text_main.setText(" ");
         else holder.text_main.setText(item.get(position).Description);
-        holder.txt_salry.setText(""+item.get(position).getPrice());
-        if (item.get(position).getFilePath() != null) {
+        holder.txt_salry.setText("" + item.get(position).getPrice());
+        if (item.get(position).getFilePath() != null)
             Glide.with(context).load(item.get(position).getFilePath()).into(holder.image_home);
 
-            holder.goToDescription.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  listener.onClick(position);
-                }
-            });
-            holder.add_to_cart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onButtonClick(position);
-                }
-            });
+        holder.goToDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(position);
+            }
+        });
+        holder.add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onButtonClick(position);
+            }
+        });
 //            Picasso.with(context).load(item.get(position).getFilePath()).networkPolicy(NetworkPolicy.NO_CACHE)
 //                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).resize(300, 300)
 //                    .centerCrop().error(R.drawable.blank_profile_picture)
@@ -84,8 +84,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 //            holder.bind(holder.add_to_cart, (View.OnClickListener) listener);
 //            holder.bind(holder.goToDescription, (View.OnClickListener) listener);
 
-        }
     }
+
 
     @Override
     public int getItemCount() {

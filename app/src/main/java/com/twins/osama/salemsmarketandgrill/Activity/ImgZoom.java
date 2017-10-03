@@ -38,7 +38,8 @@ public class ImgZoom /*extends Activity*/extends SwipeBackActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_img_zoom);
-        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+        setDragEdge(SwipeBackLayout.DragEdge.TOP);
+        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
 
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.image_zoom));
         RealmController.with(this).refresh();

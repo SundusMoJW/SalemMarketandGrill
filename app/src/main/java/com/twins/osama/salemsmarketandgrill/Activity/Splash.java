@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.crashlytics.android.Crashlytics;
 import com.twins.osama.salemsmarketandgrill.Classes.Market;
 import com.twins.osama.salemsmarketandgrill.Classes.Meals;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
@@ -20,6 +21,7 @@ import com.twins.osama.salemsmarketandgrill.Classes.TypeList;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +47,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
         Realm.init(getApplication());
         realm = Realm.getDefaultInstance();

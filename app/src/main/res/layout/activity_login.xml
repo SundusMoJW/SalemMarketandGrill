@@ -48,8 +48,8 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:hint="User Name "
-                    android:padding="15dp"
                     android:inputType="text"
+                    android:padding="15dp"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -115,14 +115,24 @@
                     android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="end"
+                    android:layout_centerHorizontal="true"
                     android:background="@drawable/with_corner"
                     android:padding="@dimen/rest_ic_padding"
                     android:text="@string/login"
                     android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/progress_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/login"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_spinner_of_dots" />
+
             </RelativeLayout>
 
             <View
@@ -161,7 +171,6 @@
                     android:text="@string/new_signup"
                     android:textColor="@color/backLogo" />
             </LinearLayout>
-
 
 
         </LinearLayout>

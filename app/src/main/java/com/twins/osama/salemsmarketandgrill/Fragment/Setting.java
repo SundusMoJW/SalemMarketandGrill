@@ -44,10 +44,10 @@ public class Setting extends Fragment implements View.OnClickListener {
     private TextView logout_account;
     private Switch switchNotification;
     private TextView aboutApp;
-    Bundle bundle;
+    private Bundle bundle;
     private SharedPrefUtil sharedPrefUtil;
-    Fragment nextFragment;
-    FragmentManager fragmentManager;
+    private Fragment nextFragment;
+    private FragmentManager fragmentManager;
     private Switch switch_language;
     private String strLanguge;
     public Activity mActivity;
@@ -247,6 +247,7 @@ public class Setting extends Fragment implements View.OnClickListener {
                         //Starting login activity
                         Intent intent = new Intent(getActivity(), Login.class);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 });
         alertDialogBuilder.setNegativeButton("No",

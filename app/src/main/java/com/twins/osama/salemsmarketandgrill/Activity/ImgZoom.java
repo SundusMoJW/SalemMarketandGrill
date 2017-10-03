@@ -1,12 +1,13 @@
 package com.twins.osama.salemsmarketandgrill.Activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.liuguangqiang.swipeback.SwipeBackActivity;
+import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.RealmController;
@@ -18,7 +19,7 @@ import io.realm.RealmResults;
 
 import static com.twins.osama.salemsmarketandgrill.Fragment.HomeFragment.isSlider;
 
-public class ImgZoom extends Activity {
+public class ImgZoom /*extends Activity*/extends SwipeBackActivity {
 
 
     //                intent.putExtra("position", list.get(position).getId());
@@ -37,6 +38,8 @@ public class ImgZoom extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_img_zoom);
+        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.image_zoom));
         RealmController.with(this).refresh();
         realm = Realm.getDefaultInstance();

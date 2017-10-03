@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<DrawerItem> items;
     ArrayList<String> itemsTitles;
     public static int nav_back = 0;
-    public static String NAME ;
+    public static String NAME;
     public static String EMAILProfile;
-   public static int PROFILE = R.drawable.blank_profile_picture;
+    public static int PROFILE = R.drawable.blank_profile_picture;
     Toolbar toolbar;                              // Declaring the Toolbar Object
-    public  RecyclerView mRecyclerView;                           // Declaring RecyclerView
-    public  RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
+    public RecyclerView mRecyclerView;                           // Declaring RecyclerView
+    public RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     Fragment fragment = null;
@@ -109,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 //        bm.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            // imageProfile= sharedPref.getString(IMAGE_PROFILE);
+        // imageProfile= sharedPref.getString(IMAGE_PROFILE);
 //            String value = sharedPref.getString(IMAGE_PROFILE,null);
-            //   ImageView imageView = (ImageView) findViewById(R.id.circleView);
-            //  if (!(value==null) ){
+        //   ImageView imageView = (ImageView) findViewById(R.id.circleView);
+        //  if (!(value==null) ){
 //            Bitmap bitmap = Const.decodeSampledBitmapFromResource(imageProfile, 300, 300);
-            //    imageView.setImageBitmap(bitmap);
-            // PROFILE = new BitmapDrawable(getResources(), bitmap);
+        //    imageView.setImageBitmap(bitmap);
+        // PROFILE = new BitmapDrawable(getResources(), bitmap);
 //        }else {
 //            sharedPref.saveString(IMAGE_PROFILE,extStorageDirectory);
 //           imageProfile= sharedPref.getString(IMAGE_PROFILE);
@@ -123,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
 //            //    imageView.setImageBitmap(bitmap);
 //            PROFILE = new BitmapDrawable(getResources(), bitmap);
 //        }
-            //  Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-            //  PROFILE = ContextCompat.getDrawable(getApplicationContext(),R.drawable.blank_profile_picture);
+        //  Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+        //  PROFILE = ContextCompat.getDrawable(getApplicationContext(),R.drawable.blank_profile_picture);
 //                    getResources().getDrawable(R.drawable.blank_profile_picture);
 
         NAME = sharedPref.getString(USER_NAME_SHARED_PREF);
-        EMAILProfile =sharedPref.getString(EMAIL_SHARED_PREF);
+        EMAILProfile = sharedPref.getString(EMAIL_SHARED_PREF);
 
 
         mAdapter = new MyAdapter(this, items/*, NAME, EMAILProfile, PROFILE*/, new OnDrawerItemClickListener() {
@@ -341,14 +341,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //    public void restartFirstActivity()
-//    {
-//        Intent i = getApplicationContext().getPackageManager()
-//                .getLaunchIntentForPackage(getApplicationContext().getPackageName() );
-//
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
-//        startActivity(i);
-//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -368,10 +360,7 @@ public class MainActivity extends AppCompatActivity {
             sharedPref.saveString(IMAGE_PROFILE, picturePath);
             ImageView imageView = (ImageView) findViewById(R.id.circleView);
             imageView.setImageBitmap(bitmap);
-
         }
-
-
     }
 //            imageView.setImageBitmap(bmp);
 //            SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(getApplicationContext());
@@ -412,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
 //        parcelFileDescriptor.close();
 //        return image;
 //    }
- public  void Logout() {
+    public void Logout() {
         //Creating an alert dialog to confirm logout
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure you want to logout?");

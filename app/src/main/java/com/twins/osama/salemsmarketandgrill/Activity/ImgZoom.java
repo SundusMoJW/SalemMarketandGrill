@@ -40,7 +40,10 @@ public class ImgZoom /*extends Activity*/extends SwipeBackActivity {
         setContentView(R.layout.activity_img_zoom);
         setDragEdge(SwipeBackLayout.DragEdge.TOP);
         setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
-
+//        image_zoom=(Gr)
+//        view.setBackgroundColor(Color.TRANSPARENT);
+//        View view =(View)findViewById(R.id.image_zoom) ;
+//        view.getBackground().setAlpha(50);
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.image_zoom));
         RealmController.with(this).refresh();
         realm = Realm.getDefaultInstance();

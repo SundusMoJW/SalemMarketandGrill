@@ -104,74 +104,125 @@
                     android:visibility="visible" />
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:padding="5dp">
-
-                <Button
-                    android:id="@+id/login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/with_corner"
-                    android:padding="@dimen/rest_ic_padding"
-                    android:text="@string/login"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/progress_image"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/login"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_margin="20dp"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_spinner_of_dots" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
-                android:background="@color/colorAccent" />
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp" >
 
-                <TextView
+                <CheckBox
+                    android:id="@+id/show_hide_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="@string/forget_pssword"
-                    android:textColor="@color/backLogo" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@color/colorAccent" />
+                    android:layout_weight="1"
+                    android:text="@string/show_pwd"
+                    android:textColor="@color/backLogo"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/new_signup_user"
-                    android:layout_width="match_parent"
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="end"
                     android:padding="5dp"
-                    android:text="@string/new_signup"
-                    android:textColor="@color/backLogo" />
+                    android:text="@string/forgot"
+                    android:textColor="@color/backLogo"
+                    android:textSize="14sp" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/login"
+                android:layout_marginTop="3dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/with_corner"
+                android:padding="@dimen/rest_ic_padding"
+                android:text="@string/login"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="5dp">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/login"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:background="@drawable/with_corner"-->
+                    <!--android:padding="@dimen/rest_ic_padding"-->
+                    <!--android:text="@string/login"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/progress_image"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_below="@id/login"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_margin="20dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--app:srcCompat="@drawable/ic_spinner_of_dots" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:background="@color/colorAccent" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:gravity="left"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:text="@string/forget_pssword"-->
+                    <!--android:textColor="@color/backLogo" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@color/colorAccent" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/new_signup_user"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:gravity="left"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:text="@string/new_signup"-->
+                    <!--android:textColor="@color/backLogo" />-->
+            <!--</LinearLayout>-->
+            <TextView
+                android:id="@+id/createAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/newUser"
+                android:textColor="@color/backLogo"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

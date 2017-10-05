@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button login;
     private EditText email_login;
     private EditText passsword_login;
-    private TextView new_signup_user;
+    private TextView createAccount;
 //    private LoginButton loginButton;
 //    private CallbackManager callbackManager;
 
@@ -58,8 +58,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         email_login = (EditText) findViewById(R.id.email_login);
         passsword_login = (EditText) findViewById(R.id.passsword_login);
         login.setOnClickListener(this);
-        new_signup_user = (TextView) findViewById(R.id.new_signup_user);
-        new_signup_user.setOnClickListener(new View.OnClickListener() {
+        createAccount = (TextView) findViewById(R.id.createAccount);
+        createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, SignUp.class);

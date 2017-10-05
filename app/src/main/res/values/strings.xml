@@ -52,6 +52,11 @@
     <string name="facebook_app_id">109572556432674</string>
     <string name="fb_login_protocol_scheme">fb109572556432674</string>
 
+    <string name="show_pwd">Show Password</string>
+    <string name="hide_pwd">Hide Password</string>
+    <string name="forgot">Forgot password?</string>
+    <string name="newUser">Not a Member yet? Sign Up here.</string>
+
 
     <string-array name="drawerItems">
         <item>Home</item>

@@ -33,7 +33,7 @@
         <activity
             android:name=".Activity.ImgZoom"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
+            />
         <!-- <activity android:name=".Activity.ImgZoom" android:theme="@style/Theme.Swipe.Back" /> -->
 
         <activity android:name=".Activity.Login" />

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
@@ -25,9 +24,12 @@
             android:src="@drawable/logo" />
 
         <LinearLayout
+            android:id="@+id/ll_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="25dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
@@ -109,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:paddingTop="8dp" >
+                android:paddingTop="8dp">
 
                 <CheckBox
                     android:id="@+id/show_hide_password"
@@ -134,96 +136,96 @@
 
             <Button
                 android:id="@+id/login"
-                android:layout_marginTop="3dp"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/with_corner"
                 android:padding="@dimen/rest_ic_padding"
                 android:text="@string/login"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold" />
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="5dp">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp">-->
 
-                <!--<Button-->
-                    <!--android:id="@+id/login"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:background="@drawable/with_corner"-->
-                    <!--android:padding="@dimen/rest_ic_padding"-->
-                    <!--android:text="@string/login"-->
-                    <!--android:textColor="@color/white" />-->
+            <!--<Button-->
+            <!--android:id="@+id/login"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:background="@drawable/with_corner"-->
+            <!--android:padding="@dimen/rest_ic_padding"-->
+            <!--android:text="@string/login"-->
+            <!--android:textColor="@color/white" />-->
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/progress_image"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_below="@id/login"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_margin="20dp"-->
-                    <!--android:visibility="gone"-->
-                    <!--app:srcCompat="@drawable/ic_spinner_of_dots" />-->
+            <!--<ImageView-->
+            <!--android:id="@+id/progress_image"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_below="@id/login"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:visibility="gone"-->
+            <!--app:srcCompat="@drawable/ic_spinner_of_dots" />-->
 
             <!--</RelativeLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:background="@color/colorAccent" />-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@color/colorAccent" />-->
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_margin="5dp"-->
-                    <!--android:gravity="left"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:text="@string/forget_pssword"-->
-                    <!--android:textColor="@color/backLogo" />-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:gravity="left"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="@string/forget_pssword"-->
+            <!--android:textColor="@color/backLogo" />-->
 
-                <!--<View-->
-                    <!--android:layout_width="1dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:background="@color/colorAccent" />-->
+            <!--<View-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@color/colorAccent" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/new_signup_user"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_margin="5dp"-->
-                    <!--android:gravity="left"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:text="@string/new_signup"-->
-                    <!--android:textColor="@color/backLogo" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/new_signup_user"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:gravity="left"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="@string/new_signup"-->
+            <!--android:textColor="@color/backLogo" />-->
             <!--</LinearLayout>-->
-            <TextView
-                android:id="@+id/createAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_layout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/newUser"
-                android:textColor="@color/backLogo"
-                android:textSize="15sp" />
-
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/createAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/newUser"
+            android:textColor="@color/backLogo"
+            android:textSize="15sp" />
+
+
     </LinearLayout>
 </ScrollView>

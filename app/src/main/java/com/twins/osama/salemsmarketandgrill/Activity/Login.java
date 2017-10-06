@@ -5,10 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,8 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-//import com.facebook.appevents.AppEventsLogger;
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
+import com.twins.osama.salemsmarketandgrill.Helpar.CustomToast;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -29,6 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.FULL_NAME_SHARED_PREF;
@@ -39,12 +50,18 @@ import static com.twins.osama.salemsmarketandgrill.Helpar.Const.STATUS_SHARED_PR
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_LOGIN;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USER_NAME_SHARED_PREF;
 
+//import com.facebook.appevents.AppEventsLogger;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
+    private static View view;
 
     private Button login;
     private EditText email_login;
     private EditText passsword_login;
     private TextView createAccount;
+    private CheckBox show_hide_password;
+    private LinearLayout ll_login;
+    private Animation shakeAnimation;
 //    private LoginButton loginButton;
 //    private CallbackManager callbackManager;
 
@@ -53,7 +70,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_login);
+        view = findViewById(R.id.login_layout);
+
         login = (Button) findViewById(R.id.login);
+        show_hide_password = (CheckBox) findViewById(R.id.show_hide_password);
+        ll_login = (LinearLayout) findViewById(R.id.ll_login);
+
+        // Load ShakeAnimation
+        shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.shake);
+
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.login_layout));
         email_login = (EditText) findViewById(R.id.email_login);
         passsword_login = (EditText) findViewById(R.id.passsword_login);
@@ -64,7 +90,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.left_enter,R.anim.right_out);
                 finish();
+            }
+        });
+
+        show_hide_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton button,
+                                         boolean isChecked) {
+                         if (isChecked) {
+                    show_hide_password.setText(R.string.hide_pwd);
+                 passsword_login.setInputType(InputType.TYPE_CLASS_TEXT);
+                    passsword_login.setTransformationMethod(HideReturnsTransformationMethod
+                            .getInstance());// show password
+                } else {
+                    show_hide_password.setText(R.string.show_pwd);
+                passsword_login.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passsword_login.setTransformationMethod(PasswordTransformationMethod
+                            .getInstance());// hide password
+
+                }
+
             }
         });
 //        callbackManager = CallbackManager.Factory.create();
@@ -146,16 +194,46 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        data_request.executeAsync();
 //
 //    }
+private void checkValidation() {
+    // Get email id and password
+    String getEmailId = email_login.getText().toString();
+    String getPassword = passsword_login.getText().toString();
 
+    // Check patter for email id
+    Pattern p = Pattern.compile(Const.regEx);
+
+    Matcher m = p.matcher(getEmailId);
+
+    // Check for both field is empty or not
+    if (getEmailId.equals("") || getEmailId.length() == 0
+            || getPassword.equals("") || getPassword.length() == 0) {
+        ll_login.startAnimation(shakeAnimation);
+        new CustomToast().Show_Toast(getApplicationContext(), view,
+                "Enter both credentials.");
+
+    }
+    // Check if email id is valid or not
+    else if (!m.find())
+        new CustomToast().Show_Toast(getApplicationContext(), view,
+                "Your User Name Id is Invalid.");
+        // Else do login and do your stuff
+    else
+        Toast.makeText(getApplicationContext(), "Do Login.", Toast.LENGTH_SHORT)
+                .show();
+
+}
     private void login() {
         //Getting values from edit texts
         final String stringEmail = email_login.getText().toString().trim();
         final String stringPassword = passsword_login.getText().toString().trim();
+        checkValidation();
+
         final ProgressDialog pd = new ProgressDialog(Login.this);
         pd.setTitle("Loading...");
         pd.setMessage("Please wait.");
         pd.setCancelable(false);
         pd.show();
+
         //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, URL_LOGIN

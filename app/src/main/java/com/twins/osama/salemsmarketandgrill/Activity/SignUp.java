@@ -50,6 +50,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_sign_up);
+
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.signup_layout));
         findViews();
         go_to_login.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +58,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUp.this, Login.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.right_enter,R.anim.left_out);
                 finish();
             }
         });

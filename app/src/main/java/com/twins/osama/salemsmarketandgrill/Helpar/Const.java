@@ -45,7 +45,10 @@ public class Const {
     public static final String URLF="http://saleem.newsolutions.ps/APIs/getSlider";
     public static final String IMG_URL="http://saleem.newsolutions.ps";
 
-      public static void setLangSettings(Activity activity) {
+    public static final String regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
+
+
+    public static void setLangSettings(Activity activity) {
         SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(activity);
         Resources res = activity.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

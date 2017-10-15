@@ -5,6 +5,7 @@
     android:layout_margin="5dp"
     android:background="@color/white"
     android:layoutDirection="ltr"
+    android:scrollbars="none"
     android:textDirection="ltr"
     android:id="@+id/cart_fragment"
     tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CartFragment">

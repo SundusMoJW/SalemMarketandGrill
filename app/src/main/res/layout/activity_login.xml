@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:layoutDirection="ltr"
+    android:scrollbars="none"
     android:orientation="vertical"
     android:textDirection="ltr"
     tools:context="com.twins.osama.salemsmarketandgrill.Activity.Login">
@@ -145,12 +147,22 @@
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
+
+
             <!--<RelativeLayout-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_margin="10dp"-->
             <!--android:gravity="center"-->
             <!--android:padding="5dp">-->
+            <ImageView
+                android:id="@+id/progress_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_spinner_of_dots" />
 
             <!--<Button-->
             <!--android:id="@+id/login"-->
@@ -213,7 +225,17 @@
             <!--android:textColor="@color/backLogo" />-->
             <!--</LinearLayout>-->
         </LinearLayout>
-
+        <!--<ImageView-->
+        <!--android:id="@+id/progress_image"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_below="@id/login"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:visibility="gone"-->
+        <!--app:srcCompat="@drawable/ic_spinner_of_dots" />-->
         <TextView
             android:id="@+id/createAccount"
             android:layout_width="wrap_content"

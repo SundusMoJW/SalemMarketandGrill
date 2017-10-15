@@ -45,7 +45,7 @@ import static com.twins.osama.salemsmarketandgrill.R.id.addView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private SliderAdapter adapter;
-    public static boolean isSlider=false;
+    public static boolean isSlider = false;
     private ViewPager mViewPager;
     private static int currentPage = 0;
     //    ArrayList<HomeRecycleViewTemplate> data;
@@ -220,7 +220,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     linearLayout.addView(getItem(new Category(typeList.get(i).getId(), typeList.get(i).getName())));
 
                 }
-                Log.i("///", typeList.get(i).getId() + " ");
+//                Log.i("///", typeList.get(i).getId() + " ");
             }
         }
 
@@ -317,7 +317,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         Bundle bundle = new Bundle();
                         bundle.putInt("position", meatsArrayList.get(position).getId());
-//                Log.i("///*",  mealsArrayList.get(position).getId() + " ");
                         fragment.setArguments(bundle);
                         mFragmentTransaction.replace(R.id.frame_layout, fragment);
                         mFragmentTransaction.commit();

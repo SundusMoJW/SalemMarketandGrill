@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
+import com.twins.osama.salemsmarketandgrill.Helpar.CustomToast;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -43,6 +43,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText adressSignup;
     private EditText mobileSignup;
     SharedPrefUtil sharedPrefUtil;
+    private static View view;
 
 
     @Override
@@ -50,6 +51,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_sign_up);
+        view = findViewById(R.id.signup_layout);
 
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.signup_layout));
         findViews();
@@ -75,11 +77,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     public void SignUp() {
         //Adding the string request to the queue
-        final ProgressDialog pd = new ProgressDialog(SignUp.this);
-        pd.setTitle("Loading...");
-        pd.setMessage("Please wait.");
-        pd.setCancelable(false);
-        pd.show();
+        final ProgressDialog progressDialog = new ProgressDialog(SignUp.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, URL_SIGNUP, new Response.Listener<String>() {
 
@@ -89,8 +92,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
                     if (OtherData == null) {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+                        if (progressDialog != null && progressDialog.isShowing())
+                            progressDialog.dismiss();
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
                         builder.setTitle("Something went wrong");
                         builder.setMessage(jsonObject.optString("ResultText"));
@@ -105,8 +108,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             }
                         }, 3000);
                     } else {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+                        if (progressDialog != null && progressDialog.isShowing())
+                            progressDialog.dismiss();
                         Intent intent = new Intent(SignUp.this, Login.class);
                         startActivity(intent);
                         finish();
@@ -124,21 +127,24 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (pd != null && pd.isShowing())
-                    pd.dismiss();
-                AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
-                builder.setTitle("Something went wrong");
-                builder.setMessage(" Error Response");
-                builder.setCancelable(true);
-                final AlertDialog closedialog = builder.create();
-                closedialog.show();
-                final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        closedialog.dismiss();
-                        timer2.cancel(); //this will cancel the timer of the system
-                    }
-                }, 3000);
+                new CustomToast().Show_Toast(getApplicationContext(), view,
+                        "You must check the network");
+                progressDialog.dismiss();
+//                if (progressDialog != null && progressDialog.isShowing())
+//                    progressDialog.dismiss();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
+//                builder.setTitle("Something went wrong");
+//                builder.setMessage(" Error Response");
+//                builder.setCancelable(true);
+//                final AlertDialog closedialog = builder.create();
+//                closedialog.show();
+//                final Timer timer2 = new Timer();
+//                timer2.schedule(new TimerTask() {
+//                    public void run() {
+//                        closedialog.dismiss();
+//                        timer2.cancel(); //this will cancel the timer of the system
+//                    }
+//                }, 3000);
             }
         }) {
             @Override
@@ -160,15 +166,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String username = fullNameSignup.getText().toString().trim();
-        String passs1 = passswordSignup.getText().toString().trim();
-        String passs2 = confirmPassswordSignup.getText().toString().trim();
-        String emailcon = emailSignup.getText().toString().trim();
-        if (username.equals("")&& isEmailValid(emailcon) && isPasswordValid(passs1, passs2)) {
 
-            Toast.makeText(SignUp.this, "Enter basic account data", Toast.LENGTH_SHORT).show();
-        } else
+        if(validate()){
             SignUp();
+        }
+//        else {
+//            new CustomToast().Show_Toast(getApplicationContext(), view,
+//                    "Enter both credentials.");
+//        }
 
     }
 
@@ -187,19 +192,65 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         signup.setOnClickListener(this);
     }
 
-    private boolean isEmailValid(String email) {
+    public boolean validate() {
+        boolean valid = true;
 
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password, String confPassword) {
-        //TODO: Replace this with your own logic
-        if (password.equals(confPassword) && password.length() > 4) {
-            return true;
+        String fullName = fullNameSignup.getText().toString();
+        String address = adressSignup.getText().toString();
+        String email = emailSignup.getText().toString();
+        String mobile = mobileSignup.getText().toString();
+        String password = passswordSignup.getText().toString();
+        String reEnterPassword = confirmPassswordSignup.getText().toString();
+        String ueserName=ueserNameSignup.getText().toString();
+        if (fullName.isEmpty() || fullName.length() < 3) {
+            fullNameSignup.setError("Enter Full Name at least 3 char");
+            valid = false;
         } else {
-            return false;
+            fullNameSignup.setError(null);
+        }
+        if (ueserName.isEmpty() || ueserName.length() < 3) {
+            ueserNameSignup.setError("Enter User Name at least 3 char");
+            valid = false;
+        } else {
+            ueserNameSignup.setError(null);
+        }
+        if (address.isEmpty()) {
+            adressSignup.setError("Enter Valid Address");
+            valid = false;
+        } else {
+            adressSignup.setError(null);
         }
 
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailSignup.setError("enter a valid email address");
+            valid = false;
+        } else {
+            emailSignup.setError(null);
+        }
+
+        if (mobile.isEmpty() || mobile.length()<=10) {
+            mobileSignup.setError("Enter Valid Mobile Number");
+            valid = false;
+        } else {
+            mobileSignup.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4 ) {
+            passswordSignup.setError("At Least 4  alphanumeric characters");
+            valid = false;
+        } else {
+            passswordSignup.setError(null);
+        }
+
+        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
+            confirmPassswordSignup.setError("Password Do not match");
+            valid = false;
+        } else {
+            confirmPassswordSignup.setError(null);
+        }
+
+        return valid;
     }
 
 

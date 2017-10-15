@@ -3,7 +3,6 @@ package com.twins.osama.salemsmarketandgrill.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -15,9 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,10 +35,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.FULL_NAME_SHARED_PREF;
@@ -56,14 +51,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private static View view;
 
     private Button login;
-    private EditText email_login;
+    private EditText userLogin;
     private EditText passsword_login;
     private TextView createAccount;
     private CheckBox show_hide_password;
     private LinearLayout ll_login;
     private Animation shakeAnimation;
-//    private LoginButton loginButton;
+    private ImageView progress_image;
+    private Animation animPrograss;
+    //    private LoginButton loginButton;
 //    private CallbackManager callbackManager;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,26 +69,38 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Const.setLangSettings(this);
         setContentView(R.layout.activity_login);
         view = findViewById(R.id.login_layout);
+        TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.login_layout));
+
+//        progress_image = (ImageView)findViewById(R.id.progress_image);
 
         login = (Button) findViewById(R.id.login);
         show_hide_password = (CheckBox) findViewById(R.id.show_hide_password);
         ll_login = (LinearLayout) findViewById(R.id.ll_login);
-
-        // Load ShakeAnimation
-        shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.shake);
-
-        TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.login_layout));
-        email_login = (EditText) findViewById(R.id.email_login);
+        userLogin = (EditText) findViewById(R.id.email_login);
         passsword_login = (EditText) findViewById(R.id.passsword_login);
         login.setOnClickListener(this);
         createAccount = (TextView) findViewById(R.id.createAccount);
+        // Load ShakeAnimation
+        shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.shake);
+//        animPrograss = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.progress_anim);
+//        animPrograss.setDuration(1000);
+//        progress_image.startAnimation(animPrograss);
+//        animPrograss.setInterpolator(new Interpolator() {
+//            private final int frameCount = 8;
+//
+//            @Override
+//            public float getInterpolation(float input) {
+//                return (float) Math.floor(input * frameCount) / frameCount;
+//            }
+//        });
+
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_enter,R.anim.right_out);
+                overridePendingTransition(R.anim.left_enter, R.anim.right_out);
                 finish();
             }
         });
@@ -99,14 +109,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton button,
                                          boolean isChecked) {
-                         if (isChecked) {
+                if (isChecked) {
                     show_hide_password.setText(R.string.hide_pwd);
-                 passsword_login.setInputType(InputType.TYPE_CLASS_TEXT);
+                    passsword_login.setInputType(InputType.TYPE_CLASS_TEXT);
                     passsword_login.setTransformationMethod(HideReturnsTransformationMethod
                             .getInstance());// show password
                 } else {
                     show_hide_password.setText(R.string.show_pwd);
-                passsword_login.setInputType(InputType.TYPE_CLASS_TEXT
+                    passsword_login.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     passsword_login.setTransformationMethod(PasswordTransformationMethod
                             .getInstance());// hide password
@@ -147,8 +157,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
 //    }
-
-//    protected void getUserDetails(LoginResult loginResult) {
+    //    protected void getUserDetails(LoginResult loginResult) {
 //        GraphRequest data_request = GraphRequest.newMeRequest(
 //                loginResult.getAccessToken(),
 //                new GraphRequest.GraphJSONObjectCallback() {
@@ -194,45 +203,47 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        data_request.executeAsync();
 //
 //    }
-private void checkValidation() {
-    // Get email id and password
-    String getEmailId = email_login.getText().toString();
-    String getPassword = passsword_login.getText().toString();
 
-    // Check patter for email id
-    Pattern p = Pattern.compile(Const.regEx);
+    private boolean checkValidation() {
+        boolean valid = true;
+        // Get email id and password
+        String userName = userLogin.getText().toString().trim();
+        String getPassword = passsword_login.getText().toString().trim();
 
-    Matcher m = p.matcher(getEmailId);
+        // Check for both field is empty or not
+        if (userName.equals("") || userName.length() == 0) {
+            userLogin.setError("Enter your Name");
+            ll_login.startAnimation(shakeAnimation);
+            valid= false;
+        } else {
+            userLogin.setError(null);
+        }
 
-    // Check for both field is empty or not
-    if (getEmailId.equals("") || getEmailId.length() == 0
-            || getPassword.equals("") || getPassword.length() == 0) {
-        ll_login.startAnimation(shakeAnimation);
-        new CustomToast().Show_Toast(getApplicationContext(), view,
-                "Enter both credentials.");
-
+        if (getPassword.equals("") || getPassword.length() == 0) {
+            ll_login.startAnimation(shakeAnimation);
+            passsword_login.setError("Enter your Password");
+            valid= false;
+        } else {
+            passsword_login.setError(null);
+        }
+        return valid;
     }
-    // Check if email id is valid or not
-    else if (!m.find())
-        new CustomToast().Show_Toast(getApplicationContext(), view,
-                "Your User Name Id is Invalid.");
-        // Else do login and do your stuff
-    else
-        Toast.makeText(getApplicationContext(), "Do Login.", Toast.LENGTH_SHORT)
-                .show();
 
-}
     private void login() {
         //Getting values from edit texts
-        final String stringEmail = email_login.getText().toString().trim();
+        final String stringEmail = userLogin.getText().toString().trim();
         final String stringPassword = passsword_login.getText().toString().trim();
-        checkValidation();
-
-        final ProgressDialog pd = new ProgressDialog(Login.this);
-        pd.setTitle("Loading...");
-        pd.setMessage("Please wait.");
-        pd.setCancelable(false);
-        pd.show();
+//        final ProgressDialog pd = new ProgressDialog(Login.this);
+//        pd.setTitle("Loading...");
+//        pd.setMessage("Please wait.");
+//        pd.setCancelable(false);
+//        pd.show();
+//        progress_image.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(Login.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
 
         //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -245,8 +256,11 @@ private void checkValidation() {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean Status = jsonObject.optBoolean("Status");
                     if (Status) {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+//                        if (pd != null && pd.isShowing())
+//                            pd.dismiss();
+//                        progress_image.setVisibility(View.GONE);
+                        progressDialog.dismiss();
+
                         JSONObject data = jsonObject.optJSONObject("OtherData");
                         int id = data.optInt("Id");
                         String FullName = data.optString("FullName");
@@ -270,23 +284,34 @@ private void checkValidation() {
                         startActivity(intent);
                         finish();
                     } else {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+
+//                        if (pd != null && pd.isShowing())
+//                            pd.dismiss();
                         //If the server response is not success
                         //Displaying an error message on toast
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                        builder.setTitle("Something went wrong");
-                        builder.setMessage(jsonObject.optString("ResultText"));
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+//                        builder.setTitle("Something went wrong");
+////                        builder.setMessage(jsonObject.optString("ResultText"));
+//                        builder.setMessage("Your User Name Id is Invalid");
+//                        builder.setCancelable(true);
+//                        final AlertDialog closedialog = builder.create();
+//                        closedialog.show();
+//                        final Timer timer2 = new Timer();
+//                        timer2.schedule(new TimerTask() {
+//                            public void run() {
+//                                closedialog.dismiss();
+//                                timer2.cancel(); //this will cancel the timer of the system
+//                            }
+//                        }, 3000);
+
+                        progressDialog.dismiss();
+
+                        new CustomToast().Show_Toast(getApplicationContext(), view,
+                                "Your User Name is Invalid.");
+                        progress_image.setVisibility(View.GONE);
+                        ll_login.startAnimation(shakeAnimation);
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -298,31 +323,34 @@ private void checkValidation() {
         {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (pd != null && pd.isShowing())
-                    pd.dismiss();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                builder.setTitle("Something went wrong");
-                builder.setMessage(" Error Response");
-                builder.setCancelable(true);
-                final AlertDialog closedialog = builder.create();
-                closedialog.show();
-                final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        closedialog.dismiss();
-                        timer2.cancel(); //this will cancel the timer of the system
-                    }
-                }, 3000);
+//                if (pd != null && pd.isShowing())
+//                    pd.dismiss();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+//                builder.setTitle("Something went wrong");
+//                builder.setMessage(" Error Response");
+//                builder.setCancelable(true);
+//                final AlertDialog closedialog = builder.create();
+//                closedialog.show();
+//                final Timer timer2 = new Timer();
+//                timer2.schedule(new TimerTask() {
+//                    public void run() {
+//                        closedialog.dismiss();
+//                        timer2.cancel();
+//                    }
+//                }, 3000);
+//                progress_image.setVisibility(View.GONE);
+                progressDialog.dismiss();
+
+                new CustomToast().Show_Toast(getApplicationContext(), view,
+                        "No Internet connection");
+
             }
         }) {
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                //Adding parameters to request
                 params.put("username", stringEmail);
                 params.put("Password", stringPassword);
-                //Creating a string request
-
                 return params;
             }
         };
@@ -332,21 +360,23 @@ private void checkValidation() {
 
     @Override
     public void onClick(View v) {
-
-        login();
+        if (checkValidation()) {
+            login();
+        }
+// else {
+//            progressDialog.dismiss();
+//
+//        }
+//            progress_image.setVisibility(View.GONE);
 
     }
 
     protected void onResume() {
         super.onResume();
-        // Logs 'install' and 'app activate' App Events.
-//        AppEventsLogger.activateApp(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Logs 'app deactivate' App Event.
-//        AppEventsLogger.deactivateApp(this);
     }
 }

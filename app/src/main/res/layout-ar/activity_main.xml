@@ -118,8 +118,6 @@
         android:layout_width="@dimen/nav_size"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="@color/white"
-        android:scrollbars="vertical">
-
+        android:background="@color/white">
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.DrawerLayout>

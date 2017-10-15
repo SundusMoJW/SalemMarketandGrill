@@ -49,6 +49,12 @@
     <string name="signup">تسجيل الدخول</string>
     <string name="new_signup">تسجيل مستخدم جديد</string>
 
+    <string name="show_pwd">إظهار كلمة السر</string>
+    <string name="hide_pwd">إخفاء كلمة السر</string>
+    <string name="forgot">نسيت كلمة السر</string>
+    <string name="newUser">هل أنت متخدم جديد؟من هنا</string>
+    <string name="already_user">مسجل سابقا؟ تسحيل الدخول</string>
+
     <string-array name="drawerItems">
         <item>البداية</item>
         <item>السلة</item>

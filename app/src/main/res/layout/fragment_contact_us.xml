@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:textDirection="ltr"
+    android:scrollbars="none"
     android:id="@+id/contact_us"
     tools:context=".Fragment.ContactUs">
 

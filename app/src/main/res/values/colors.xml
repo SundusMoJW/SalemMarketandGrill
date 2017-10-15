@@ -16,4 +16,7 @@
     <color name="back_digg">#353535</color>
     <color name="bordar_edit">#C6C6C6</color>
     <color name="seekbar_progres">#4E54A4</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="primary">#E43F3F</color>
+
 </resources>

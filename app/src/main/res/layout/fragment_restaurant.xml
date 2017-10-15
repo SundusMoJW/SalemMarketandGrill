@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:textDirection="ltr"
+    android:scrollbars="none"
     tools:context=".Fragment.RestaurantFragment">
 
     <LinearLayout

@@ -24,10 +24,9 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 //    private Glide GlideApp;
 
-    public interface OnItemClickListener {
-
-        void onItemClick(Meals item);
-    }
+//    public interface OnItemClickListener {
+//        void onItemClick(Meals item);
+//    }
 
 
     private final OnDrawerItemClickListener listener;

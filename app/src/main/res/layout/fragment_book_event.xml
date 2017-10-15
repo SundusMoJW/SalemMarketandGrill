@@ -6,6 +6,8 @@
     android:background="@color/white"
     android:layoutDirection="ltr"
     android:textDirection="ltr"
+    android:scrollbars="none"
+
     android:id="@+id/bookEvent"
     tools:context=".Fragment.BookEvent">
 

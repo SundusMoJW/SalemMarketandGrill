@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
+    android:scrollbars="none"
     android:background="@color/white"
     android:layoutDirection="rtl"
     android:textDirection="rtl"
-    android:id="@+id/cart_fragment"
+     android:id="@+id/cart_fragment"
     tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CartFragment">
 
     <LinearLayout

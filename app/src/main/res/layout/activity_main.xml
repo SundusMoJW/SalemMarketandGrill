@@ -40,6 +40,7 @@
                     android:layout_centerVertical="true"
                     android:padding="15dp"
                     app:srcCompat="@drawable/ic_menu_black_24dp" />
+
                 <ImageView
                     android:id="@+id/go_back"
                     android:layout_width="?actionBarSize"
@@ -47,8 +48,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:padding="20dp"
-                    app:srcCompat="@drawable/ic_go_back_left_arrow"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_go_back_left_arrow" />
+
                 <TextView
                     android:id="@+id/tv_title"
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
@@ -116,8 +118,7 @@
         android:layout_width="@dimen/nav_size"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="@color/white"
-        android:scrollbars="vertical">
+        android:background="@color/white">
 
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.DrawerLayout>

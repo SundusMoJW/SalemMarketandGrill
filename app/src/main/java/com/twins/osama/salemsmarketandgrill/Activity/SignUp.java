@@ -204,19 +204,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         String ueserName=ueserNameSignup.getText().toString();
         if (fullName.isEmpty() || fullName.length() < 3) {
             fullNameSignup.setError("Enter Full Name at least 3 char");
-            valid = false;
+            return false;
         } else {
             fullNameSignup.setError(null);
         }
         if (ueserName.isEmpty() || ueserName.length() < 3) {
             ueserNameSignup.setError("Enter User Name at least 3 char");
-            valid = false;
+            return false;
         } else {
             ueserNameSignup.setError(null);
         }
         if (address.isEmpty()) {
             adressSignup.setError("Enter Valid Address");
-            valid = false;
+            return false;
         } else {
             adressSignup.setError(null);
         }
@@ -224,33 +224,33 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailSignup.setError("enter a valid email address");
-            valid = false;
+            return false;
         } else {
             emailSignup.setError(null);
         }
 
         if (mobile.isEmpty() || mobile.length()<=10) {
             mobileSignup.setError("Enter Valid Mobile Number");
-            valid = false;
+            return false;
         } else {
             mobileSignup.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 ) {
             passswordSignup.setError("At Least 4  alphanumeric characters");
-            valid = false;
+            return false;
         } else {
             passswordSignup.setError(null);
         }
 
         if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
             confirmPassswordSignup.setError("Password Do not match");
-            valid = false;
+            return false;
         } else {
             confirmPassswordSignup.setError(null);
         }
 
-        return valid;
+        return true;
     }
 
 

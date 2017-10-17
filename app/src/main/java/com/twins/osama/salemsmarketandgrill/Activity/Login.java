@@ -213,20 +213,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // Check for both field is empty or not
         if (userName.equals("") || userName.length() == 0) {
             userLogin.setError("Enter your Name");
-            ll_login.startAnimation(shakeAnimation);
-            valid= false;
+            userLogin.startAnimation(shakeAnimation);
+            return false;
         } else {
             userLogin.setError(null);
         }
 
         if (getPassword.equals("") || getPassword.length() == 0) {
-            ll_login.startAnimation(shakeAnimation);
+            passsword_login.startAnimation(shakeAnimation);
             passsword_login.setError("Enter your Password");
-            valid= false;
+            return false;
         } else {
             passsword_login.setError(null);
         }
-        return valid;
+        return true;
     }
 
     private void login() {

@@ -1,13 +1,9 @@
 package com.twins.osama.salemsmarketandgrill.Activity;
 
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.liuguangqiang.swipeback.SwipeBackActivity;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.RealmController;
@@ -15,12 +11,16 @@ import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import io.realm.Realm;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 import static com.twins.osama.salemsmarketandgrill.Fragment.HomeFragment.isSlider;
 
-public class ImgZoom extends SwipeBackActivity {
+public class ImgZoom extends /*SwipeBackActivity*/ SwipeBackActivity {
 
+//    private RadioGroup mTrackingModeGroup;
 
+    private me.imid.swipebacklayout.lib.SwipeBackLayout mSwipeBackLayout;
     private Slider slider = new Slider();
     private ImageView imgZoom;
     private Realm realm;
@@ -31,12 +31,16 @@ public class ImgZoom extends SwipeBackActivity {
         Realm.init(this);
         int position = getIntent().getIntExtra("position", 0);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_img_zoom);
-        setDragEdge(SwipeBackLayout.DragEdge.TOP);
-        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
+//        mKeyTrackingMode = getString(R.string.key_tracking_mode);
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_ALL);
+
+//        setDragEdge(SwipeBackLayout.DragEdge.TOP);
+//        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
 //        overridePendingTransition(R.anim.swipeback_stack_to_front, R.anim.swipeback_stack_to_back);
 
         imgZoom = (ImageView) findViewById(R.id.imgZoom);

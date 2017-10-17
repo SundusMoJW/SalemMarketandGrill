@@ -29,11 +29,11 @@
             android:name=".Activity.SearchActivity"
             android:screenOrientation="portrait" />
 
-        <!-- <activity android:name=".Activity.ImgZoom" android:theme="@android:style/Theme.Translucent" /> -->
-        <activity
-            android:name=".Activity.ImgZoom"
-            android:screenOrientation="portrait"
-            />
+         <activity android:name=".Activity.ImgZoom" android:theme="@android:style/Theme.Translucent"  android:screenOrientation="portrait"/>
+        <!--<activity-->
+            <!--android:name=".Activity.ImgZoom"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--/>-->
         <!-- <activity android:name=".Activity.ImgZoom" android:theme="@style/Theme.Swipe.Back" /> -->
 
         <activity android:name=".Activity.Login" />

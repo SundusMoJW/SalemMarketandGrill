@@ -28,11 +28,11 @@ public class ImgZoom extends /*SwipeBackActivity*/ SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Realm.init(this);
         int position = getIntent().getIntExtra("position", 0);
 
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Const.setLangSettings(this);
         setContentView(R.layout.activity_img_zoom);
 //        mKeyTrackingMode = getString(R.string.key_tracking_mode);

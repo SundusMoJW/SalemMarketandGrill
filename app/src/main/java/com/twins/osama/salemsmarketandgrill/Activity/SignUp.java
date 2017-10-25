@@ -202,6 +202,25 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         String password = passswordSignup.getText().toString();
         String reEnterPassword = confirmPassswordSignup.getText().toString();
         String ueserName=ueserNameSignup.getText().toString();
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailSignup.setError("enter a valid email address");
+            return false;
+        } else {
+            emailSignup.setError(null);
+        }
+        if (password.isEmpty() || password.length() < 4 ) {
+            passswordSignup.setError("At Least 4  alphanumeric characters");
+            return false;
+        } else {
+            passswordSignup.setError(null);
+        }
+        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
+            confirmPassswordSignup.setError("Password Do not match");
+            return false;
+        } else {
+            confirmPassswordSignup.setError(null);
+        }
         if (fullName.isEmpty() || fullName.length() < 3) {
             fullNameSignup.setError("Enter Full Name at least 3 char");
             return false;
@@ -220,36 +239,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         } else {
             adressSignup.setError(null);
         }
-
-
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailSignup.setError("enter a valid email address");
-            return false;
-        } else {
-            emailSignup.setError(null);
-        }
-
         if (mobile.isEmpty() || mobile.length()<=10) {
             mobileSignup.setError("Enter Valid Mobile Number");
             return false;
         } else {
             mobileSignup.setError(null);
         }
-
-        if (password.isEmpty() || password.length() < 4 ) {
-            passswordSignup.setError("At Least 4  alphanumeric characters");
-            return false;
-        } else {
-            passswordSignup.setError(null);
-        }
-
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
-            confirmPassswordSignup.setError("Password Do not match");
-            return false;
-        } else {
-            confirmPassswordSignup.setError(null);
-        }
-
         return true;
     }
 

@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         login = (Button) findViewById(R.id.login);
         show_hide_password = (CheckBox) findViewById(R.id.show_hide_password);
         ll_login = (LinearLayout) findViewById(R.id.ll_login);
-        userLogin = (EditText) findViewById(R.id.email_login);
+        userLogin = (EditText) findViewById(R.id.user_login);
         passsword_login = (EditText) findViewById(R.id.passsword_login);
         login.setOnClickListener(this);
         createAccount = (TextView) findViewById(R.id.createAccount);
@@ -268,9 +268,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         String UserName = data.optString("UserName");
                         String Email = data.optString("Email");
                         String Pass = data.optString("Password");
-
                         SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(Login.this);
-
                         sharedPrefUtil.saveString(FULL_NAME_SHARED_PREF, FullName);
                         sharedPrefUtil.saveBoolean(STATUS_SHARED_PREF, Status);
                         sharedPrefUtil.saveInt(ID_SHARED_PREF, id);
@@ -278,8 +276,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
                         sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Email);
                         sharedPrefUtil.saveString(PASSWORD_SHARED_PREF, Pass);
-
-
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -303,23 +299,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                                timer2.cancel(); //this will cancel the timer of the system
 //                            }
 //                        }, 3000);
-
                         progressDialog.dismiss();
-
                         new CustomToast().Show_Toast(getApplicationContext(), view,
                                 "Your User Name is Invalid.");
                         progress_image.setVisibility(View.GONE);
                         ll_login.startAnimation(shakeAnimation);
-
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener()
-
         {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -340,10 +330,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                }, 3000);
 //                progress_image.setVisibility(View.GONE);
                 progressDialog.dismiss();
-
                 new CustomToast().Show_Toast(getApplicationContext(), view,
                         "No Internet connection");
-
             }
         }) {
             @Override
@@ -356,8 +344,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         };
         requestQueue.add(request);
     }
-
-
     @Override
     public void onClick(View v) {
         if (checkValidation()) {
@@ -365,16 +351,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
 // else {
 //            progressDialog.dismiss();
-//
-//        }
-//            progress_image.setVisibility(View.GONE);
-
+////        }
+//          progress_image.setVisibility(View.GONE);
     }
-
+    @Override
     protected void onResume() {
         super.onResume();
     }
-
     @Override
     protected void onPause() {
         super.onPause();

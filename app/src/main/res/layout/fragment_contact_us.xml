@@ -1,11 +1,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contact_us"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    android:textDirection="ltr"
     android:scrollbars="none"
-    android:id="@+id/contact_us"
+    android:textDirection="ltr"
     tools:context=".Fragment.ContactUs">
 
     <LinearLayout
@@ -13,11 +13,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <!--<include-->
+            <!--layout="@layout/activity_maps"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150dp" />-->
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/map" />
+            android:layout_height="@dimen/hight_slider" />
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/map" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
-                android:text="4Main Street, New York, NY USA 02489" />
+                android:layout_marginLeft="5dp"
+                android:text="@string/_4main_street_new_york_ny_usa_02489" />
         </RelativeLayout>
 
         <View
@@ -54,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Phone" />
+                android:text="@string/phone_nam" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +107,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text"
-            android:focusable="false"
             android:hint="@string/name"
             android:inputType="text"
             android:padding="15dp"
@@ -119,7 +130,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text"
-            android:focusable="false"
             android:hint="Subject"
             android:inputType="text"
             android:padding="15dp"

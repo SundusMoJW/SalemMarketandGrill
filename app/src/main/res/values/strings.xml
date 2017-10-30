@@ -49,8 +49,10 @@
     <string name="message">This app is >>>>>>\n >>>>...</string>
     <string name="signup">Sign Up</string>
     <string name="new_signup">Sign Up</string>
+
     <string name="facebook_app_id">109572556432674</string>
     <string name="fb_login_protocol_scheme">fb109572556432674</string>
+    <string name="googleMapKey">AIzaSyCY1FAZktzRVscUkQvMmJYy-pszqNjjX4w</string>
 
     <string name="show_pwd">Show Password</string>
     <string name="hide_pwd">Hide Password</string>
@@ -97,4 +99,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_sign_up">SignUp</string>
+    <string name="_4main_street_new_york_ny_usa_02489">4Main Street, New York, NY USA 02489</string>
+    <string name="phone_nam">Phone</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -4,22 +4,25 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.widget.ListView;
 
-import com.liuguangqiang.swipeback.SwipeBackActivity;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.twins.osama.salemsmarketandgrill.Helpar.DbBackend;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
 public class SearchActivity  extends SwipeBackActivity {
-    SearchView searchView;
+    private SearchView searchView;
     private ListView listView;
     private DbBackend databaseObject;
+    private SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_ALL);
 
         TypefaceUtil.applyFont(getApplicationContext(),findViewById(R.id.search_activity));
 //        searchView = (SearchView) findViewById(R.id.searchView);

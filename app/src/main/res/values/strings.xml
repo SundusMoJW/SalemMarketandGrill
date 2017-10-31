@@ -102,4 +102,6 @@
     <string name="_4main_street_new_york_ny_usa_02489">4Main Street, New York, NY USA 02489</string>
     <string name="phone_nam">Phone</string>
     <string name="title_activity_maps">Map</string>
+    <string name="save_email">Save New Email</string>
+    <string name="save_new_user_name">Save New User Name</string>
 </resources>

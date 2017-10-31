@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.EMAILProfile;
 import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.items;
@@ -50,6 +47,8 @@ import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_CustomerEdit
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_CustomerEditProfile;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USERNAME;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USER_NAME_SHARED_PREF;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.saveData;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.wrongAlertDialog;
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
     private LinearLayout userLayout;
@@ -68,6 +67,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     private EditText old_pass;
     private ProgressBar progressBar;
     public MyAdapter mAdapter;
+
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
         return fragment;
@@ -205,44 +205,21 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                         String UserName = OtherData.optString("UserName");
                         sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
 //                        disableProgressBar(progressBar);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Save New User Name");
-                        builder.setMessage("Your data has been successfully saved");
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+
+                        saveData(getActivity(), R.string.save_new_user_name);
                         newName.setText("");
 //                        mFragmentManager = getActivity().getSupportFragmentManager();
 //                        fragment = new Setting();
 //                        mFragmentTransaction = mFragmentManager.beginTransaction();
 //                        mFragmentTransaction.commit();
 //                        NAME = UserName;
-                      mAdapter.setName(UserName);
+                        mAdapter.setName(UserName);
                     } else {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
 //                        progressBar.setVisibility(ProgressBar.GONE);
 //                        disableProgressBar(progressBar);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Something went wrong");
-                        builder.setMessage(jsonObject.optString("ResultText"));
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+                        wrongAlertDialog(getActivity());
                     }
                     newName.setText("");
                     //If the server response is not success
@@ -256,19 +233,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 if (pd != null && pd.isShowing())
                     pd.dismiss();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Something went wrong");
-                builder.setMessage(" Error Response");
-                builder.setCancelable(true);
-                final AlertDialog closedialog = builder.create();
-                closedialog.show();
-                final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        closedialog.dismiss();
-                        timer2.cancel(); //this will cancel the timer of the system
-                    }
-                }, 3000);
+                wrongAlertDialog(getActivity());
             }
         }) {
             @Override
@@ -302,51 +267,24 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
-
-
-                    //  boolean Status = jsonObject.optBoolean("Status");
-                    if (OtherData != null) {
+                    boolean Status = jsonObject.optBoolean("Status");
+                    if (Status) {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
                         String Email = OtherData.optString("Email");
                         sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Email);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Save New Email");
-                        builder.setMessage("Your data has been successfully saved");
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+
+                        saveData(getActivity(), R.string.save_email);
+
                         EMAILProfile = Email;
                         mAdapter.setEmail(EMAILProfile);
                         newEmail.setText("");
                     } else {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Something went wrong");
-                        builder.setMessage(jsonObject.optString("ResultText"));
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+                        wrongAlertDialog(getActivity());
                     }
                     newEmail.setText("");
-
-                    //If the server response is not success
-                    //Displaying an error message on toast
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -356,19 +294,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 if (pd != null && pd.isShowing())
                     pd.dismiss();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Something went wrong");
-                builder.setMessage(" Error Response");
-                builder.setCancelable(true);
-                final AlertDialog closedialog = builder.create();
-                closedialog.show();
-                final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        closedialog.dismiss();
-                        timer2.cancel(); //this will cancel the timer of the system
-                    }
-                }, 3000);
+                wrongAlertDialog(getActivity());
             }
         }) {
             @Override
@@ -383,9 +309,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 return param;
             }
         };
-
         requestQueue.add(request);
-
     }
 
     public void SavePassword() {
@@ -418,38 +342,14 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                             pd.dismiss();
                         String newPasss = OtherData.optString("UserName");
                         sharedPrefUtil.saveString(PASSWORD_SHARED_PREF, newPasss);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Something went wrong");
-                        builder.setMessage(jsonObject.optString("ResultText"));
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+
                         newPass.setText("");
                         old_pass.setText("");
 
                     } else {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Something went wrong");
-                        builder.setMessage(jsonObject.optString("ResultText"));
-                        builder.setCancelable(true);
-                        final AlertDialog closedialog = builder.create();
-                        closedialog.show();
-                        final Timer timer2 = new Timer();
-                        timer2.schedule(new TimerTask() {
-                            public void run() {
-                                closedialog.dismiss();
-                                timer2.cancel(); //this will cancel the timer of the system
-                            }
-                        }, 3000);
+                        wrongAlertDialog(getActivity());
                         newPass.setText("");
                         old_pass.setText("");
 
@@ -457,7 +357,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                     //If the server response is not success
                     //Displaying an error message on toast
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    wrongAlertDialog(getActivity());
                 }
             }
         }, new Response.ErrorListener() {
@@ -465,19 +365,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 if (pd != null && pd.isShowing())
                     pd.dismiss();
-                Toast.makeText(getActivity(), " Error Response", Toast.LENGTH_SHORT).show(); AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Something went wrong");
-                builder.setMessage(" Error Response");
-                builder.setCancelable(true);
-                final AlertDialog closedialog = builder.create();
-                closedialog.show();
-                final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        closedialog.dismiss();
-                        timer2.cancel(); //this will cancel the timer of the system
-                    }
-                }, 3000);
+                Toast.makeText(getActivity(), " Error Response", Toast.LENGTH_SHORT).show();
+                wrongAlertDialog(getActivity());
             }
         }) {
             @Override

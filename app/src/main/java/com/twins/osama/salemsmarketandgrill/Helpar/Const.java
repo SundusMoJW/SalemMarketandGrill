@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.twins.osama.salemsmarketandgrill.R;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Osama on 8/2/2017.
@@ -19,7 +22,7 @@ import java.util.Locale;
 public class Const {
 
     public static final String KEY = "key";
-    public static final String IMAGE_PROFILE="imageProfile";
+    public static final String IMAGE_PROFILE = "imageProfile";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
@@ -29,21 +32,21 @@ public class Const {
 
     public static final String FONT_NAME = "fonts/Exo_Medium.otf";
 
-    public static final String USER_NAME_SHARED_PREF="loggedInSharedPref";
-    public static final String FULL_NAME_SHARED_PREF="fullNameSharedPref";
-    public static final String ID_SHARED_PREF="idSharedPref";
-    public static final String GUID_SHARED_PREF="guidSharedPref";
-    public static final String EMAIL_SHARED_PREF="emailSharedPref";
-    public static final String STATUS_SHARED_PREF="statusSharedPref";
-    public static final String PASSWORD_SHARED_PREF="passwordSharedPref";
+    public static final String USER_NAME_SHARED_PREF = "loggedInSharedPref";
+    public static final String FULL_NAME_SHARED_PREF = "fullNameSharedPref";
+    public static final String ID_SHARED_PREF = "idSharedPref";
+    public static final String GUID_SHARED_PREF = "guidSharedPref";
+    public static final String EMAIL_SHARED_PREF = "emailSharedPref";
+    public static final String STATUS_SHARED_PREF = "statusSharedPref";
+    public static final String PASSWORD_SHARED_PREF = "passwordSharedPref";
 
     public static final String URL_LOGIN = "http://saleem.newsolutions.ps/APIs/CustomerLogin";
     public static final String URL_SIGNUP = "http://saleem.newsolutions.ps/APIs/CustomerSingUp";
     public static final String URL_CustomerEditProfile = "http://saleem.newsolutions.ps/APIs/CustomerEditProfile";
     public static final String URL_CustomerEditPassword = "http://saleem.newsolutions.ps/APIs/CustomerEditPassword";
-    public static final String STATIC_URL= "http://saleem.newsolutions.ps/APIs/";
-    public static final String URLF="http://saleem.newsolutions.ps/APIs/getSlider";
-    public static final String IMG_URL="http://saleem.newsolutions.ps";
+    public static final String STATIC_URL = "http://saleem.newsolutions.ps/APIs/";
+    public static final String URLF = "http://saleem.newsolutions.ps/APIs/getSlider";
+    public static final String IMG_URL = "http://saleem.newsolutions.ps";
 
     public static final String regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
 
@@ -96,12 +99,43 @@ public class Const {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(strPath, options);
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options,reqWidth,
+        options.inSampleSize = calculateInSampleSize(options, reqWidth,
                 reqHeight);
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(strPath, options);
     }
 
+    public static void wrongAlertDialog(Activity activity/*, JSONObject jsonObject*/) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("Something went wrong");
+//        builder.setMessage(jsonObject.optString("ResultText"));
+        builder.setCancelable(true);
+        final AlertDialog closedialog = builder.create();
+        closedialog.show();
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+            }
+        }, 3000);
+    }
+
+    public static void saveData(Activity activity, int recourseTitel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(recourseTitel);
+        builder.setMessage("Your data has been successfully saved");
+        builder.setCancelable(true);
+        final AlertDialog closedialog = builder.create();
+        closedialog.show();
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+            }
+        }, 3000);
+    }
 }
 //

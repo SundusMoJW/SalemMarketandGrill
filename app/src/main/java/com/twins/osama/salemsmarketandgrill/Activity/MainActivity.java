@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
     public static String NAME;
     public static String EMAILProfile;
     public static int PROFILE = R.drawable.blank_profile_picture;
-    Toolbar toolbar;                              // Declaring the Toolbar Object
-    public RecyclerView mRecyclerView;                           // Declaring RecyclerView
-    public RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
+    Toolbar toolbar;
+    public RecyclerView mRecyclerView;
+    public RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout Drawer;
     Fragment fragment = null;
-    ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
+    ActionBarDrawerToggle mDrawerToggle;
     private ImageView menu;
     ImageView shopping;
     private TypedArray navMenuIcons;
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         EMAILProfile = sharedPref.getString(EMAIL_SHARED_PREF);
 
 
-        mAdapter = new MyAdapter(this, items/*, NAME, EMAILProfile, PROFILE*/, new OnDrawerItemClickListener() {
+        mAdapter = new MyAdapter(this, items, new OnDrawerItemClickListener() {
             @Override
             public void onClick(int position) {
 
@@ -264,12 +264,6 @@ public class MainActivity extends AppCompatActivity {
                 menu.setVisibility(View.VISIBLE);
 
                 break;
-//            case 3:
-//                fragment = new RestaurantFragment();
-//                tv_title.setText(getResources().getText(R.string.restaurant));
-//                //iv_back.setVisibility(View.GONE);
-//                menu.setVisibility(View.VISIBLE);
-//                break;
 
             case 3:
                 nav_back = 1;

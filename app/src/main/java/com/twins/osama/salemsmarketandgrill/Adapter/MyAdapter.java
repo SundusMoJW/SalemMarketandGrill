@@ -30,16 +30,11 @@ import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USER_NAME_SHARED
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private final SharedPrefUtil sharedPref;
     ArrayList<DrawerItem> items;
-    private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
-    // IF the view under inflation and population is header or Item
+    private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
-
-//    private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
-//    private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
-
-    private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
-    private String email;       //
+    private String name;
+    private int profile;
+    private String email;
     private Activity context;
     OnDrawerItemClickListener listener;
     public static int PROFILE = R.drawable.blank_profile_picture;
@@ -56,33 +51,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public LinearLayout drawer_Item;
 
         public ViewHolder(View itemView, int ViewType) {
-            // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
 
-            // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
-
             if (ViewType == TYPE_ITEM) {
-                textView = (TextView) itemView.findViewById(R.id.text_home); // Creating TextView object with the id of textView from item_row.xml
+                textView = (TextView) itemView.findViewById(R.id.text_home);
                 drawer_Item = (LinearLayout) itemView.findViewById(R.id.drower_Item);
-                TypefaceUtil.applyFont(itemView.getContext(),itemView.findViewById(R.id.drower_Item));
-                imageView = (ImageView) itemView.findViewById(R.id.image_home);// Creating ImageView object with the id of ImageView from item_row.xml
-                Holderid = 1; // setting holder id as 1 as the object being populated are of type item row
+                TypefaceUtil.applyFont(itemView.getContext(), itemView.findViewById(R.id.drower_Item));
+                imageView = (ImageView) itemView.findViewById(R.id.image_home);
+                Holderid = 1;
             } else {
 
-                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
-                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
+                Name = (TextView) itemView.findViewById(R.id.name);
+                email = (TextView) itemView.findViewById(R.id.email);
+                profile = (ImageView) itemView.findViewById(R.id.circleView);
                 TypefaceUtil.applyFont(itemView.getContext(), itemView.findViewById(R.id.header_id));
-
-                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
+                Holderid = 0;
             }
         }
-
-
-        // This method returns the number of items present in the list
-
-
-        // Witht the following method we check what type of view is being passed
 
         public int getItemViewType(int position) {
             if (isPositionHeader(position))
@@ -119,19 +104,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.name = name;
     }
 
-    public MyAdapter(Activity context, ArrayList<DrawerItem> items/*, String Name, String Email, int Profile*/, OnDrawerItemClickListener listener) { // MyAdapter Constructor with titles and icons parameter
+    public MyAdapter(Activity context, ArrayList<DrawerItem> items, OnDrawerItemClickListener listener) {
         sharedPref = new SharedPrefUtil(context);
-        // titles, icons, name, email, profile pic are passed from the main activity as we
-//        mNavTitles = Titles;                //have seen earlier
-//        mIcons = Icons;
         this.context = context;
         this.items = items;
-//        name = Name;
-
-//        email = Email;
-//        profile = Profile;                     //here we assign those passed values to the values we declared here
-        this.listener = listener;                     //here we assign those passed values to the values we declared here
-        //in adapter
+        this.listener = listener;
 
 
     }
@@ -139,37 +116,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.toolbar, parent, false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.toolbar, parent, false);
+            ViewHolder vhItem = new ViewHolder(v, viewType);
 
-            ViewHolder vhItem = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
-
-            return vhItem; // Returning the created object
-
-            //inflate your layout and pass it to view holder
+            return vhItem;
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header, parent, false); //Inflating the layout
-
-            ViewHolder vhHeader = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
-
-            return vhHeader; //returning the object created
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header, parent, false);
+            ViewHolder vhHeader = new ViewHolder(v, viewType);
+            return vhHeader;
 
 
         }
         return null;
     }
-//Next we override a method which is called when the item in a row is needed to be displayed, here the int position
-    // Tells us item at which position is being constructed to be displayed and the holder id of the holder object tell us
-    // which view type is being created 1 for item row
 
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, final int position) {
 
         if (holder.Holderid == 0) {
             name = sharedPref.getString(USER_NAME_SHARED_PREF);
-            email =sharedPref.getString(EMAIL_SHARED_PREF);
-            // holder.profile.setImageDrawable(profile);
+            email = sharedPref.getString(EMAIL_SHARED_PREF);
             holder.profile.setImageResource(PROFILE);
             holder.Name.setText(name);
             holder.email.setText(email);
@@ -193,13 +161,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 holder.drawer_Item.setBackgroundColor(Color.parseColor("#ffffff"));
                 holder.imageView.setImageResource(item.getImage());
             }
-        holder.drawer_Item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onClick(position-1);
+            holder.drawer_Item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(position - 1);
 
-            }
-        });
+                }
+            });
         }
     }
 

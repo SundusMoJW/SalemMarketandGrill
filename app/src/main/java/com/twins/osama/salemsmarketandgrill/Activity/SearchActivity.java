@@ -1,17 +1,18 @@
 package com.twins.osama.salemsmarketandgrill.Activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.widget.ListView;
 
+import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.DbBackend;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public class SearchActivity  extends SwipeBackActivity {
+public class SearchActivity extends AppCompatActivity {
     private SearchView searchView;
     private ListView listView;
     private DbBackend databaseObject;
@@ -20,11 +21,10 @@ public class SearchActivity  extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Const.setLangSettings(this);
         setContentView(R.layout.activity_search);
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_ALL);
+        TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.search_activity));
 
-        TypefaceUtil.applyFont(getApplicationContext(),findViewById(R.id.search_activity));
 //        searchView = (SearchView) findViewById(R.id.searchView);
 //        searchView.setQueryHint("Enter search");
 //       // databaseObject = new DbBackend(MainActivity.this);

@@ -59,8 +59,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Animation shakeAnimation;
     private ImageView progress_image;
     private Animation animPrograss;
-    //    private LoginButton loginButton;
-//    private CallbackManager callbackManager;
     private ProgressDialog progressDialog;
 
     @Override
@@ -80,7 +78,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         passsword_login = (EditText) findViewById(R.id.passsword_login);
         login.setOnClickListener(this);
         createAccount = (TextView) findViewById(R.id.createAccount);
-        // Load ShakeAnimation
         shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.shake);
 //        animPrograss = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.progress_anim);
@@ -281,25 +278,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         finish();
                     } else {
 
-//                        if (pd != null && pd.isShowing())
-//                            pd.dismiss();
-                        //If the server response is not success
-                        //Displaying an error message on toast
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-//                        builder.setTitle("Something went wrong");
-////                        builder.setMessage(jsonObject.optString("ResultText"));
-//                        builder.setMessage("Your User Name Id is Invalid");
-//                        builder.setCancelable(true);
-//                        final AlertDialog closedialog = builder.create();
-//                        closedialog.show();
-//                        final Timer timer2 = new Timer();
-//                        timer2.schedule(new TimerTask() {
-//                            public void run() {
-//                                closedialog.dismiss();
-//                                timer2.cancel(); //this will cancel the timer of the system
-//                            }
-//                        }, 3000);
-                        progressDialog.dismiss();
+                       progressDialog.dismiss();
                         new CustomToast().Show_Toast(getApplicationContext(), view,
                                 "Your User Name is Invalid.");
                         progress_image.setVisibility(View.GONE);
@@ -313,22 +292,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                if (pd != null && pd.isShowing())
-//                    pd.dismiss();
-//                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-//                builder.setTitle("Something went wrong");
-//                builder.setMessage(" Error Response");
-//                builder.setCancelable(true);
-//                final AlertDialog closedialog = builder.create();
-//                closedialog.show();
-//                final Timer timer2 = new Timer();
-//                timer2.schedule(new TimerTask() {
-//                    public void run() {
-//                        closedialog.dismiss();
-//                        timer2.cancel();
-//                    }
-//                }, 3000);
-//                progress_image.setVisibility(View.GONE);
                 progressDialog.dismiss();
                 new CustomToast().Show_Toast(getApplicationContext(), view,
                         "No Internet connection");
@@ -349,10 +312,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (checkValidation()) {
             login();
         }
-// else {
-//            progressDialog.dismiss();
-////        }
-//          progress_image.setVisibility(View.GONE);
     }
     @Override
     protected void onResume() {

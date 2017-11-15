@@ -69,6 +69,20 @@ public class Setting extends Fragment implements View.OnClickListener {
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.setting_id));
         mActivity = getActivity();
         sharedPrefUtil = new SharedPrefUtil(getActivity());
+        userNameAccount = (RelativeLayout) view.findViewById(R.id.user_name_account);
+        actauleName = (TextView) view.findViewById(R.id.actaule_name);
+        actauleName.setText(sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
+
+        emailAccount = (RelativeLayout) view.findViewById(R.id.email_account);
+        actauleEmail = (TextView) view.findViewById(R.id.actaule_email);
+        actauleEmail.setText( sharedPrefUtil.getString(EMAIL_SHARED_PREF));
+
+        passwordAccount = (RelativeLayout) view.findViewById(R.id.password_account);
+        actaulePassword = (TextView) view.findViewById(R.id.actaule_password);
+
+        logout_account = (TextView) view.findViewById(R.id.logout_account);
+
+        switchNotification = (Switch) view.findViewById(R.id.switch_notification);
 
         strLanguge = sharedPrefUtil.getString(LANG);
 
@@ -77,7 +91,6 @@ public class Setting extends Fragment implements View.OnClickListener {
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.search).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.go_back).setVisibility(View.GONE);
-
 
         switch_language = (Switch) view.findViewById(R.id.switch_Language);
 
@@ -159,20 +172,6 @@ public class Setting extends Fragment implements View.OnClickListener {
 
         });
 
-        userNameAccount = (RelativeLayout) view.findViewById(R.id.user_name_account);
-        actauleName = (TextView) view.findViewById(R.id.actaule_name);
-        actauleName.setText(sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
-
-        emailAccount = (RelativeLayout) view.findViewById(R.id.email_account);
-        actauleEmail = (TextView) view.findViewById(R.id.actaule_email);
-        actauleEmail.setText( sharedPrefUtil.getString(EMAIL_SHARED_PREF));
-
-        passwordAccount = (RelativeLayout) view.findViewById(R.id.password_account);
-        actaulePassword = (TextView) view.findViewById(R.id.actaule_password);
-
-        logout_account = (TextView) view.findViewById(R.id.logout_account);
-
-        switchNotification = (Switch) view.findViewById(R.id.switch_notification);
 
 
 
@@ -193,7 +192,6 @@ public class Setting extends Fragment implements View.OnClickListener {
         logout_account.setOnClickListener(this);
         //       aboutApp.setOnClickListener(this);
 //        switchNotification.setOnClickListener(this);
-
 
         return view;
 
@@ -262,6 +260,7 @@ public class Setting extends Fragment implements View.OnClickListener {
         alertDialog.show();
 
     }
+
 }
 
 

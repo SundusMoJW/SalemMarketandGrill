@@ -1,23 +1,28 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
+import android.app.Dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CheckOutSteps extends Fragment implements View.OnClickListener {
@@ -64,17 +69,6 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
         View mainView = inflater.inflate(R.layout.activity_main, container, false);
         tv_title = (TextView) mainView.findViewById(R.id.tv_title);
         tv_title.setText(getText(R.string.checkout));
-//        Spinner spinner = (Spinner) view.findViewById(R.id.country);
-//
-//        final List<String> list = new ArrayList<String>();
-//        list.add("United State");
-//        list.add("United State");
-//        list.add("United State");
-//        list.add("United State");
-//        list.add("United State");
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, list);
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(arrayAdapter);
 
         ((TextView) getActivity().findViewById(R.id.tv_title)).setText(getText(R.string.checkout));
         select1 = (LinearLayout) view.findViewById(R.id.select1);
@@ -169,9 +163,32 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
         showPopupCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(v);
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+                dialog.setContentView(R.layout.spinner_layout);
+                ListView listView = (ListView) dialog.findViewById(R.id.showPopupCart);
+                final List<String> items = new ArrayList();
+                items.add("Country");
+                items.add("Country");
+                items.add("Country");
+                items.add("Country");
+                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+//
+                listView.setAdapter(adapter);
+//
+                listView.setTextFilterEnabled(true);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        showPopupCheckout.setText(items.get(position));
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
             }
         });
+
+
         return view;
 
     }
@@ -265,35 +282,6 @@ direct_transfer.setBackground(getResources().getDrawable(R.drawable.edit_text));
             delivery.setBackground(getResources().getDrawable(R.drawable.with_corner_left));
         }
     }
-    public void showPopup(View view) {
-        PopupMenu popup = new PopupMenu(getActivity(), view);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.popup1c:
-                        showPopupCheckout.setText(item.getTitle());
-                        return true;
-                    case R.id.popup2c:
-                        showPopupCheckout.setText(item.getTitle());
-
-                        return true;
-                    case R.id.popup3c:
-                        showPopupCheckout.setText(item.getTitle());
-
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-        });
-
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_country, popup.getMenu());
-
-        popup.show();
-    }
 
 }

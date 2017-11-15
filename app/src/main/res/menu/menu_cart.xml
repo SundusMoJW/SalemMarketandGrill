@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/popup1u" android:title="@string/united_states"></item>
-    <item android:id="@+id/popup2u" android:title="@string/united_states"></item>
-    <item android:id="@+id/popup3u" android:title="@string/united_states"></item>
-</menu>

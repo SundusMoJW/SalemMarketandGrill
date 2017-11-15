@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:scrollbars="none"
-        android:background="@drawable/edit_text"
         android:textSize="@dimen/textSize" />
+        <!--android:background="@drawable/edit_text"-->
 </LinearLayout>

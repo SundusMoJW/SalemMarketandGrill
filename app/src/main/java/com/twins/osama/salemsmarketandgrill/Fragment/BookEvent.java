@@ -1,17 +1,20 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.PopupMenu;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -19,7 +22,9 @@ import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class BookEvent extends Fragment {
     private TextView event_date;
@@ -43,7 +48,7 @@ public class BookEvent extends Fragment {
         // استدعي الميثود وامررها اكتيفيتي يعني (this)قبل ما أمرر ال layout
         Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_book_event, container, false);
-        TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.bookEvent));
+        TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.bookEvent));
         event_date = (TextView) view.findViewById(R.id.event_date);
 
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
@@ -68,30 +73,18 @@ public class BookEvent extends Fragment {
                         event_date.setText(myTime);
                     }
                 }, year, month, day);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                }
                 datePickerDialog.show();
             }
         });
 
 
-//        Spinner spinner = (Spinner) view.findViewById(R.id.event_type);
-//
-//        final List<String> list = new ArrayList<String>();
-//        list.add("Event Type");
-//        list.add("Event Type");
-//        list.add("Event Type");
-//        list.add("Event Type");
-//        list.add("Event Type");
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, list);
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(arrayAdapter);
-
 
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
         value = (TextView) view.findViewById(R.id.value);
-//        seekBar.getProgressDrawable();
-                //setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
-        //seekBar.getThumb().setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_IN);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 value.setText(String.valueOf(progress));
@@ -109,44 +102,35 @@ public class BookEvent extends Fragment {
         showPopup = (EditText) view.findViewById(R.id.showPopup);
         showPopup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                showPopup(v);
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+                dialog.setContentView(R.layout.spinner_layout);
+                ListView listView = (ListView) dialog.findViewById(R.id.showPopupCart);
+                final List<String> items = new ArrayList();
+                items.add("Event Type");
+                items.add("Event Type");
+                items.add("Event Type");
+                items.add("Event Type");
+                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+//
+                listView.setAdapter(adapter);
+//
+                listView.setTextFilterEnabled(true);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        showPopup.setText(items.get(position));
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
             }
         });
+
 
         return view;
 
     }
-
-
-    public void showPopup(View view) {
-        PopupMenu popup = new PopupMenu(getActivity(), view);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.popup1:
-                      showPopup.setText(item.getTitle());
-                        return true;
-                    case R.id.popup2:
-                        showPopup.setText(item.getTitle());
-                        return true;
-                    case R.id.popup3:
-                        showPopup.setText(item.getTitle());
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-        });
-
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu, popup.getMenu());
-
-        popup.show();
-    }
-
 
 }

@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cart_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
@@ -7,7 +8,6 @@
     android:layoutDirection="ltr"
     android:scrollbars="none"
     android:textDirection="ltr"
-    android:id="@+id/cart_fragment"
     tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CartFragment">
 
     <LinearLayout
@@ -105,15 +105,14 @@
                 android:layout_alignBottom="@+id/linearLayout"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/button_shape"
-               >
+                android:background="@drawable/button_shape">
 
                 <TextView
                     android:id="@+id/componentSalry"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
                     android:text="9"
@@ -123,11 +122,11 @@
                 <TextView
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/button_shape"
-                    android:text="$ US"
                     android:gravity="center"
+                    android:text="$ US"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSize" />
             </LinearLayout>
@@ -141,18 +140,28 @@
             android:textSize="@dimen/textSize"
             android:textStyle="bold" />
 
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:spinnerMode="dialog"-->
+            <!--android:layout_margin="5dp"-->
+
+            <!--android:background="@drawable/edit_text"-->
+            <!--android:textSize="@dimen/textSize"-->
+            <!--android:padding="10dp"/>-->
         <EditText
-            android:id="@+id/showPopupCart"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/edit_text"
-            android:drawableRight="@drawable/down_arrow_f"
-            android:focusable="false"
-            android:hint="@string/united_states"
-            android:padding="10dp"
-            android:textSize="@dimen/textSize" />
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/edit_text"
+        android:drawableRight="@drawable/down_arrow_f"
+        android:focusable="false"
+        android:hint="@string/united_states"
+        android:padding="10dp"
+        android:textSize="@dimen/textSize" />
 
         <EditText
             style="@style/AlertDialog.AppCompat.Light"

@@ -1,22 +1,27 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CartFragment extends Fragment {
@@ -30,7 +35,7 @@ public class CartFragment extends Fragment {
     public EditText showPopupCart;
     private TextView componentSalry;
     private int componentSalryInteger=1;
-
+    private EditText spinner;
 
     public static CartFragment newInstance() {
         CartFragment fragment = new CartFragment();
@@ -60,6 +65,8 @@ public class CartFragment extends Fragment {
         txtResult = (TextView) view.findViewById(R.id.result);
         componentSalry = (TextView) view.findViewById(R.id.componentSalry);
         componentSalryInteger = Integer.parseInt(componentSalry.getText().toString());
+        spinner =view.findViewById(R.id.spinner);
+
         buPlus.setOnClickListener(new View.OnClickListener() {
             private int oldValue;
 
@@ -97,10 +104,44 @@ public class CartFragment extends Fragment {
 //        list.add("United State (US)");
 //        list.add("United State (US)");
 //        list.add("United State (US)");
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, list);
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        List<String> items = new ArrayList();
+        items.add("United State (US)");
+        items.add("United State (US)");
+        items.add("United State (US)");
+        items.add("United State (US)");
+        items.add("United State (US)");
+        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+
+        spinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+                dialog.setContentView(R.layout.spinner_layout);
+                ListView listView = (ListView) dialog.findViewById(R.id.showPopupCart);
+                final List<String> items = new ArrayList();
+                items.add("United State (US)");
+                items.add("United State (US)");
+                items.add("United State (US)");
+                items.add("United State (US)");
+                items.add("United State (US)");
+                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
 //
-//        spinner.setAdapter(arrayAdapter);
+                                listView.setAdapter(adapter);
+//
+                                listView.setTextFilterEnabled(true);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        spinner.setText(items.get(position));
+                                        dialog.cancel();
+                                    }
+                                });
+                dialog.show();
+            }
+        });
+
         bucheckout = (Button) view.findViewById(R.id.bucheckout);
         bucheckout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,44 +153,10 @@ public class CartFragment extends Fragment {
             }
         });
 
-        showPopupCart = (EditText) view.findViewById(R.id.showPopupCart);
-        showPopupCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup(v);
-            }
-        });
         return view;
     }
 
-    public void showPopup(View view) {
-        PopupMenu popup = new PopupMenu(getActivity(), view);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.popup1u:
-                        showPopupCart.setText(item.getTitle());
-                        return true;
-                    case R.id.popup2u:
-                        showPopupCart.setText(item.getTitle());
-                        return true;
-                    case R.id.popup3u:
-                        showPopupCart.setText(item.getTitle());
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-        });
-
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_cart, popup.getMenu());
-
-        popup.show();
-    }
 
 
 }

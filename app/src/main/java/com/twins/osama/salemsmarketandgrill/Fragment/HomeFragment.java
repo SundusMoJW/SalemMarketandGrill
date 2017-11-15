@@ -38,8 +38,6 @@ import java.util.TimerTask;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-import static com.twins.osama.salemsmarketandgrill.R.id.addView;
-
 //import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -49,18 +47,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ViewPager mViewPager;
     private static int currentPage = 0;
     //    ArrayList<HomeRecycleViewTemplate> data;
-    int img = R.drawable.crop3;
+    private int img = R.drawable.crop3;
     private int NUM_PAGES;
     public static int constant = 1;
     private FragmentTransaction mFragmentTransaction;
-    CoordinatorLayout mCoordinatorLayout;
+    private CoordinatorLayout mCoordinatorLayout;
     //    public String filePth;
 //    public String[] arrTitels = new String[]{};
 //    public String[] arrImage = new String[]{};
-    ArrayList<Slider> list;
+    private ArrayList<Slider> list;
     private Realm realm;
-    ArrayList<Meals> meals;
-    ArrayList<TypeList> typeList;
+    private ArrayList<Meals> meals;
+    private  ArrayList<TypeList> typeList;
     private LinearLayout linearLayout;
     private TextView menu_tab;
     private TextView grocery;
@@ -192,7 +190,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-        linearLayout = (LinearLayout) view.findViewById(addView);
+        linearLayout = (LinearLayout) view.findViewById(R.id.addView);
         menu_tab = (TextView) view.findViewById(R.id.menu_tab);
         grocery = (TextView) view.findViewById(R.id.grocery);
         meat = (TextView) view.findViewById(R.id.meat);

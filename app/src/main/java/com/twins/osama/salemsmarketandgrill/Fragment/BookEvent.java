@@ -28,8 +28,8 @@ import java.util.List;
 
 public class BookEvent extends Fragment {
     private TextView event_date;
-    FragmentTransaction manager;
-    TextView value;
+    private FragmentTransaction manager;
+    private TextView value;
     private EditText showPopup;
 
     public static BookEvent newInstance() {
@@ -60,7 +60,7 @@ public class BookEvent extends Fragment {
         event_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
+
                 final Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
@@ -80,8 +80,6 @@ public class BookEvent extends Fragment {
             }
         });
 
-
-
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
         value = (TextView) view.findViewById(R.id.value);
        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -97,7 +95,6 @@ public class BookEvent extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
-
         });
         showPopup = (EditText) view.findViewById(R.id.showPopup);
         showPopup.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +110,7 @@ public class BookEvent extends Fragment {
                 items.add("Event Type");
                 items.add("Event Type");
                 ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
-//
                 listView.setAdapter(adapter);
-//
                 listView.setTextFilterEnabled(true);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -127,7 +122,6 @@ public class BookEvent extends Fragment {
                 dialog.show();
             }
         });
-
 
         return view;
 

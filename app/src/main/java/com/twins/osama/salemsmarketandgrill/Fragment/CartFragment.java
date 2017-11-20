@@ -34,7 +34,7 @@ public class CartFragment extends Fragment {
     private FragmentTransaction mFragmentTransaction;
     public EditText showPopupCart;
     private TextView componentSalry;
-    private int componentSalryInteger=1;
+    private int componentSalryInteger = 1;
     private EditText spinner;
 
     public static CartFragment newInstance() {
@@ -52,7 +52,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.cart_fragment));
+        TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.cart_fragment));
 
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.shopping).setVisibility(View.VISIBLE);
@@ -65,7 +65,7 @@ public class CartFragment extends Fragment {
         txtResult = (TextView) view.findViewById(R.id.result);
         componentSalry = (TextView) view.findViewById(R.id.componentSalry);
         componentSalryInteger = Integer.parseInt(componentSalry.getText().toString());
-        spinner =view.findViewById(R.id.spinner);
+        spinner = view.findViewById(R.id.spinner);
 
         buPlus.setOnClickListener(new View.OnClickListener() {
             private int oldValue;
@@ -76,7 +76,7 @@ public class CartFragment extends Fragment {
                 oldValue++;
                 componentSalryInteger *= oldValue;
                 txtResult.setText("" + oldValue);
-                componentSalry.setText(""+componentSalryInteger);
+                componentSalry.setText("" + componentSalryInteger);
             }
         });
         buMins.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +87,13 @@ public class CartFragment extends Fragment {
                 oldValue = Integer.parseInt((String) txtResult.getText());
                 oldValue--;
 
-                if (oldValue <= 0|oldValue==1) {
+                if (oldValue <= 0 | oldValue == 1) {
                     oldValue = 1;
-                    componentSalryInteger=9;
+                    componentSalryInteger = 9;
                 }
                 componentSalryInteger /= oldValue;
                 txtResult.setText("" + oldValue);
-                componentSalry.setText(""+componentSalryInteger);
+                componentSalry.setText("" + componentSalryInteger);
             }
         });
 //        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
@@ -111,7 +111,7 @@ public class CartFragment extends Fragment {
         items.add("United State (US)");
         items.add("United State (US)");
         items.add("United State (US)");
-        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
 
         spinner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,18 +126,18 @@ public class CartFragment extends Fragment {
                 items.add("United State (US)");
                 items.add("United State (US)");
                 items.add("United State (US)");
-                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
 //
-                                listView.setAdapter(adapter);
+                listView.setAdapter(adapter);
 //
-                                listView.setTextFilterEnabled(true);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        spinner.setText(items.get(position));
-                                        dialog.cancel();
-                                    }
-                                });
+                listView.setTextFilterEnabled(true);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        spinner.setText(items.get(position));
+                        dialog.cancel();
+                    }
+                });
                 dialog.show();
             }
         });
@@ -155,8 +155,5 @@ public class CartFragment extends Fragment {
 
         return view;
     }
-
-
-
 
 }

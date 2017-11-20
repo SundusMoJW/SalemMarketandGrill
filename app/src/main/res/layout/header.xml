@@ -1,56 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_id"
     android:layout_width="match_parent"
     android:layout_height="@dimen/hedar"
-    android:layoutDirection="ltr"
-    android:textDirection="rtl"
-    android:id="@+id/header_id"
     android:background="@drawable/background_poly"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:layout_marginBottom="20dp"
+    android:textDirection="rtl"
     android:weightSum="1">
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:textColor="@color/white"
             android:text="Name"
-            android:textStyle="bold"
+            android:textColor="@color/white"
             android:textSize="@dimen/titel"
- />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:text="Test test"
-            android:textStyle="normal"
+            android:textColor="@color/white"
             android:textSize="@dimen/textSize"
-     />
+            android:textStyle="normal" />
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/resturant"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/circleView"
-        />
+        android:src="@drawable/resturant" />
 </RelativeLayout>

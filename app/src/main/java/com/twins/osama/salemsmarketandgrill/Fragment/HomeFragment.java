@@ -116,41 +116,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
         mViewPager.setOffscreenPageLimit(0);
-//        adapter = new SliderAdapter(getChildFragmentManager(), ICONS,TITEL);
-//        mViewPager = (ViewPager) view.findViewById(R.id.pager);
-//        mViewPager.setAdapter(adapter);
-//        mViewPager.setCurrentItem(0);
-//        mViewPager.setOffscreenPageLimit(0);
-//        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);cardView_home
-//        indicator.setViewPager(mViewPager);
-//
-//        // Auto start of viewpager
-//        final Handler handler = new Handler();
-//        final Runnable Update = new Runnable() {
-//            public void run() {
-//                if (currentPage == ICONS.length) {
-//                    currentPage = 0;
-//                }
-//                mViewPager.setCurrentItem(currentPage++, true);
-//            }
-//        };
-//        Timer swipeTimer = new Timer();
-//        swipeTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                handler.post(Update);
-//            }
-//        }, 3000, 3000);
+
         CirclePageIndicator indicator = (CirclePageIndicator)
                 view.findViewById(R.id.indicator);
 
         indicator.setViewPager(mViewPager);
 
         final float density = getResources().getDisplayMetrics().density;
-
-//Set circle indicator radius
         indicator.setRadius(4 * density);
-
         NUM_PAGES = list.size();
 
         // Auto start of viewpager
@@ -177,17 +150,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-
             }
 
             @Override
             public void onPageScrolled(int pos, float arg1, int arg2) {
-
             }
 
             @Override
             public void onPageScrollStateChanged(int pos) {
-
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.addView);
@@ -207,8 +177,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         realmMealsResults = realm.where(Meals.class).findAll();
         meals = (ArrayList<Meals>) realm.copyFromRealm(realmMealsResults);
-//        Log.i("///", realmMealsResults + " ");
-
         linearLayout.removeAllViews();
         if (typeList != null && typeList.size() > 0) {
             Category categoryAll = new Category(-1, "All");
@@ -216,9 +184,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             for (int i = 0; i < typeList.size(); i++) {
                 if (typeList.get(i).getIdType() == 2) {
                     linearLayout.addView(getItem(new Category(typeList.get(i).getId(), typeList.get(i).getName())));
-
                 }
-//                Log.i("///", typeList.get(i).getId() + " ");
             }
         }
 
@@ -343,21 +309,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Log.i("///", typeList.get(i).getId() + " ");
                     }
                 }
-//                for (int i = 0; i < typeList.size(); i++) {
-//                    if (typeList.get(i).getIdType() == 7) {
-//                        TextView tv = new TextView(getContext());
-//                        typeList.get(i).getName();
-//                        tv.setTextColor(Color.parseColor("#ef5438"));
-//                        tv.setTextSize(14);
-//                        LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                        llp.setMargins(10, 10, 10, 10); // llp.setMargins(left, top, right, bottom);
-//                        tv.setGravity(Gravity.CENTER);
-//                        tv.setLayoutParams(llp);
-//                        tv.setText(typeList.get(i).getName());
-//                        linearLayout.addView(tv);
-//                        TypefaceUtil.applyFont(getContext(), tv);
-//                    }
-//                }
+
                 break;
             case R.id.grocery:
                 constant = 3;
@@ -436,10 +388,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (id == -1) {
             realmMealsResults = realm.where(Meals.class).findAll();
             meals = (ArrayList<Meals>) realm.copyFromRealm(realmMealsResults);
-//            Log.i("///", realmMealsResults + " ");
         } else {
-//            Log.i("///",  "****** ");
-
             realm.executeTransaction(new Realm.Transaction() {
                 public ArrayList<Meals> mealsResults = new ArrayList<Meals>();
 
@@ -448,7 +397,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                     realmMealsResults = realm.where(Meals.class).equalTo("IdTypeList", id).findAll();
                     meals = (ArrayList<Meals>) realm.copyFromRealm(realmMealsResults);
-//                    Log.i("///*",meals+ " ");
                 }
             });
         }
@@ -461,7 +409,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meals.get(position).getId());
-//                Log.i("///*",  mealsArrayList.get(position).getId() + " ");
                 fragment.setArguments(bundle);
                 mFragmentTransaction.replace(R.id.frame_layout, fragment);
                 mFragmentTransaction.commit();
@@ -486,16 +433,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (id == -1) {
             realmMeatsResults = realm.where(Market.class).equalTo("type", 2).findAll();
             meatsArrayList = (ArrayList<Market>) realm.copyFromRealm(realmMeatsResults);
-//            Log.i("///", realmMealsResults + " ");
         } else {
-//            Log.i("///",  "****** ");
-
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     realmMeatsResults = realm.where(Market.class).equalTo("type", 2).equalTo("IdTypeList", id).findAll();
                     meatsArrayList = (ArrayList<Market>) realm.copyFromRealm(realmMeatsResults);
-//                    Log.i("///*",meals+ " ");
                 }
             });
         }
@@ -508,7 +451,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meatsArrayList.get(position).getId());
-//                Log.i("///*",  mealsArrayList.get(position).getId() + " ");
                 fragment.setArguments(bundle);
                 mFragmentTransaction.replace(R.id.frame_layout, fragment);
                 mFragmentTransaction.commit();
@@ -533,16 +475,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (id == -1) {
             realmMeatsResults = realm.where(Market.class).equalTo("type", 1).findAll();
             meatsArrayList = (ArrayList<Market>) realm.copyFromRealm(realmMeatsResults);
-//            Log.i("///", realmMealsResults + " ");
         } else {
-//            Log.i("///",  "****** ");
-
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     realmMeatsResults = realm.where(Market.class).equalTo("type", 1).equalTo("IdTypeList", id).findAll();
                     meatsArrayList = (ArrayList<Market>) realm.copyFromRealm(realmMeatsResults);
-//                    Log.i("///*",meals+ " ");
                 }
             });
         }
@@ -555,7 +493,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meatsArrayList.get(position).getId());
-//                Log.i("///*",  mealsArrayList.get(position).getId() + " ");
                 fragment.setArguments(bundle);
                 mFragmentTransaction.replace(R.id.frame_layout, fragment);
                 mFragmentTransaction.commit();

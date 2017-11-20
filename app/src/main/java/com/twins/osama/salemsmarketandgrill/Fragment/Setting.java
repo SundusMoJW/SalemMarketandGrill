@@ -72,18 +72,13 @@ public class Setting extends Fragment implements View.OnClickListener {
         userNameAccount = (RelativeLayout) view.findViewById(R.id.user_name_account);
         actauleName = (TextView) view.findViewById(R.id.actaule_name);
         actauleName.setText(sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
-
         emailAccount = (RelativeLayout) view.findViewById(R.id.email_account);
         actauleEmail = (TextView) view.findViewById(R.id.actaule_email);
         actauleEmail.setText( sharedPrefUtil.getString(EMAIL_SHARED_PREF));
-
         passwordAccount = (RelativeLayout) view.findViewById(R.id.password_account);
         actaulePassword = (TextView) view.findViewById(R.id.actaule_password);
-
         logout_account = (TextView) view.findViewById(R.id.logout_account);
-
         switchNotification = (Switch) view.findViewById(R.id.switch_notification);
-
         strLanguge = sharedPrefUtil.getString(LANG);
 
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
@@ -93,7 +88,6 @@ public class Setting extends Fragment implements View.OnClickListener {
         getActivity().findViewById(R.id.go_back).setVisibility(View.GONE);
 
         switch_language = (Switch) view.findViewById(R.id.switch_Language);
-
         switch_language.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -109,13 +103,11 @@ public class Setting extends Fragment implements View.OnClickListener {
                         Configuration config = new Configuration();
                         config.locale = locale;
                         getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
-
                         Intent intent = new Intent(getActivity(), Splash.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         getActivity().finish();
 
-                        // restartActivity(mActivity);
                     } else {
                         switch_language.setText((String) getResources().getText(R.string.Arabic));
                         sharedPrefUtil.saveString(LANG, arabic);
@@ -125,12 +117,10 @@ public class Setting extends Fragment implements View.OnClickListener {
                         Configuration config = new Configuration();
                         config.locale = locale;
                         getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
-
                         Intent intent = new Intent(getActivity(), Splash.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         getActivity().finish();
-                        //restartActivity(mActivity);
                     }
                 } else {
 
@@ -143,37 +133,28 @@ public class Setting extends Fragment implements View.OnClickListener {
                         Configuration config = new Configuration();
                         config.locale = locale;
                         getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
-
                         Intent intent = new Intent(getActivity(), Splash.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         getActivity().finish();
-                        //restartActivity(mActivity);
                     } else {
                         switch_language.setText((String) getResources().getText(R.string.Arabic));
                         sharedPrefUtil.saveString(LANG, arabic);
-                        // Const.setLangSettings(getActivity());
                         String languageToLoad = "ar";
                         Locale locale = new Locale(languageToLoad);
                         Locale.setDefault(locale);
                         Configuration config = new Configuration();
                         config.locale = locale;
                         getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
-
                         Intent intent = new Intent(getActivity(), Splash.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         getActivity().finish();
-                        //restartActivity(mActivity);
                     }
-
                 }
             }
 
         });
-
-
-
 
         aboutApp = (TextView) view.findViewById(R.id.about_app);
         aboutApp.setOnClickListener(new View.OnClickListener() {
@@ -190,13 +171,8 @@ public class Setting extends Fragment implements View.OnClickListener {
         emailAccount.setOnClickListener(this);
         passwordAccount.setOnClickListener(this);
         logout_account.setOnClickListener(this);
-        //       aboutApp.setOnClickListener(this);
-//        switchNotification.setOnClickListener(this);
-
         return view;
-
-
-    }
+   }
 
 
     @Override
@@ -224,8 +200,6 @@ public class Setting extends Fragment implements View.OnClickListener {
             case R.id.logout_account:
                 nextFragment = new HomeFragment();
                 Logout();
-                //iv_back.setVisibility(View.GONE);
-
                 break;
         }
         fragmentManager = getActivity().getSupportFragmentManager();
@@ -242,7 +216,6 @@ public class Setting extends Fragment implements View.OnClickListener {
                     public void onClick(DialogInterface arg0, int arg1) {
                         sharedPrefUtil = new SharedPrefUtil(getActivity());
                         sharedPrefUtil.clear();
-                        //Starting login activity
                         Intent intent = new Intent(getActivity(), Login.class);
                         startActivity(intent);
                         getActivity().finish();
@@ -255,7 +228,6 @@ public class Setting extends Fragment implements View.OnClickListener {
                     }
                 });
 
-        //Showing the alert dialog
         android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
 

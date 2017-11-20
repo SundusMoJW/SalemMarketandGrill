@@ -3,7 +3,9 @@ package com.twins.osama.salemsmarketandgrill.Fragment;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,7 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
     private LinearLayout select1;
     private LinearLayout select2;
     private LinearLayout select3;
-    TextView tv_title;
+    private TextView tv_title;
     private LinearLayout contentStep3;
     private LinearLayout contentStep2;
     private LinearLayout contentStep1;
@@ -65,10 +67,6 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
         Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_check_out_steps, container, false);
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.check_out_steps));
-
-        View mainView = inflater.inflate(R.layout.activity_main, container, false);
-        tv_title = (TextView) mainView.findViewById(R.id.tv_title);
-        tv_title.setText(getText(R.string.checkout));
 
         ((TextView) getActivity().findViewById(R.id.tv_title)).setText(getText(R.string.checkout));
         select1 = (LinearLayout) view.findViewById(R.id.select1);
@@ -187,10 +185,7 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
                 dialog.show();
             }
         });
-
-
         return view;
-
     }
 
 
@@ -282,6 +277,23 @@ direct_transfer.setBackground(getResources().getDrawable(R.drawable.edit_text));
             delivery.setBackground(getResources().getDrawable(R.drawable.with_corner_left));
         }
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
 
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.frame_layout, new CartFragment()).commit();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 }

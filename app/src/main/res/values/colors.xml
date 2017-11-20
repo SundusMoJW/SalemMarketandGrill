@@ -5,6 +5,7 @@
     <color name="colorAccent">#C0C0C0</color>
     <color name="backLogo">#ef5438</color>
     <color name="rect_rounded">#D35650</color>
+    <color name="rect_round">#D37759</color>
     <color name="shadow_end">#f6f5f4</color>
     <color name="shadow_center">#efedec</color>
     <color name="shadow_start">#c1bcb9</color>

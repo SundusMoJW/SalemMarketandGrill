@@ -68,9 +68,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         view = findViewById(R.id.login_layout);
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.login_layout));
-
 //        progress_image = (ImageView)findViewById(R.id.progress_image);
-
         login = (Button) findViewById(R.id.login);
         show_hide_password = (CheckBox) findViewById(R.id.show_hide_password);
         ll_login = (LinearLayout) findViewById(R.id.ll_login);

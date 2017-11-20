@@ -71,13 +71,11 @@ public class Splash extends AppCompatActivity {
 
     public void fillImage() {
         Log.i("///", "///" + "");
-//        final Realm realm = Realm.getDefaultInstance();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, URLF
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Log.i("///", "///" + "" + response);
                 realm.beginTransaction();
                 RealmResults<Slider> result = realm.where(Slider.class).findAll();
                 if (!(result.isEmpty())) {
@@ -89,8 +87,6 @@ public class Splash extends AppCompatActivity {
                     boolean Status = jsonObject.optBoolean("Status");
 
                     if (Status) {
-//                        Log.i("///", Status + "");
-
                         JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -107,8 +103,6 @@ public class Splash extends AppCompatActivity {
                         for (Slider b : list) {
                             // Persist your data easily
                             realm.beginTransaction();
-//                            Person person = realm.createObject(Person.class); // Create managed objects directly
-
                             realm.copyToRealm(b);
                             realm.commitTransaction();
                             Log.i("///", "///" + "" +/* b.getImages()+b.getTitels()*/list.get(0).getTitels());
@@ -136,14 +130,11 @@ public class Splash extends AppCompatActivity {
     }
 
     public void getTypeList() {
-//        Log.i("///", "///" + "");
-//        final Realm realm = Realm.getDefaultInstance();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, STATIC_URL + "getTypeList"
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Log.i("///", "///" + "" + response);
                 realm.beginTransaction();
 
                 RealmResults<TypeList> result = realm.where(TypeList.class).findAll();
@@ -157,8 +148,6 @@ public class Splash extends AppCompatActivity {
                     boolean Status = jsonObject.optBoolean("Status");
 
                     if (Status) {
-//                        Log.i("///", Status + "");
-
                         JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -168,7 +157,6 @@ public class Splash extends AppCompatActivity {
                             boolean isDeleted = object.optBoolean("isDeleted");
                             long updatedAt = object.getLong("UpdatedAt");
                             TypeList type = new TypeList(id, IdType, Name, isDeleted, updatedAt);
-//                            Log.i("///", i + "");
                             typeList.add(type);
                         }
 
@@ -177,8 +165,6 @@ public class Splash extends AppCompatActivity {
                             realm.beginTransaction();
                             realm.copyToRealm(b);
                             realm.commitTransaction();
-//                            Log.i("///", "///" + "" +/* b.getImages()+b.getTitels()*/typeList.get(0).getName());
-
                         }
                     } else {
                         realm.cancelTransaction();
@@ -203,13 +189,11 @@ public class Splash extends AppCompatActivity {
 
     public void getMealsList() {
         Log.i("///", "///" + "");
-//        final Realm realm = Realm.getDefaultInstance();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, STATIC_URL + "getMealsList"
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Log.i("///", "///" + "" + response);
                 realm.beginTransaction();
                 RealmResults<Meals> result = realm.where(Meals.class).findAll();
                 if (!(result.isEmpty())) {
@@ -220,7 +204,6 @@ public class Splash extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean Status = jsonObject.optBoolean("Status");
                     if (Status) {
-//                        Log.i("///", Status + "");
                         JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -235,15 +218,12 @@ public class Splash extends AppCompatActivity {
                             long updatedAt = object.getLong("UpdatedAt");
                             Meals typeMeals = new Meals(id, Name, IdType, price, description, IMG_URL + filePth,
                                     isDeleted, showInHomePage, updatedAt);
-//                            Log.i("///", i + "");
                             meals.add(typeMeals);
                         }
                         for (Meals b : meals) {
-                            // Persist your data easily
                             realm.beginTransaction();
                             realm.copyToRealm(b);
                             realm.commitTransaction();
-//                            Log.i("///", "///" + "" +/* b.getImages()+b.getTitels()*/meals.get(0).getName());
                         }
                     } else {
                         realm.cancelTransaction();
@@ -252,7 +232,6 @@ public class Splash extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -270,7 +249,6 @@ public class Splash extends AppCompatActivity {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Log.i("///", "///" + "" + response);
                 realm.beginTransaction();
                 RealmResults<Market> result = realm.where(Market.class).findAll();
                 if (!(result.isEmpty())) {
@@ -298,7 +276,6 @@ public class Splash extends AppCompatActivity {
                             market.add(typeMarket);
                         }
                         for (Market b : market) {
-                            // Persist your data easily
                             realm.beginTransaction();
                             realm.copyToRealm(b);
                             realm.commitTransaction();

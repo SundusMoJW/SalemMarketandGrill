@@ -2,9 +2,11 @@ package com.twins.osama.salemsmarketandgrill.Fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,9 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.twins.osama.salemsmarketandgrill.Adapter.MyAdapter;
+import com.twins.osama.salemsmarketandgrill.Activity.MainActivity;
 import com.twins.osama.salemsmarketandgrill.Helpar.Const;
-import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -34,7 +36,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.EMAILProfile;
-import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.items;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.FULL_NAME_SHARED_PREF;
@@ -60,13 +61,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     private LinearLayout passwordLayout;
     private EditText newPass;
     private Button saveNewPass;
-    Setting fragment;
-    FragmentTransaction mFragmentTransaction;
-    FragmentManager mFragmentManager;
+    private Setting fragment;
+    private FragmentTransaction mFragmentTransaction;
+    private FragmentManager mFragmentManager;
     private SharedPrefUtil sharedPrefUtil;
     private EditText old_pass;
     private ProgressBar progressBar;
-    public MyAdapter mAdapter;
+    private TextView tv_title;
 
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
@@ -75,6 +76,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -88,6 +90,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.GONE);
         getActivity().findViewById(R.id.search).setVisibility(View.GONE);
         getActivity().findViewById(R.id.go_back).setVisibility(View.VISIBLE);
+
+        ((TextView) getActivity().findViewById(R.id.tv_title)).setText(getText(R.string.account));
+
         mFragmentManager = getActivity().getSupportFragmentManager();
         sharedPrefUtil = new SharedPrefUtil(getActivity());
 //        progressBar = (ProgressBar) getActivity().findViewById(R.id.loading_spinner);
@@ -98,20 +103,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(R.id.frame_layout, fragment);
                 mFragmentTransaction.commit();
-            }
-        });
-        mAdapter = new MyAdapter(getActivity(), items/*, NAME, EMAILProfile, PROFILE*/, new OnDrawerItemClickListener() {
-            @Override
-            public void onClick(int position) {
-            }
-
-            @Override
-            public void onPhotoClick(View view) {
-            }
-
-            @Override
-            public void onButtonClick(int postition) {
-
             }
         });
         String value = this.getArguments().getString(KEY);//get your parameters
@@ -197,9 +188,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 //                    ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
 // run a background job and once complete
 //                    progressBar.setVisibility(ProgressBar.GONE);
-                    //     boolean Status = jsonObject.optBoolean("Status");
+                    boolean Status = jsonObject.optBoolean("Status");
 
-                    if (OtherData != null) {
+                    if (Status) {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
                         String UserName = OtherData.optString("UserName");
@@ -208,12 +199,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
                         saveData(getActivity(), R.string.save_new_user_name);
                         newName.setText("");
-//                        mFragmentManager = getActivity().getSupportFragmentManager();
-//                        fragment = new Setting();
-//                        mFragmentTransaction = mFragmentManager.beginTransaction();
-//                        mFragmentTransaction.commit();
-//                        NAME = UserName;
-                        mAdapter.setName(UserName);
                     } else {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
@@ -222,8 +207,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                         wrongAlertDialog(getActivity());
                     }
                     newName.setText("");
-                    //If the server response is not success
-                    //Displaying an error message on toast
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -252,7 +235,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     }
 
     public void SaveEmail() {
-        //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
         final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
@@ -273,11 +255,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                             pd.dismiss();
                         String Email = OtherData.optString("Email");
                         sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Email);
-
                         saveData(getActivity(), R.string.save_email);
-
                         EMAILProfile = Email;
-                        mAdapter.setEmail(EMAILProfile);
                         newEmail.setText("");
                     } else {
                         if (pd != null && pd.isShowing())
@@ -331,31 +310,24 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
-
 //                    OtherData.getInt("Id");
 //                    sharedPrefUtil.saveString(FULL_NAME_SHARED_PREF, FullName);
 //                    sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
-
-                    //           boolean Status = jsonObject.optBoolean("Status");
-                    if (OtherData != null && oldPass.equals(OldPassword)) {
+                    boolean Status = jsonObject.optBoolean("Status");
+                    if (Status && oldPass.equals(OldPassword)) {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
                         String newPasss = OtherData.optString("UserName");
                         sharedPrefUtil.saveString(PASSWORD_SHARED_PREF, newPasss);
-
                         newPass.setText("");
                         old_pass.setText("");
-
                     } else {
                         if (pd != null && pd.isShowing())
                             pd.dismiss();
                         wrongAlertDialog(getActivity());
                         newPass.setText("");
                         old_pass.setText("");
-
                     }
-                    //If the server response is not success
-                    //Displaying an error message on toast
                 } catch (JSONException e) {
                     wrongAlertDialog(getActivity());
                 }
@@ -381,20 +353,25 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 return param;
             }
         };
-
         requestQueue.add(request);
-
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mAdapter.notifyDataSetChanged();
-    }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAdapter.notifyDataSetChanged();
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.frame_layout, new Setting()).commit();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

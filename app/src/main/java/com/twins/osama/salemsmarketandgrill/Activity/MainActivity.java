@@ -48,26 +48,26 @@ import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USER_NAME_SHARED
 
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<DrawerItem> items;
-    ArrayList<String> itemsTitles;
+    private ArrayList<String> itemsTitles;
     public static int nav_back = 0;
     public static String NAME;
     public static String EMAILProfile;
     public static int PROFILE = R.drawable.blank_profile_picture;
-    Toolbar toolbar;
+    private Toolbar toolbar;
     public RecyclerView mRecyclerView;
-    public RecyclerView.Adapter mAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
-    DrawerLayout Drawer;
-    Fragment fragment = null;
-    ActionBarDrawerToggle mDrawerToggle;
+    public static RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private DrawerLayout Drawer;
+    private Fragment fragment = null;
+    private ActionBarDrawerToggle mDrawerToggle;
     private ImageView menu;
-    ImageView shopping;
+    private ImageView shopping;
     private TypedArray navMenuIcons;
     private TypedArray navMenuIcons_on;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
     private TextView tv_title;
-    final Context co = this;
+    private Context co ;
     private ImageView search;
     private static int RESULT_LOAD_IMAGE = 1;
     private ImageView mImage;

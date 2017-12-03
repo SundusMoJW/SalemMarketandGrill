@@ -16,9 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.CustomToast;
-import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
@@ -42,14 +40,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText ueserNameSignup;
     private EditText adressSignup;
     private EditText mobileSignup;
-    SharedPrefUtil sharedPrefUtil;
     private static View view;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Const.setLangSettings(this);
+//        Const.setLangSettings(this);
         setContentView(R.layout.activity_sign_up);
         view = findViewById(R.id.signup_layout);
 
@@ -64,16 +61,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 finish();
             }
         });
-//        findViewById(R.id.sign).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//
-//            public void onClick(View v) {
-//                String username = et_name.getText().toString();
-//             /*   if (username.isEmpty()){
-//                    et_name.setError("الحقل مطلوب");
-//                }*/
-
-    }
+ }
 
     public void SignUp() {
         //Adding the string request to the queue
@@ -114,13 +102,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         startActivity(intent);
                         finish();
                     }
-
-                    //If the server response is not success
-                    //Displaying an error message on toast
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener()
 
@@ -130,21 +114,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 new CustomToast().Show_Toast(getApplicationContext(), view,
                         "You must check the network");
                 progressDialog.dismiss();
-//                if (progressDialog != null && progressDialog.isShowing())
-//                    progressDialog.dismiss();
-//                AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
-//                builder.setTitle("Something went wrong");
-//                builder.setMessage(" Error Response");
-//                builder.setCancelable(true);
-//                final AlertDialog closedialog = builder.create();
-//                closedialog.show();
-//                final Timer timer2 = new Timer();
-//                timer2.schedule(new TimerTask() {
-//                    public void run() {
-//                        closedialog.dismiss();
-//                        timer2.cancel(); //this will cancel the timer of the system
-//                    }
-//                }, 3000);
             }
         }) {
             @Override
@@ -159,24 +128,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 return param;
             }
         };
-
         requestQueue.add(request);
-
     }
 
     @Override
     public void onClick(View v) {
-
         if(validate()){
             SignUp();
         }
-//        else {
-//            new CustomToast().Show_Toast(getApplicationContext(), view,
-//                    "Enter both credentials.");
-//        }
-
     }
-
 
     private void findViews() {
         signup = (Button) findViewById(R.id.signup);
@@ -193,8 +153,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
     public boolean validate() {
-        boolean valid = true;
-
         String fullName = fullNameSignup.getText().toString();
         String address = adressSignup.getText().toString();
         String email = emailSignup.getText().toString();
@@ -239,7 +197,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         } else {
             adressSignup.setError(null);
         }
-        if (mobile.isEmpty() || mobile.length()<=10) {
+        if (mobile.isEmpty() || mobile.length()<10) {
             mobileSignup.setError("Enter Valid Mobile Number");
             return false;
         } else {
@@ -247,6 +205,4 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
         return true;
     }
-
-
 }

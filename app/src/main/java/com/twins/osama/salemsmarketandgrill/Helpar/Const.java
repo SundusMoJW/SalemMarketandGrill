@@ -25,6 +25,9 @@ public class Const {
     public static final String IMAGE_PROFILE = "imageProfile";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    public static final String MOBILE = "mobile";
+    public static final String ADDRESS = "address";
+
     public static final String EMAIL = "email";
     public static final String LANG = "language";
 
@@ -32,6 +35,8 @@ public class Const {
 
     public static final String FONT_NAME = "fonts/Exo_Medium.otf";
 
+    public static final String ADDRESS_NAME_SHARED_PREF = "addressInSharedPref";
+    public static final String MOBILE_SHARED_PREF = "mobileInSharedPref";
     public static final String USER_NAME_SHARED_PREF = "loggedInSharedPref";
     public static final String FULL_NAME_SHARED_PREF = "fullNameSharedPref";
     public static final String ID_SHARED_PREF = "idSharedPref";

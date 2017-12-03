@@ -34,7 +34,7 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.contact_us));
         mScrollView = (ScrollView) view.findViewById(R.id.contact_us);

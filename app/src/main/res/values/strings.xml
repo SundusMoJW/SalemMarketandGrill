@@ -14,6 +14,7 @@
     <string name="suspendisse_gravida">SUSPENDISSE GRAVIDA</string>
     <string name="login">Login</string>
     <string name="account">Account</string>
+    
     <string name="checkout">Checkout</string>
     <string name="catering">Catering</string>
     <string name="event">Event</string>
@@ -105,4 +106,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="save_email">Save New Email</string>
     <string name="save_new_user_name">Save New User Name</string>
+    <string name="full_name">Full Name</string>
+    <string name="mobile">Mobile</string>
 </resources>

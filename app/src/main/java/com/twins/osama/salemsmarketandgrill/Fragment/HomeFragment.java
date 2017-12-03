@@ -24,7 +24,6 @@ import com.twins.osama.salemsmarketandgrill.Classes.Market;
 import com.twins.osama.salemsmarketandgrill.Classes.Meals;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
 import com.twins.osama.salemsmarketandgrill.Classes.TypeList;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.RealmController;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
@@ -88,7 +87,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.coordinator));
 

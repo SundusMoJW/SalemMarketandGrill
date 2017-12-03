@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_account"
     android:layout_width="match_parent"
@@ -12,56 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="20dp"
         android:visibility="visible">
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mineTransport"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="Account"-->
-            <!--android:textColor="@color/colorPrimaryDark"-->
-            <!--android:textSize="@dimen/titel" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:text="User Name"
-            android:textColor="@color/back_digg"
-            android:textSize="@dimen/textSize" />
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
 
         <EditText
             android:id="@+id/new_name"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text"
-            android:inputType="text"
-            android:textSize="@dimen/textSize" />
-
-        <Button
-            android:id="@+id/save_new_name"
-            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="15dp"
-            android:background="@color/rect_rounded"
-            android:padding="5dp"
-            android:text="SAVE"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="User Name"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/textSize" />
+        <com.dd.CircularProgressButton
+            android:id="@+id/save_new_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="@dimen/titel" />
+            android:textSize="@dimen/titel"
+            app:cpb_cornerRadius="48dp"
+            app:cpb_selectorComplete="@drawable/complete_state_selector"
+            app:cpb_selectorError="@drawable/error_state_selector"
+            app:cpb_selectorIdle="@drawable/idle_state_selector"
+            app:cpb_textComplete="Complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="SAVE" />
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
     </LinearLayout>
 
     <LinearLayout
@@ -69,56 +50,105 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="20dp"
         android:visibility="gone">
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mineTransport"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="Account"-->
-            <!--android:textColor="@color/colorPrimaryDark"-->
-            <!--android:textSize="@dimen/titel" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:text="Email"
-            android:textColor="@color/back_digg"
-            android:textSize="@dimen/textSize" />
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
-
-        <EditText
+       <EditText
             android:id="@+id/new_email"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="Email"
             android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
             android:textSize="@dimen/textSize" />
 
-        <Button
+        <com.dd.CircularProgressButton
             android:id="@+id/save_new_email"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="15dp"
-            android:background="@color/rect_rounded"
-            android:padding="5dp"
-            android:text="SAVE"
+            android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="@dimen/titel" />
+            android:textSize="@dimen/titel"
+            app:cpb_cornerRadius="48dp"
+            app:cpb_selectorComplete="@drawable/complete_state_selector"
+            app:cpb_selectorError="@drawable/error_state_selector"
+            app:cpb_selectorIdle="@drawable/idle_state_selector"
+            app:cpb_textComplete="Complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="SAVE" />
+    </LinearLayout>
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
+    <LinearLayout
+        android:id="@+id/mobile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/new_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="New Mobile"
+            android:inputType="phone"
+            android:padding="15dp"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/textSize" />
+        <com.dd.CircularProgressButton
+            android:id="@+id/save_new_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel"
+            app:cpb_cornerRadius="48dp"
+            app:cpb_selectorComplete="@drawable/complete_state_selector"
+            app:cpb_selectorError="@drawable/error_state_selector"
+            app:cpb_selectorIdle="@drawable/idle_state_selector"
+            app:cpb_textComplete="Complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="SAVE" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/adress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/new_adress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="New Adress"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/textSize" />
+        <com.dd.CircularProgressButton
+            android:id="@+id/save_new_adress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel"
+            app:cpb_cornerRadius="48dp"
+            app:cpb_selectorComplete="@drawable/complete_state_selector"
+            app:cpb_selectorError="@drawable/error_state_selector"
+            app:cpb_selectorIdle="@drawable/idle_state_selector"
+            app:cpb_textComplete="Complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="SAVE" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -126,75 +156,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="20dp"
         android:visibility="gone">
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mineTransport"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="Account"-->
-            <!--android:textColor="@color/colorPrimaryDark"-->
-            <!--android:textSize="@dimen/titel" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:text="Old Password"
-            android:textColor="@color/back_digg"
-            android:textSize="@dimen/textSize" />
 
         <EditText
             android:id="@+id/old_pass"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text"
-            android:inputType="textPassword"
-            android:textSize="@dimen/textSize" />
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:text="New Password"
-            android:textColor="@color/back_digg"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="Old Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
             android:textSize="@dimen/textSize" />
 
         <EditText
             android:id="@+id/new_pass"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="New Password"
+            android:textColorHint="@color/rect_rounded"
+            android:layout_marginBottom="10dp"
             android:inputType="textPassword"
+            android:padding="15dp"
             android:textSize="@dimen/textSize" />
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/mineTransport" />-->
-
-        <Button
-            android:id="@+id/save_new_pass"
-            android:layout_width="100dp"
+        <EditText
+            android:id="@+id/conf_pass"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="15dp"
-            android:background="@color/rect_rounded"
-            android:padding="5dp"
-            android:text="SAVE"
-            android:textColor="@color/white"
-            android:textSize="@dimen/titel" />
+            android:textColorHint="@color/rect_rounded"
+            android:background="@drawable/selector_bg_rectangle_radius_high_light_gray"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="@dimen/textSize" />
 
+        <com.dd.CircularProgressButton
+            android:id="@+id/save_new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titel"
+            app:cpb_cornerRadius="48dp"
+            app:cpb_selectorComplete="@drawable/complete_state_selector"
+            app:cpb_selectorError="@drawable/error_state_selector"
+            app:cpb_selectorIdle="@drawable/idle_state_selector"
+            app:cpb_textComplete="Complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="SAVE" />
     </LinearLayout>
 
 </LinearLayout>

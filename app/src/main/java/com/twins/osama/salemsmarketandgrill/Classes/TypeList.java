@@ -1,6 +1,7 @@
 package com.twins.osama.salemsmarketandgrill.Classes;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 /**
@@ -8,18 +9,21 @@ import io.realm.annotations.RealmClass;
  */
 @RealmClass
 public class TypeList extends RealmObject {
-    public int Id;
-    public int IdType;
-    public String name;
-    public boolean isDeleted;
-    public long UpdatedAt;
+    @PrimaryKey
+    private int Id;
+    private int IdType;
+    private String Name;
+    private boolean isDeleted;
+    private long UpdatedAt;
+    private String FilePath;
 
     public TypeList() {
     }
-    public TypeList(int id, int idType, String name, boolean isDeleted, long updatedAt) {
+
+    public TypeList(int id, int idType, String Name, boolean isDeleted, long updatedAt) {
         Id = id;
         IdType = idType;
-        this.name = name;
+        this.Name = Name;
         this.isDeleted = isDeleted;
         UpdatedAt = updatedAt;
     }
@@ -41,11 +45,11 @@ public class TypeList extends RealmObject {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public boolean isDeleted() {

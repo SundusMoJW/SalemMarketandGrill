@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.CustomToast;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
@@ -36,10 +35,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.ADDRESS_NAME_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.FULL_NAME_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.GUID_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.ID_SHARED_PREF;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.MOBILE_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.PASSWORD_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.STATUS_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_LOGIN;
@@ -57,14 +58,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private CheckBox show_hide_password;
     private LinearLayout ll_login;
     private Animation shakeAnimation;
-    private ImageView progress_image;
+    //    private ImageView progress_image;
     private Animation animPrograss;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Const.setLangSettings(this);
+//        Const.setLangSettings(this);
         setContentView(R.layout.activity_login);
         view = findViewById(R.id.login_layout);
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.login_layout));
@@ -78,17 +79,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         createAccount = (TextView) findViewById(R.id.createAccount);
         shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.shake);
-//        animPrograss = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.progress_anim);
-//        animPrograss.setDuration(1000);
-//        progress_image.startAnimation(animPrograss);
-//        animPrograss.setInterpolator(new Interpolator() {
-//            private final int frameCount = 8;
-//
-//            @Override
-//            public float getInterpolation(float input) {
-//                return (float) Math.floor(input * frameCount) / frameCount;
-//            }
-//        });
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,12 +190,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //    }
 
     private boolean checkValidation() {
-        boolean valid = true;
-        // Get email id and password
         String userName = userLogin.getText().toString().trim();
         String getPassword = passsword_login.getText().toString().trim();
-
-        // Check for both field is empty or not
         if (userName.equals("") || userName.length() == 0) {
             userLogin.setError("Enter your Name");
             userLogin.startAnimation(shakeAnimation);
@@ -228,12 +214,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //Getting values from edit texts
         final String stringEmail = userLogin.getText().toString().trim();
         final String stringPassword = passsword_login.getText().toString().trim();
-//        final ProgressDialog pd = new ProgressDialog(Login.this);
-//        pd.setTitle("Loading...");
-//        pd.setMessage("Please wait.");
-//        pd.setCancelable(false);
-//        pd.show();
-//        progress_image.setVisibility(View.VISIBLE);
         progressDialog = new ProgressDialog(Login.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -251,11 +231,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean Status = jsonObject.optBoolean("Status");
                     if (Status) {
-//                        if (pd != null && pd.isShowing())
-//                            pd.dismiss();
-//                        progress_image.setVisibility(View.GONE);
                         progressDialog.dismiss();
-
                         JSONObject data = jsonObject.optJSONObject("OtherData");
                         int id = data.optInt("Id");
                         String FullName = data.optString("FullName");
@@ -263,31 +239,36 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         String UserName = data.optString("UserName");
                         String Email = data.optString("Email");
                         String Pass = data.optString("Password");
+                        String Address = data.optString("Address");
+                        String Mobile = data.optString("Mobile");
+
+                        Log.i("data", data.toString());
+
                         SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(Login.this);
                         sharedPrefUtil.saveString(FULL_NAME_SHARED_PREF, FullName);
                         sharedPrefUtil.saveBoolean(STATUS_SHARED_PREF, Status);
                         sharedPrefUtil.saveInt(ID_SHARED_PREF, id);
                         sharedPrefUtil.saveString(GUID_SHARED_PREF, GUID);
                         sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
+                        sharedPrefUtil.saveString(MOBILE_SHARED_PREF, Mobile);
+                        sharedPrefUtil.saveString(ADDRESS_NAME_SHARED_PREF, Address);
                         sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Email);
+                        Log.i("info", "id  :  " + id + "    GUID    :    " + GUID);
                         sharedPrefUtil.saveString(PASSWORD_SHARED_PREF, Pass);
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-
-                       progressDialog.dismiss();
+                        progressDialog.dismiss();
                         new CustomToast().Show_Toast(getApplicationContext(), view,
                                 "Your User Name is Invalid.");
-                        progress_image.setVisibility(View.GONE);
                         ll_login.startAnimation(shakeAnimation);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener()
-        {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
@@ -305,16 +286,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         };
         requestQueue.add(request);
     }
+
     @Override
     public void onClick(View v) {
         if (checkValidation()) {
             login();
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
     }
+
     @Override
     protected void onPause() {
         super.onPause();

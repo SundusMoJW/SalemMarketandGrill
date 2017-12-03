@@ -46,7 +46,7 @@ public class BookEvent extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // استدعي الميثود وامررها اكتيفيتي يعني (this)قبل ما أمرر ال layout
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_book_event, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.bookEvent));
         event_date = (TextView) view.findViewById(R.id.event_date);

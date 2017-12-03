@@ -1,196 +1,200 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cart_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:background="@color/white"
     android:layoutDirection="ltr"
     android:scrollbars="none"
     android:textDirection="ltr"
-    tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CartFragment">
+    tools:context="com.twins.osama.salemsmarketandgrill.Fragment.CartFragment"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:background="@color/white"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="vertical">-->
         <!-- TODO: Update blank fragment layout -->
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:text="You have 1 item in your Cart"
             android:textColor="@color/backLogo"
             android:textSize="@dimen/textSize"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_weight="0.1"/>
 
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/itemCart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:scrollbars="vertical"
+            android:layout_margin="5dp" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/woo" />
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="2dp"-->
+        <!--android:orientation="horizontal">-->
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="90dp"-->
+        <!--android:layout_height="90dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:src="@drawable/woo" />-->
 
-                android:layout_gravity="center"
-                android:layout_toEndOf="@+id/imageView"
-                android:layout_toRightOf="@+id/imageView"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+        <!--<LinearLayout-->
+        <!--android:id="@+id/linearLayout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="WOO SINGLE #1"
-                    android:textSize="@dimen/textSize" />
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_toEndOf="@+id/imageView"-->
+        <!--android:layout_toRightOf="@+id/imageView"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="vertical">-->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="5dp"
-                    android:background="@color/colorAccent"
-                    android:orientation="horizontal">
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:text="WOO SINGLE #1"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-                    <Button
-                        android:id="@+id/mins"
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="right"
-                        android:background="@color/colorAccent"
-                        android:text="-"
-                        android:textSize="@dimen/textSize" />
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        android:id="@+id/result"
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@color/white"
-                        android:text="1"
-                        android:textSize="@dimen/textSize" />
+        <!--<Button-->
+        <!--android:id="@+id/mins"-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:text="-"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-                    <Button
-                        android:id="@+id/plus"
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="right"
-                        android:background="@color/colorAccent"
-                        android:text="+"
-                        android:textSize="@dimen/textSize" />
-                </LinearLayout>
-            </LinearLayout>
+        <!--<TextView-->
+        <!--android:id="@+id/result"-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@color/white"-->
+        <!--android:text="1"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-            <LinearLayout
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/linearLayout"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_shape">
+        <!--<Button-->
+        <!--android:id="@+id/plus"-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:text="+"-->
+        <!--android:textSize="@dimen/textSize" />-->
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/componentSalry"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_shape"
-                    android:gravity="center"
-                    android:text="9"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize" />
+        <!--<LinearLayout-->
+        <!--android:layout_width="75dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/linearLayout"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="@drawable/button_shape">-->
 
-                <TextView
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_shape"
-                    android:gravity="center"
-                    android:text="$ US"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize" />
-            </LinearLayout>
-        </RelativeLayout>
+        <!--<TextView-->
+        <!--android:id="@+id/componentSalry"-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:gravity="center"-->
+        <!--android:text="9"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/shipping"
-            android:textColor="@color/backLogo"
-            android:textSize="@dimen/textSize"
-            android:textStyle="bold" />
+        <!--<TextView-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:gravity="center"-->
+        <!--android:text="$ US"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/textSize" />-->
+        <!--</LinearLayout>-->
+        <!--</RelativeLayout>-->
 
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:spinnerMode="dialog"-->
-            <!--android:layout_margin="5dp"-->
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/shipping"-->
+        <!--android:textColor="@color/backLogo"-->
+        <!--android:textSize="@dimen/textSize"-->
+        <!--android:textStyle="bold" />-->
+        <!--**************************************-->
+        <!--**************************************-->
+        <!--<EditText-->
+        <!--android:id="@+id/spinner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@drawable/edit_text"-->
+        <!--android:drawableRight="@drawable/down_arrow_f"-->
+        <!--android:focusable="false"-->
+        <!--android:hint="@string/united_states"-->
+        <!--android:padding="10dp"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-            <!--android:background="@drawable/edit_text"-->
-            <!--android:textSize="@dimen/textSize"-->
-            <!--android:padding="10dp"/>-->
-        <EditText
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:background="@drawable/edit_text"
-        android:drawableRight="@drawable/down_arrow_f"
-        android:focusable="false"
-        android:hint="@string/united_states"
-        android:padding="10dp"
-        android:textSize="@dimen/textSize" />
+        <!--<EditText-->
+        <!--style="@style/AlertDialog.AppCompat.Light"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:background="@drawable/edit_text"-->
+        <!--android:hint="@string/postal"-->
+        <!--android:inputType="number"-->
+        <!--android:padding="10dp"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
-        <EditText
-            style="@style/AlertDialog.AppCompat.Light"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit_text"
-            android:hint="@string/postal"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textSize="@dimen/textSize" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/button_shape"
-            android:text="Calculate"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize" />
+        <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:text="Calculate"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            android:layout_marginTop="5dp"
             android:background="@color/black" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="center_vertical"
             android:layout_margin="5dp"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -251,25 +255,27 @@
         <Button
             android:id="@+id/bucheckout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
             android:layout_margin="2dp"
+            android:layout_weight="0.1"
             android:background="@drawable/button_shape"
             android:text="Check out"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:background="@drawable/botton_upadte"
-            android:text="Update Cart"
-            android:textColor="@color/backLogo"
-            android:textSize="@dimen/textSize" />
+        <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="2dp"-->
+        <!--android:background="@drawable/botton_upadte"-->
+        <!--android:text="Update Cart"-->
+        <!--android:textColor="@color/backLogo"-->
+        <!--android:textSize="@dimen/textSize" />-->
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:visibility="invisible" />
     </LinearLayout>
-</ScrollView>
+<!--</ScrollView>-->

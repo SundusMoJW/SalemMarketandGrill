@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -74,56 +75,79 @@
             android:padding="10dp"
             android:visibility="visible">
 
-            <EditText
-                android:id="@+id/showPopupCheckout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text"
-                android:drawableRight="@drawable/down_arrow_f"
-                android:hint="@string/country"
-                android:padding="10dp"
-                android:focusable="false"
-                android:textSize="@dimen/textSize" />
-            <EditText
-                android:id="@+id/first_name"
-                style="@style/AlertDialog.AppCompat.Light"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text"
-                android:hint="@string/first_name"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textSize="@dimen/textSize" />
+            <!--<EditText-->
+                <!--android:id="@+id/showPopupCheckout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:drawableRight="@drawable/down_arrow_f"-->
+                <!--android:hint="@string/country"-->
+                <!--android:padding="10dp"-->
+                <!--android:focusable="false"-->
+                <!--android:textSize="@dimen/textSize" />-->
+            <!--<EditText-->
+                <!--android:id="@+id/first_name"-->
+                <!--style="@style/AlertDialog.AppCompat.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:hint="@string/first_name"-->
+                <!--android:inputType="text"-->
+                <!--android:padding="10dp"-->
+                <!--android:textSize="@dimen/textSize" />-->
 
+            <!--<EditText-->
+                <!--android:id="@+id/last_name"-->
+                <!--style="@style/AlertDialog.AppCompat.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:inputType="text"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:hint="@string/last_name"-->
+                <!--android:padding="10dp"-->
+                <!--android:textSize="@dimen/textSize" />-->
             <EditText
-                android:id="@+id/last_name"
+                android:id="@+id/full_name"
                 style="@style/AlertDialog.AppCompat.Light"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:inputType="text"
                 android:background="@drawable/edit_text"
-                android:hint="@string/last_name"
+                android:hint="@string/full_name"
+                android:inputType="text"
                 android:padding="10dp"
                 android:textSize="@dimen/textSize" />
-
             <EditText
-                android:id="@+id/company_name"
+                android:id="@+id/mobile"
                 style="@style/AlertDialog.AppCompat.Light"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:inputType="phone"
                 android:background="@drawable/edit_text"
-                android:hint="@string/company_name"
+                android:hint="@string/mobile"
                 android:padding="10dp"
                 android:textSize="@dimen/textSize" />
+            <!--<EditText-->
+                <!--android:id="@+id/company_name"-->
+                <!--style="@style/AlertDialog.AppCompat.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:inputType="text"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:hint="@string/company_name"-->
+                <!--android:padding="10dp"-->
+                <!--android:textSize="@dimen/textSize" />-->
 
             <EditText
                 android:id="@+id/address"
@@ -138,31 +162,31 @@
                 android:padding="10dp"
                 android:textSize="@dimen/textSize" />
 
-            <EditText
-                android:id="@+id/town"
-                style="@style/AlertDialog.AppCompat.Light"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:background="@drawable/edit_text"
-                android:hint="@string/town"
-                android:padding="10dp"
-                android:textSize="@dimen/textSize" />
+            <!--<EditText-->
+                <!--android:id="@+id/town"-->
+                <!--style="@style/AlertDialog.AppCompat.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:inputType="text"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:hint="@string/town"-->
+                <!--android:padding="10dp"-->
+                <!--android:textSize="@dimen/textSize" />-->
 
-            <EditText
-                android:id="@+id/state"
-                style="@style/AlertDialog.AppCompat.Light"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text"
-                android:hint="@string/state"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textSize="@dimen/textSize" />
+            <!--<EditText-->
+                <!--android:id="@+id/state"-->
+                <!--style="@style/AlertDialog.AppCompat.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:hint="@string/state"-->
+                <!--android:inputType="text"-->
+                <!--android:padding="10dp"-->
+                <!--android:textSize="@dimen/textSize" />-->
         </LinearLayout>
 
         <View

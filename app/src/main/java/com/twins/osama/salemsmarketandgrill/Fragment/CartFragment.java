@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
@@ -50,7 +49,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.cart_fragment));
 

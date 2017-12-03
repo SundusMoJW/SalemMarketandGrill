@@ -1,13 +1,15 @@
 package com.twins.osama.salemsmarketandgrill.Classes;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by Osama on 8/28/2017.
  */
-
+@RealmClass
 public class Meals extends RealmObject {
-
+    @PrimaryKey
     public int Id;
     public String name;
     public int IdTypeList;

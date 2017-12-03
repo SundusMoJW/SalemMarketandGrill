@@ -11,8 +11,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.crashlytics.android.Crashlytics;
 import com.twins.osama.salemsmarketandgrill.Classes.Market;
 import com.twins.osama.salemsmarketandgrill.Classes.Meals;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
@@ -21,15 +22,13 @@ import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
-import static com.twins.osama.salemsmarketandgrill.Helpar.Const.IMG_URL;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.STATIC_URL;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.STATUS_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URLF;
@@ -45,6 +44,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
         Realm.init(getApplication());
         realm = Realm.getDefaultInstance();
@@ -70,167 +70,89 @@ public class Splash extends AppCompatActivity {
     }
 
     public void fillImage() {
-        Log.i("///", "///" + "");
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, URLF
-                , new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URLF,null
+                , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                realm.beginTransaction();
-                RealmResults<Slider> result = realm.where(Slider.class).findAll();
-                if (!(result.isEmpty())) {
-                    result.deleteAllFromRealm();
-                    realm.commitTransaction();
-                } else realm.cancelTransaction();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean Status = jsonObject.optBoolean("Status");
-
+            public void onResponse(JSONObject response) {
+//                realm.beginTransaction();
+//                RealmResults<Slider> result = realm.where(Slider.class).findAll();
+//                if (!(result.isEmpty())) {
+//                    result.deleteAllFromRealm();
+//                    realm.commitTransaction();
+//                } else realm.cancelTransaction();
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+                    boolean Status = response.optBoolean("Status");
                     if (Status) {
-                        JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            String filePth = object.optString("FilePath").replace("~", "");
-                            String title = object.optString("Titel");
-                            int id = object.optInt("Id");
-                            boolean isDeleted = object.optBoolean("isDeleted");
-                            long updatedAt = object.getLong("UpdatedAt");
-                            Slider slider = new Slider(IMG_URL + filePth, title, id, isDeleted, updatedAt);
-                            Log.i("///", i + "");
-                            list.add(slider);
-                        }
-
-                        for (Slider b : list) {
-                            // Persist your data easily
-                            realm.beginTransaction();
-                            realm.copyToRealm(b);
-                            realm.commitTransaction();
-                            Log.i("///", "///" + "" +/* b.getImages()+b.getTitels()*/list.get(0).getTitels());
-
-                        }
+                        JSONArray jsonArray = response.optJSONArray("OtherData");
+                        realm.beginTransaction();
+                        realm.createOrUpdateAllFromJson(TypeList.class, response.optJSONArray("OtherData"));
+                        realm.commitTransaction();
+                        Log.i("OtherData", jsonArray.toString());
+                        Log.i("response", response.toString());
                     } else {
-                        realm.cancelTransaction();
-                        Toast.makeText(getApplicationContext(), jsonObject.optString("ResultText"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
-            }
-        }, new Response.ErrorListener()
-
-        {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error Response", Toast.LENGTH_LONG).show();
-
-            }
-        });
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Error Response", Toast.LENGTH_LONG).show();
+                }
+            });
         requestQueue.add(request);
-    }
+        }
 
     public void getTypeList() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, STATIC_URL + "getTypeList"
-                , new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getTypeList", null
+                , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                realm.beginTransaction();
-
-                RealmResults<TypeList> result = realm.where(TypeList.class).findAll();
-                if (!(result.isEmpty())) {
-                    result.deleteAllFromRealm();
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+                if (Status) {
+                    JSONArray jsonArray = response.optJSONArray("OtherData");
+                    realm.beginTransaction();
+                    realm.createOrUpdateAllFromJson(TypeList.class, response.optJSONArray("OtherData"));
                     realm.commitTransaction();
-                } else realm.cancelTransaction();
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean Status = jsonObject.optBoolean("Status");
-
-                    if (Status) {
-                        JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            int IdType = object.optInt("IdType");
-                            String Name = object.optString("Name");
-                            int id = object.optInt("Id");
-                            boolean isDeleted = object.optBoolean("isDeleted");
-                            long updatedAt = object.getLong("UpdatedAt");
-                            TypeList type = new TypeList(id, IdType, Name, isDeleted, updatedAt);
-                            typeList.add(type);
-                        }
-
-                        for (TypeList b : typeList) {
-                            // Persist your data easily
-                            realm.beginTransaction();
-                            realm.copyToRealm(b);
-                            realm.commitTransaction();
-                        }
-                    } else {
-                        realm.cancelTransaction();
-                        Toast.makeText(getApplicationContext(), jsonObject.optString("ResultText"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.i("OtherData", jsonArray.toString());
+                    Log.i("response", response.toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                 }
-
             }
-        }, new Response.ErrorListener()
-
-        {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Error Response", Toast.LENGTH_LONG).show();
-
             }
         });
         requestQueue.add(request);
     }
 
     public void getMealsList() {
-        Log.i("///", "///" + "");
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, STATIC_URL + "getMealsList"
-                , new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMealsList", null
+                , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                realm.beginTransaction();
-                RealmResults<Meals> result = realm.where(Meals.class).findAll();
-                if (!(result.isEmpty())) {
-                    result.deleteAllFromRealm();
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+//                realm.beginTransaction();
+//                RealmResults<Meals> result = realm.where(Meals.class).findAll();
+//                if (!(result.isEmpty())) {
+//                    result.deleteAllFromRealm();
+//                    realm.commitTransaction();
+//                } else realm.cancelTransaction();
+                if (Status) {
+                    JSONArray jsonArray = response.optJSONArray("OtherData");
+                    realm.beginTransaction();
+                    realm.createOrUpdateAllFromJson(Meals.class, response.optJSONArray("OtherData"));
                     realm.commitTransaction();
-                } else realm.cancelTransaction();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean Status = jsonObject.optBoolean("Status");
-                    if (Status) {
-                        JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            int IdType = object.optInt("IdTypeList");
-                            String Name = object.optString("Name");
-                            String description = object.optString("Description");
-                            int id = object.optInt("Id");
-                            double price = object.optDouble("Price");
-                            String filePth = object.optString("FilePath").replace("~", "");
-                            boolean isDeleted = object.optBoolean("isDeleted");
-                            boolean showInHomePage = object.optBoolean("ShowInHomePage");
-                            long updatedAt = object.getLong("UpdatedAt");
-                            Meals typeMeals = new Meals(id, Name, IdType, price, description, IMG_URL + filePth,
-                                    isDeleted, showInHomePage, updatedAt);
-                            meals.add(typeMeals);
-                        }
-                        for (Meals b : meals) {
-                            realm.beginTransaction();
-                            realm.copyToRealm(b);
-                            realm.commitTransaction();
-                        }
-                    } else {
-                        realm.cancelTransaction();
-                        Toast.makeText(getApplicationContext(), jsonObject.optString("ResultText"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.i("OtherData", jsonArray.toString());
+                    Log.i("response", response.toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -243,51 +165,28 @@ public class Splash extends AppCompatActivity {
     }
 
     public void getMarketList() {
-        Log.i("///", "///" + "");
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, STATIC_URL + "getMarketList"
-                , new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMarketList",null
+                , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                realm.beginTransaction();
-                RealmResults<Market> result = realm.where(Market.class).findAll();
-                if (!(result.isEmpty())) {
-                    result.deleteAllFromRealm();
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+//                realm.beginTransaction();
+//                RealmResults<Meals> result = realm.where(Meals.class).findAll();
+//                if (!(result.isEmpty())) {
+//                    result.deleteAllFromRealm();
+//                    realm.commitTransaction();
+//                } else realm.cancelTransaction();
+                if (Status) {
+                    JSONArray jsonArray = response.optJSONArray("OtherData");
+                    realm.beginTransaction();
+                    realm.createOrUpdateAllFromJson(Market.class, response.optJSONArray("OtherData"));
                     realm.commitTransaction();
-                } else realm.cancelTransaction();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean Status = jsonObject.optBoolean("Status");
-                    if (Status) {
-                        JSONArray jsonArray = jsonObject.optJSONArray("OtherData");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            int IdTypeList = object.optInt("IdTypeList");
-                            int type = object.optInt("type");
-                            String Name = object.optString("Name");
-                            String description = object.optString("Description");
-                            int id = object.optInt("Id");
-                            double price = object.optDouble("Price");
-                            String filePth = object.optString("FilePath").replace("~", "");
-                            boolean isDeleted = object.optBoolean("isDeleted");
-                            long updatedAt = object.getLong("UpdatedAt");
-                            Market typeMarket = new Market(id, type, IdTypeList, IMG_URL + filePth,Name,  description,price,
-                                    isDeleted, updatedAt);
-                            market.add(typeMarket);
-                        }
-                        for (Market b : market) {
-                            realm.beginTransaction();
-                            realm.copyToRealm(b);
-                            realm.commitTransaction();
-                        }
-                    } else {
-                        realm.cancelTransaction();
-                        Toast.makeText(getApplicationContext(), jsonObject.optString("ResultText"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.i("OtherData", jsonArray.toString());
+                    Log.i("response", response.toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

@@ -1,12 +1,15 @@
 package com.twins.osama.salemsmarketandgrill.Classes;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by Osama on 9/6/2017.
  */
-
+@RealmClass
 public class Market extends RealmObject {
+    @PrimaryKey
     public int Id;
     public int type; // النوع || 1=بقالة || 2=لحوم ،،،، Grocery|Meat
 

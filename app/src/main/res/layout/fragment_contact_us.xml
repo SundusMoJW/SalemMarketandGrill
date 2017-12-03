@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_us"
@@ -6,6 +7,7 @@
     android:layoutDirection="ltr"
     android:scrollbars="none"
     android:textDirection="ltr"
+    android:background="@color/white"
     tools:context=".Fragment.ContactUs">
 
     <LinearLayout
@@ -112,7 +114,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/first_name"
+            android:id="@+id/email"
             style="@style/AlertDialog.AppCompat.Light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,9 +124,19 @@
             android:inputType="textEmailAddress"
             android:padding="15dp"
             android:textSize="15sp" />
-
         <EditText
-            android:id="@+id/showPopupCheckout"
+            android:id="@+id/mobile"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:hint="Mobile"
+            android:inputType="phone"
+            android:padding="15dp"
+            android:textSize="15sp" />
+        <EditText
+            android:id="@+id/Subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -135,13 +147,13 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/first_name"
+            android:id="@+id/body"
             style="@style/AlertDialog.AppCompat.Light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text"
-            android:hint="inquiry"
+            android:hint="Body"
             android:inputType="text"
             android:padding="15dp"
             android:textSize="@dimen/textSize" />

@@ -1,21 +1,16 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,8 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dd.CircularProgressButton;
 import com.twins.osama.salemsmarketandgrill.Activity.MainActivity;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -35,39 +30,47 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.EMAILProfile;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.ADDRESS;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.ADDRESS_NAME_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.EMAIL_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.FULL_NAME_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.GUID_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.ID_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.KEY;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.MOBILE;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.PASSWORD;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.PASSWORD_SHARED_PREF;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_CustomerEditPassword;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.URL_CustomerEditProfile;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USERNAME;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.USER_NAME_SHARED_PREF;
-import static com.twins.osama.salemsmarketandgrill.Helpar.Const.saveData;
-import static com.twins.osama.salemsmarketandgrill.Helpar.Const.wrongAlertDialog;
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
     private LinearLayout userLayout;
     private EditText newName;
-    private Button saveNewName;
+    private CircularProgressButton saveNewName;
     private LinearLayout emailLayout;
     private EditText newEmail;
-    private Button saveNewEmail;
+    private CircularProgressButton saveNewEmail;
     private LinearLayout passwordLayout;
     private EditText newPass;
-    private Button saveNewPass;
+    private EditText confPass;
+    private CircularProgressButton saveNewPass;
+    private Runnable run;
+    private Handler handler;
     private Setting fragment;
     private FragmentTransaction mFragmentTransaction;
     private FragmentManager mFragmentManager;
     private SharedPrefUtil sharedPrefUtil;
     private EditText old_pass;
-    private ProgressBar progressBar;
-    private TextView tv_title;
+    private String oldPass;
+    private LinearLayout adress_layout;
+    private LinearLayout mobile_layout;
+    private EditText new_adress;
+    private CircularProgressButton save_new_adress;
+    private EditText new_mobile;
+    private CircularProgressButton save_new_mobile;
 
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
@@ -77,12 +80,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity.mAdapter.notifyDataSetChanged();
+        /********************/// getActivity().etILitene(thi);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.fragment_account));
         getActivity().findViewById(R.id.menu).setVisibility(View.GONE);
@@ -109,24 +113,43 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
         userLayout = (LinearLayout) view.findViewById(R.id.user_layout);
         newName = (EditText) view.findViewById(R.id.new_name);
-        saveNewName = (Button) view.findViewById(R.id.save_new_name);
+        saveNewName = (CircularProgressButton) view.findViewById(R.id.save_new_name);
+        saveNewName.setIndeterminateProgressMode(true);
+        saveNewName.setProgress(0);
 
         emailLayout = (LinearLayout) view.findViewById(R.id.email_layout);
         newEmail = (EditText) view.findViewById(R.id.new_email);
-        saveNewEmail = (Button) view.findViewById(R.id.save_new_email);
+        saveNewEmail = (CircularProgressButton) view.findViewById(R.id.save_new_email);
+        saveNewEmail.setIndeterminateProgressMode(true);
+        saveNewEmail.setProgress(0);
 
         passwordLayout = (LinearLayout) view.findViewById(R.id.password_layout);
         newPass = (EditText) view.findViewById(R.id.new_pass);
-        saveNewPass = (Button) view.findViewById(R.id.save_new_pass);
+        confPass = (EditText) view.findViewById(R.id.conf_pass);
+        saveNewPass = (CircularProgressButton) view.findViewById(R.id.save_new_pass);
+        saveNewPass.setIndeterminateProgressMode(true);
+        saveNewPass.setProgress(0);
         old_pass = (EditText) view.findViewById(R.id.old_pass);
+
+        adress_layout = (LinearLayout) view.findViewById(R.id.adress_layout);
+        new_adress = (EditText) view.findViewById(R.id.new_adress);
+        save_new_adress = (CircularProgressButton) view.findViewById(R.id.save_new_adress);
+        save_new_adress.setIndeterminateProgressMode(true);
+        save_new_adress.setProgress(0);
+
+        mobile_layout = (LinearLayout) view.findViewById(R.id.mobile_layout);
+        new_mobile = (EditText) view.findViewById(R.id.new_mobile);
+        save_new_mobile = (CircularProgressButton) view.findViewById(R.id.save_new_mobile);
+        save_new_mobile.setIndeterminateProgressMode(true);
+        save_new_mobile.setProgress(0);
 
         saveNewName.setOnClickListener(this);
         saveNewEmail.setOnClickListener(this);
         saveNewPass.setOnClickListener(this);
+        save_new_adress.setOnClickListener(this);
+        save_new_mobile.setOnClickListener(this);
         CheckUpBundell(value);
         return view;
-
-
     }
 
     public void CheckUpBundell(String str) {
@@ -135,88 +158,192 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 userLayout.setVisibility(View.VISIBLE);
                 emailLayout.setVisibility(View.GONE);
                 passwordLayout.setVisibility(View.GONE);
+                adress_layout.setVisibility(View.GONE);
+                mobile_layout.setVisibility(View.GONE);
                 break;
             case PASSWORD:
                 userLayout.setVisibility(View.GONE);
                 emailLayout.setVisibility(View.GONE);
                 passwordLayout.setVisibility(View.VISIBLE);
+                adress_layout.setVisibility(View.GONE);
+                mobile_layout.setVisibility(View.GONE);
                 break;
             case EMAIL:
                 userLayout.setVisibility(View.GONE);
                 emailLayout.setVisibility(View.VISIBLE);
                 passwordLayout.setVisibility(View.GONE);
+                adress_layout.setVisibility(View.GONE);
+                mobile_layout.setVisibility(View.GONE);
+                break;
+                /*********************/
+            case MOBILE:
+                userLayout.setVisibility(View.GONE);
+                emailLayout.setVisibility(View.GONE);
+                passwordLayout.setVisibility(View.GONE);
+                adress_layout.setVisibility(View.GONE);
+                mobile_layout.setVisibility(View.VISIBLE);
+                break;
+            case ADDRESS:
+                userLayout.setVisibility(View.GONE);
+                emailLayout.setVisibility(View.GONE);
+                passwordLayout.setVisibility(View.GONE);
+                adress_layout.setVisibility(View.VISIBLE);
+                mobile_layout.setVisibility(View.GONE);
                 break;
         }
-
     }
 
     @Override
     public void onClick(View v) {
         if (v == saveNewName) {
-            SaveUserName();
+            String name = newName.getText().toString();
 
+            if(!(name.isEmpty())||name.length()!=0){
+                SaveUserName();
+            }else {
+                saveNewName.setProgress(-1);
+                saveNewName.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewName.setEnabled(true);
+                        saveNewName.setProgress(0);
+                    }
+                };
+                newName.setText("");
+            }
         } else if (v == saveNewEmail) {
-            SaveEmail();
-
+            String email = newEmail.getText().toString();
+            if (!(email.isEmpty()) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                SaveEmail();
+            }else {
+                saveNewEmail.setProgress(-1);
+                saveNewEmail.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewEmail.setEnabled(true);
+                        saveNewEmail.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
+                newEmail.setText("");
+            }
         } else if (v == saveNewPass) {
-            SavePassword();
+//            final String OldPassword = sharedPrefUtil.getString(PASSWORD_SHARED_PREF);
+            oldPass = old_pass.getText().toString().trim();
+            if (newPass.getText().equals(confPass.getText())){
+                SavePassword();
+            }
+            else {
+                saveNewPass.setProgress(-1);
+                saveNewPass.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewPass.setEnabled(true);
+                        saveNewPass.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
+                newPass.setText("");
+                old_pass.setText("");
+                confPass.setText("");
+            }
+        } else if (v == save_new_adress) {
+          String newAdress = new_adress.getText().toString();
 
+            if(!(newAdress.isEmpty())||newAdress.length()!=0){
+                SaveAddress();
+            }else {
+                save_new_adress.setProgress(-1);
+                save_new_adress.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        save_new_adress.setEnabled(true);
+                        save_new_adress.setProgress(0);
+                    }
+                };
+                new_adress.setText("");
+            }
+        } else if (v == save_new_mobile) {
+          String newMobile = new_mobile.getText().toString();
+
+            if(!(newMobile.isEmpty())||newMobile.length()!=0){
+                SaveMobile();
+            }else {
+                save_new_mobile.setProgress(-1);
+                save_new_mobile.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        save_new_mobile.setEnabled(true);
+                        save_new_mobile.setProgress(0);
+                    }
+                };
+                new_mobile.setText("");
+            }
         }
     }
 
     public void SaveUserName() {
-        //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
         final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
-//        progressBar = (ProgressBar) getActivity().findViewById(R.id.loading_spinner);
-        final ProgressDialog pd = new ProgressDialog(getContext());
-        pd.setTitle("Loading...");
-        pd.setMessage("Please wait.");
-        pd.setCancelable(false);
-        pd.show();
-//        enableProgressBar(progressBar);
-//        progressBar.setVisibility(ProgressBar.VISIBLE);
+        saveNewName.setProgress(50);
         StringRequest request = new StringRequest(Request.Method.POST, URL_CustomerEditProfile, new Response.Listener<String>() {
-
-
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
-//                    ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
-// run a background job and once complete
-//                    progressBar.setVisibility(ProgressBar.GONE);
                     boolean Status = jsonObject.optBoolean("Status");
 
                     if (Status) {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+                        saveNewName.setProgress(0);
                         String UserName = OtherData.optString("UserName");
                         sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
-//                        disableProgressBar(progressBar);
-
-                        saveData(getActivity(), R.string.save_new_user_name);
                         newName.setText("");
                     } else {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
-//                        progressBar.setVisibility(ProgressBar.GONE);
-//                        disableProgressBar(progressBar);
-                        wrongAlertDialog(getActivity());
+                        saveNewName.setProgress(-1);
+                        saveNewName.setEnabled(false);
+                        run = new Runnable() {
+                            @Override
+                            public void run() {
+                                saveNewName.setEnabled(true);
+                                saveNewName.setProgress(0);
+                            }
+                        };
+                        newName.setText("");
                     }
-                    newName.setText("");
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    saveNewName.setProgress(-1);
+                    saveNewName.setEnabled(false);
+                    run = new Runnable() {
+                        @Override
+                        public void run() {
+                            saveNewName.setEnabled(true);
+                            saveNewName.setProgress(0);
+                        }
+                    };
+                    newName.setText("");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (pd != null && pd.isShowing())
-                    pd.dismiss();
-                wrongAlertDialog(getActivity());
+                saveNewName.setProgress(-1);
+                saveNewName.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewName.setEnabled(true);
+                        saveNewName.setProgress(0);
+                    }
+                };
             }
         }) {
             @Override
@@ -229,20 +356,14 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 return param;
             }
         };
-
         requestQueue.add(request);
-
     }
 
     public void SaveEmail() {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
         final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
-        final ProgressDialog pd = new ProgressDialog(getContext());
-        pd.setTitle("Loading...");
-        pd.setMessage("Please wait.");
-        pd.setCancelable(false);
-        pd.show();
+        saveNewEmail.setProgress(50);
         StringRequest request = new StringRequest(Request.Method.POST, URL_CustomerEditProfile, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -251,37 +372,216 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
                     boolean Status = jsonObject.optBoolean("Status");
                     if (Status) {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
+                        saveNewEmail.setProgress(0);
                         String Email = OtherData.optString("Email");
                         sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Email);
-                        saveData(getActivity(), R.string.save_email);
-                        EMAILProfile = Email;
                         newEmail.setText("");
+                        MainActivity.mAdapter.notifyDataSetChanged();
                     } else {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
-                        wrongAlertDialog(getActivity());
+                        saveNewEmail.setProgress(-1);
+                        saveNewEmail.setEnabled(false);
+                        run = new Runnable() {
+                            @Override
+                            public void run() {
+                                saveNewEmail.setEnabled(true);
+                                saveNewEmail.setProgress(0);
+                            }
+                        };
+                        handler = new Handler();
+                        handler.postDelayed(run, 5000);
+                        newEmail.setText("");
                     }
-                    newEmail.setText("");
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    saveNewEmail.setProgress(-1);
+                    saveNewEmail.setEnabled(false);
+                    run = new Runnable() {
+                        @Override
+                        public void run() {
+                            saveNewEmail.setEnabled(true);
+                            saveNewEmail.setProgress(0);
+                        }
+                    };
+                    handler = new Handler();
+                    handler.postDelayed(run, 5000);
+                    newEmail.setText("cah");
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (pd != null && pd.isShowing())
-                    pd.dismiss();
-                wrongAlertDialog(getActivity());
+                saveNewEmail.setProgress(-1);
+                saveNewEmail.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewEmail.setEnabled(true);
+                        saveNewEmail.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> param = new HashMap<String, String>();
-
                 param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
                 param.put("Email", newEmail.getText().toString().trim());
+                param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
+                param.put("Id", String.valueOf(idSaredPref));
+                param.put("GUID", guidSaredPref);
+                return param;
+            }
+        };
+        requestQueue.add(request);
+    }
+
+    public void SaveMobile() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
+        final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
+        save_new_mobile.setProgress(50);
+        StringRequest request = new StringRequest(Request.Method.POST, URL_CustomerEditProfile, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject OtherData = jsonObject.optJSONObject("OtherData");
+                    boolean Status = jsonObject.optBoolean("Status");
+                    if (Status) {
+                        save_new_mobile.setProgress(0);
+                        String Mobile = OtherData.optString("Mobile");
+                        sharedPrefUtil.saveString(EMAIL_SHARED_PREF, Mobile);
+                        new_mobile.setText("");
+                    } else {
+                        save_new_mobile.setProgress(-1);
+                        save_new_mobile.setEnabled(false);
+                        run = new Runnable() {
+                            @Override
+                            public void run() {
+                                save_new_mobile.setEnabled(true);
+                                save_new_mobile.setProgress(0);
+                            }
+                        };
+                        handler = new Handler();
+                        handler.postDelayed(run, 5000);
+                        new_mobile.setText("");
+                    }
+                } catch (JSONException e) {
+                    save_new_mobile.setProgress(-1);
+                    save_new_mobile.setEnabled(false);
+                    run = new Runnable() {
+                        @Override
+                        public void run() {
+                            save_new_mobile.setEnabled(true);
+                            save_new_mobile.setProgress(0);
+                        }
+                    };
+                    handler = new Handler();
+                    handler.postDelayed(run, 5000);
+                    new_mobile.setText("");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                save_new_mobile.setProgress(-1);
+                save_new_mobile.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        save_new_mobile.setEnabled(true);
+                        save_new_mobile.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
+                param.put("Mobile", new_mobile.getText().toString().trim());
+                param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
+                param.put("Id", String.valueOf(idSaredPref));
+                param.put("GUID", guidSaredPref);
+                return param;
+            }
+        };
+        requestQueue.add(request);
+    }
+
+    public void SaveAddress() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
+        final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
+        save_new_adress.setProgress(50);
+        StringRequest request = new StringRequest(Request.Method.POST, URL_CustomerEditProfile, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject OtherData = jsonObject.optJSONObject("OtherData");
+                    boolean Status = jsonObject.optBoolean("Status");
+                    if (Status) {
+                        save_new_adress.setProgress(0);
+                        String Email = OtherData.optString("Email");
+                        sharedPrefUtil.saveString(ADDRESS_NAME_SHARED_PREF, Email);
+                        save_new_adress.setText("");
+                    } else {
+                        save_new_adress.setProgress(-1);
+                        save_new_adress.setEnabled(false);
+                        run = new Runnable() {
+                            @Override
+                            public void run() {
+                                save_new_adress.setEnabled(true);
+                                save_new_adress.setProgress(0);
+                            }
+                        };
+                        handler = new Handler();
+                        handler.postDelayed(run, 5000);
+                        new_adress.setText("");
+                    }
+                } catch (JSONException e) {
+                    save_new_adress.setProgress(-1);
+                    save_new_adress.setEnabled(false);
+                    run = new Runnable() {
+                        @Override
+                        public void run() {
+                            save_new_adress.setEnabled(true);
+                            save_new_adress.setProgress(0);
+                        }
+                    };
+                    handler = new Handler();
+                    handler.postDelayed(run, 5000);
+                    new_adress.setText("cah");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                save_new_adress.setProgress(-1);
+                save_new_adress.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        save_new_adress.setEnabled(true);
+                        save_new_adress.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
+                param.put("Address", new_adress.getText().toString().trim());
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
                 param.put("Id", String.valueOf(idSaredPref));
                 param.put("GUID", guidSaredPref);
@@ -297,48 +597,68 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         final int idSaredPref = sharedPrefUtil.getInt(ID_SHARED_PREF);
         final String guidSaredPref = sharedPrefUtil.getString(GUID_SHARED_PREF);
         final String OldPassword = sharedPrefUtil.getString(PASSWORD_SHARED_PREF);
-        final String oldPass = old_pass.getText().toString().trim();
-        final ProgressDialog pd = new ProgressDialog(getContext());
-        pd.setTitle("Loading...");
-        pd.setMessage("Please wait.");
-        pd.setCancelable(false);
-        pd.show();
+        saveNewPass.setProgress(50);
         StringRequest request = new StringRequest(Request.Method.POST, URL_CustomerEditPassword, new Response.Listener<String>() {
-
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject OtherData = jsonObject.optJSONObject("OtherData");
-//                    OtherData.getInt("Id");
-//                    sharedPrefUtil.saveString(FULL_NAME_SHARED_PREF, FullName);
-//                    sharedPrefUtil.saveString(USER_NAME_SHARED_PREF, UserName);
                     boolean Status = jsonObject.optBoolean("Status");
-                    if (Status && oldPass.equals(OldPassword)) {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
-                        String newPasss = OtherData.optString("UserName");
-                        sharedPrefUtil.saveString(PASSWORD_SHARED_PREF, newPasss);
+                    if (Status) {
+                        saveNewPass.setProgress(0);
+                        String GUID = OtherData.optString("GUID");
+                        sharedPrefUtil.saveString(GUID_SHARED_PREF, GUID);
                         newPass.setText("");
                         old_pass.setText("");
+                        confPass.setText("");
                     } else {
-                        if (pd != null && pd.isShowing())
-                            pd.dismiss();
-                        wrongAlertDialog(getActivity());
+                        saveNewPass.setProgress(-1);
+                        saveNewPass.setEnabled(false);
+                        run = new Runnable() {
+                            @Override
+                            public void run() {
+                                saveNewPass.setEnabled(true);
+                                saveNewPass.setProgress(0);
+                            }
+                        };
+                        handler = new Handler();
+                        handler.postDelayed(run, 5000);
                         newPass.setText("");
                         old_pass.setText("");
+                        confPass.setText("");
                     }
                 } catch (JSONException e) {
-                    wrongAlertDialog(getActivity());
+                    saveNewPass.setProgress(-1);
+                    saveNewPass.setEnabled(false);
+                    run = new Runnable() {
+                        @Override
+                        public void run() {
+                            saveNewPass.setEnabled(true);
+                            saveNewPass.setProgress(0);
+                        }
+                    };
+                    handler = new Handler();
+                    handler.postDelayed(run, 5000);
+                    newPass.setText("");
+                    old_pass.setText("");
+                    confPass.setText("");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (pd != null && pd.isShowing())
-                    pd.dismiss();
-                Toast.makeText(getActivity(), " Error Response", Toast.LENGTH_SHORT).show();
-                wrongAlertDialog(getActivity());
+                saveNewPass.setProgress(-1);
+                saveNewPass.setEnabled(false);
+                run = new Runnable() {
+                    @Override
+                    public void run() {
+                        saveNewPass.setEnabled(true);
+                        saveNewPass.setProgress(0);
+                    }
+                };
+                handler = new Handler();
+                handler.postDelayed(run, 5000);
             }
         }) {
             @Override
@@ -346,7 +666,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
                 param.put("Password", newPass.getText().toString().trim());
-                param.put("OldPassword", OldPassword);
+                param.put("OldPassword", oldPass);
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
                 param.put("Id", String.valueOf(idSaredPref));
                 param.put("GUID", guidSaredPref);
@@ -356,22 +676,5 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         requestQueue.add(request);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.frame_layout, new Setting()).commit();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
 }

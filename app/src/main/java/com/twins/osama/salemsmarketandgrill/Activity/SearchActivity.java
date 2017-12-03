@@ -21,7 +21,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Const.setLangSettings(this);
+//        Const.setLangSettings(this);
         setContentView(R.layout.activity_search);
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.search_activity));
 

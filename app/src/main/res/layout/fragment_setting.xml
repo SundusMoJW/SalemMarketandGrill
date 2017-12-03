@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,7 +17,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,6 @@
             android:text="Account"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/titel" />
-
 
         <RelativeLayout
             android:id="@+id/user_name_account"
@@ -36,7 +35,6 @@
             android:padding="10dp">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -111,6 +109,88 @@
             android:background="@color/mineTransport" />
 
         <RelativeLayout
+            android:id="@+id/mobile_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:text="Mobile"
+                android:textColor="@color/back_digg"
+                android:textSize="@dimen/textSize" />
+            <TextView
+                android:id="@+id/actaule_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:text="test"
+                android:textSize="@dimen/textSize" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_point_to_right" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+        <RelativeLayout
+            android:id="@+id/address_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:text="Address"
+                android:textColor="@color/back_digg"
+                android:textSize="@dimen/textSize" />
+
+            <TextView
+                android:id="@+id/actaule_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:text="test"
+                android:textSize="@dimen/textSize" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_point_to_right" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/mineTransport" />
+
+        <RelativeLayout
             android:id="@+id/password_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,7 +241,6 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,7 +249,6 @@
             android:text="Notification"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/titel" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -212,36 +290,36 @@
             android:textSize="@dimen/titel" />
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="3dp">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="3dp">-->
 
-            <TextView
-                android:id="@+id/language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:padding="5dp"
-                android:text="Language App"
-                android:textColor="@color/back_digg"
-                android:textSize="@dimen/textSize" />
+            <!--<TextView-->
+                <!--android:id="@+id/language"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="Language App"-->
+                <!--android:textColor="@color/back_digg"-->
+                <!--android:textSize="@dimen/textSize" />-->
 
-            <Switch
-                android:id="@+id/switch_Language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                android:text="@string/English"
-                android:textOn=""
-                android:textOff=""
-                android:textSize="@dimen/textSize" />
+            <!--<Switch-->
+                <!--android:id="@+id/switch_Language"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:text="@string/English"-->
+                <!--android:textOn=""-->
+                <!--android:textOff=""-->
+                <!--android:textSize="@dimen/textSize" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -271,7 +349,5 @@
             android:text="Log out"
             android:textColor="@color/back_digg"
             android:textSize="@dimen/textSize" />
-
-
     </LinearLayout>
 </ScrollView>

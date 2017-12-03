@@ -64,7 +64,7 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     res = getActivity().getResources();
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_check_out_steps, container, false);
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.check_out_steps));
 

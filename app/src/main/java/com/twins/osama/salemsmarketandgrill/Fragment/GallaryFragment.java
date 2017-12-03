@@ -39,7 +39,7 @@ public class GallaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_gallary, container, false);
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.gallary_fragment));
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.cardView));

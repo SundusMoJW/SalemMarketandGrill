@@ -75,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
     private String imageProfile;
     private FileOutputStream outStream;
 
+ //   private IBackLineter myBack = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Const.setLangSettings(this);
+//        Const.setLangSettings(this);
         setContentView(R.layout.activity_main);
         sharedPref = new SharedPrefUtil(getApplicationContext());
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.DrawerLayout));
@@ -321,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
 
+
         if (nav_back != 0) {
             Log.i("////*", nav_back + "");
             fragment = new HomeFragment();
@@ -331,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentTransaction.commit();
             return;
         }
+     //   myBack.onBackLitener();
         super.onBackPressed();
 
     }
@@ -440,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
 //        super.onResumeFragments();
 //        mAdapter.notifyDataSetChanged();
 //    }
+
 
 }
 

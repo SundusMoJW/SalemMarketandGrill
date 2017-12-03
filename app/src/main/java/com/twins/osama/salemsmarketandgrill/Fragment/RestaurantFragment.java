@@ -62,7 +62,7 @@ public class RestaurantFragment extends Fragment {
         RealmController.with(getActivity()).refresh();
         realm = Realm.getDefaultInstance();
 
-        Const.setLangSettings(this.getActivity());
+//        Const.setLangSettings(this.getActivity());
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
         nav_back = 1;
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.restaurant_id));

@@ -48,7 +48,7 @@ public class ImgZoom extends Activity implements View.OnTouchListener{
         Realm.init(this);
         int position = getIntent().getIntExtra("position", 0);
 
-        Const.setLangSettings(this);
+//        Const.setLangSettings(this);
         setContentView(R.layout.activity_img_zoom);
         baseLayout = (LinearLayout) findViewById(R.id.image_zoom);
         baseLayout.setOnTouchListener(this);

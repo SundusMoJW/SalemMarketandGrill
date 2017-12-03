@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 /**
@@ -13,6 +14,7 @@ import io.realm.annotations.RealmClass;
 public class Slider extends RealmObject implements Parcelable {
     String images;
     String titels;
+    @PrimaryKey
     int Id;
     boolean isDeleted;
     long UpdatedAt;

@@ -1,5 +1,6 @@
 package com.twins.osama.salemsmarketandgrill.Classes;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -10,32 +11,49 @@ import io.realm.annotations.RealmClass;
 @RealmClass
 public class Market extends RealmObject {
     @PrimaryKey
-    public int Id;
-    public int type; // النوع || 1=بقالة || 2=لحوم ،،،، Grocery|Meat
-
+    private int Id;
+    private int type; // النوع || 1=بقالة || 2=لحوم ،،،، Grocery|Meat
     // ثوابت 6و7 ||| 6=للبقالة للرقم 1 || 7=للحوم للرقم 2
-    public int IdTypeList;
-    public String FilePath;
-    public String name;
-    public String Description;
-    public double Price;
-    public boolean isDeleted;
-    public long UpdatedAt;
+    private int IdTypeList;
+    private String FilePath;
+    private String Name;
+    private String Description;
+    private double Price;
+    private boolean isDeleted;
+    private long UpdatedAt;
+    private RealmList<MarketAdditionsAPI> ListAdditions;
 
     public Market() {
     }
 
-    public Market(int id, int type, int idTypeList, String filePath, String name, String description,
-                  double price, boolean isDeleted, long updatedAt) {
-        this.Id = id;
+    public Market(int id, int type, int idTypeList, String filePath, String name, String description, double price,
+                  boolean isDeleted, long updatedAt, RealmList<MarketAdditionsAPI> listAdditions) {
+        Id = id;
         this.type = type;
-        this.IdTypeList = idTypeList;
-        this.FilePath = filePath;
-        this.name = name;
-        this.Description = description;
-        this.Price = price;
+        IdTypeList = idTypeList;
+        FilePath = filePath;
+        Name = name;
+        Description = description;
+        Price = price;
         this.isDeleted = isDeleted;
-        this.UpdatedAt = updatedAt;
+        UpdatedAt = updatedAt;
+        ListAdditions = listAdditions;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public RealmList<MarketAdditionsAPI> getListAdditions() {
+        return ListAdditions;
+    }
+
+    public void setListAdditions(RealmList<MarketAdditionsAPI> listAdditions) {
+        ListAdditions = listAdditions;
     }
 
     public int getId() {
@@ -71,20 +89,20 @@ public class Market extends RealmObject {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
+//    public String getDescription() {
+//        return Description;
+//    }
+//
+//    public void setDescription(String description) {
+//        Description = description;
+//    }
 
     public double getPrice() {
         return Price;

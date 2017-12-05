@@ -1,5 +1,6 @@
 package com.twins.osama.salemsmarketandgrill.Classes;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -10,30 +11,48 @@ import io.realm.annotations.RealmClass;
 @RealmClass
 public class Meals extends RealmObject {
     @PrimaryKey
-    public int Id;
-    public String name;
-    public int IdTypeList;
-    public double Price;
-    public String Description;
-    public String FilePath;
-    public boolean isDeleted;
-    public boolean ShowInHomePage;
-    public long UpdatedAt;
-
-    public Meals(){
+    private int Id;
+    private String Name;
+    private int IdTypeList;
+    private double Price;
+    private String Description;
+    private String FilePath;
+    private boolean isDeleted;
+    private boolean ShowInHomePage;
+    private long UpdatedAt;
+    private RealmList<MealsAdditionsAPI> ListAdditions;
+    public Meals() {
 
     }
-    public Meals(int id, String name, int idTypeList, double price, String description, String filePath,
-                 boolean isDeleted, boolean showInHomePage, long updatedAt) {
-        this.Id = id;
-        this.name = name;
-        this.IdTypeList = idTypeList;
-        this.Price = price;
-        this.Description = description;
-        this.FilePath = filePath;
+
+    public Meals(int id, String name, int idTypeList, double price, String description, String filePath, boolean isDeleted,
+                 boolean showInHomePage, long updatedAt, RealmList<MealsAdditionsAPI> listAdditions) {
+        Id = id;
+        Name = name;
+        IdTypeList = idTypeList;
+        Price = price;
+        Description = description;
+        FilePath = filePath;
         this.isDeleted = isDeleted;
-        this.ShowInHomePage = showInHomePage;
-        this.UpdatedAt = updatedAt;
+        ShowInHomePage = showInHomePage;
+        UpdatedAt = updatedAt;
+        ListAdditions = listAdditions;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public RealmList<MealsAdditionsAPI> getListAdditions() {
+        return ListAdditions;
+    }
+
+    public void setListAdditions(RealmList<MealsAdditionsAPI> listAdditions) {
+        ListAdditions = listAdditions;
     }
 
     public int getId() {
@@ -45,11 +64,11 @@ public class Meals extends RealmObject {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public int getIdTypeList() {
@@ -68,13 +87,13 @@ public class Meals extends RealmObject {
         Price = price;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
+//    public String getDescription() {
+//        return Description;
+//    }
+//
+//    public void setDescription(String description) {
+//        Description = description;
+//    }
 
     public String getFilePath() {
         return FilePath;

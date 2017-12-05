@@ -47,10 +47,13 @@ public class GallaryAdapter extends RecyclerView.Adapter<GallaryAdapter.ViewHold
     // viewHolder.tv_country.setText(item.get(i));
     @Override
     public void onBindViewHolder(GallaryAdapter.ViewHolder holder, int position) {
-        holder.text_info.setText(item.get(position).info);
-        holder.text_main.setText(item.get(position).main);
-        holder.imags.setImageResource(item.get(position).images);
-
+        holder.text_info.setText(item.get(position).getInfo());
+        holder.text_main.setText(item.get(position).getMain());
+        holder.imags.setImageResource(item.get(position).getImages());
+////            Uri uri = Uri.parse(IMG_URL + item.get(position).getImages().replace("~", ""));
+//            Uri uri = Uri.parse(item.get(position).getImages());
+//            holder.image_home.setImageURI(uri);
+//
         holder.expand.setOnClickListener(new View.OnClickListener() {
             public Bundle bundle;
 

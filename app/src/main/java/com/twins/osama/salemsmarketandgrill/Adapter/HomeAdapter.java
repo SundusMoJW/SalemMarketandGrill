@@ -1,21 +1,23 @@
 package com.twins.osama.salemsmarketandgrill.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.twins.osama.salemsmarketandgrill.Classes.Meals;
 import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import java.util.ArrayList;
+
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.IMG_URL;
 
 /**
  * Created by Osama on 7/24/2017.
@@ -53,12 +55,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(HomeAdapter.ViewHolder holder, final int position) {
         holder.text_title.setText(item.get(position).getName());
 
-        if ((item.get(position).Description).equals("null"))
-            holder.text_main.setText(" ");
-        else holder.text_main.setText(item.get(position).Description);
+//        if ((item.get(position).Description).equals("null"))
+//            holder.text_main.setText(" ");
+//        else holder.text_main.setText(item.get(position).Description);
         holder.txt_salry.setText("" + item.get(position).getPrice());
-        if (item.get(position).getFilePath() != null)
-            Glide.with(context).load(item.get(position).getFilePath()).into(holder.image_home);
+            Uri uri = Uri.parse(IMG_URL + item.get(position).getFilePath().replace("~", ""));
+            holder.image_home.setImageURI(uri);
 
         holder.goToDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +114,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         TextView add_to_cart;
         LinearLayout goToDescription;
         TextView txt_salry;
-        ImageView image_home;
+        SimpleDraweeView image_home;
         TextView text_title;
         TextView text_main;
 
@@ -124,9 +126,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             //cv = (CardView) itemView.findViewById(R.id.cardView_home);
             TypefaceUtil.applyFont(view.getContext(), view.findViewById(R.id.cardView_home));
             text_title = (TextView) view.findViewById(R.id.text_title);
-            text_main = (TextView) view.findViewById(R.id.text_main);
+//            text_main = (TextView) view.findViewById(R.id.text_main);
             txt_salry = (TextView) view.findViewById(R.id.txt_salry);
-            image_home = (ImageView) view.findViewById(R.id.img_hom_recview);
+//            image_home = (ImageView) view.findViewById(R.id.img_hom_recview);
+            image_home = (SimpleDraweeView) view.findViewById(R.id.img_hom_recview);
+
             goToDescription = (LinearLayout) view.findViewById(R.id.goToDescription);
             add_to_cart = (TextView) view.findViewById(R.id.add_to_cart);
         }

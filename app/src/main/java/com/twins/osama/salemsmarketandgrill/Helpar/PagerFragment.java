@@ -1,16 +1,16 @@
 package com.twins.osama.salemsmarketandgrill.Helpar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.twins.osama.salemsmarketandgrill.Activity.ImgZoom;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -18,12 +18,13 @@ import com.twins.osama.salemsmarketandgrill.R;
 import java.util.ArrayList;
 
 import static com.twins.osama.salemsmarketandgrill.Fragment.HomeFragment.isSlider;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.IMG_URL;
 
 
 public class PagerFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
-    private ImageView img;
-    TextView tv;
+    private SimpleDraweeView img;
+    private TextView tv;
     private View pagerFragment;
     private FragmentTransaction mFragmentTransaction;
 
@@ -35,11 +36,12 @@ public class PagerFragment extends Fragment {
         Bundle args = getArguments();
         final ArrayList<Slider> list = args.getParcelableArrayList("arrSlider");
         final int position = args.getInt(ARG_OBJECT);
-        img = (ImageView) view.findViewById(R.id.imge);
-        Glide.with(getContext()).load(list.get(position).getImages()).into(img);
-
+        img = (SimpleDraweeView) view.findViewById(R.id.imge);
+//        Glide.with(getContext()).load(IMG_URL +list.get(position).getFilePath().replace("~", "")).into(img);
+        Uri uri = Uri.parse(IMG_URL +list.get(position).getFilePath().replace("~", ""));
+        img.setImageURI(uri);
         tv = (TextView) view.findViewById(R.id.tv);
-        tv.setText(list.get(position).getTitels());
+        tv.setText(list.get(position).getTitel());
         pagerFragment = view.findViewById(R.id.pagerFragment);
         pagerFragment.setOnClickListener(new View.OnClickListener() {
             @Override

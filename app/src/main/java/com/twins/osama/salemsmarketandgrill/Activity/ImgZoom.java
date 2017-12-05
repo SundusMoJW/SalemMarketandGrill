@@ -4,16 +4,15 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.RealmController;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -22,6 +21,7 @@ import io.realm.Realm;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 import static com.twins.osama.salemsmarketandgrill.Fragment.HomeFragment.isSlider;
+import static com.twins.osama.salemsmarketandgrill.Helpar.Const.IMG_URL;
 
 public class ImgZoom extends Activity implements View.OnTouchListener{
 //        AppCompatActivity/*SwipeBackActivity   */{
@@ -38,7 +38,7 @@ public class ImgZoom extends Activity implements View.OnTouchListener{
 
     private SwipeBackLayout mSwipeBackLayout;
     private Slider slider = new Slider();
-    private ImageView imgZoom;
+    private SimpleDraweeView imgZoom;
     private Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +52,18 @@ public class ImgZoom extends Activity implements View.OnTouchListener{
         setContentView(R.layout.activity_img_zoom);
         baseLayout = (LinearLayout) findViewById(R.id.image_zoom);
         baseLayout.setOnTouchListener(this);
-       imgZoom = (ImageView) findViewById(R.id.imgZoom);
+       imgZoom = (SimpleDraweeView) findViewById(R.id.imgZoom);
         TypefaceUtil.applyFont(getApplicationContext(), findViewById(R.id.image_zoom));
         RealmController.with(this).refresh();
         realm = Realm.getDefaultInstance();
         if (isSlider) {
             slider = realm.where(Slider.class).equalTo("Id", position).findFirst();
 //            RealmResults<Slider> realmResults = realm.where(Slider.class).findAll();
-            Glide.with(getApplicationContext()).load(slider.getImages()).into(imgZoom);
+            Uri uri = Uri.parse(IMG_URL +slider.getFilePath().replace("~", ""));
+            imgZoom.setImageURI(uri);
+//            Glide.with(getApplicationContext()).load(IMG_URL+slider.getFilePath().replace("~", "")).into(imgZoom);
         }
-        else   imgZoom.setImageResource(R.drawable.resturant);
+//        else   imgZoom.setImageResource(R.drawable.resturant);
     }
 
     public boolean onTouch(View view, MotionEvent event) {

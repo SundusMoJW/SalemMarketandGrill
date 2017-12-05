@@ -351,7 +351,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("UserName", newName.getText().toString().trim());
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
-                param.put("Id", String.valueOf(idSaredPref));
+                param.put("Id",idSaredPref+"");
                 param.put("GUID", guidSaredPref);
                 return param;
             }
@@ -429,7 +429,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
                 param.put("Email", newEmail.getText().toString().trim());
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
-                param.put("Id", String.valueOf(idSaredPref));
+                param.put("Id",""+idSaredPref);
                 param.put("GUID", guidSaredPref);
                 return param;
             }
@@ -506,7 +506,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
                 param.put("Mobile", new_mobile.getText().toString().trim());
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
-                param.put("Id", String.valueOf(idSaredPref));
+                param.put("Id",""+idSaredPref);
                 param.put("GUID", guidSaredPref);
                 return param;
             }
@@ -583,7 +583,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 param.put("UserName", sharedPrefUtil.getString(USER_NAME_SHARED_PREF));
                 param.put("Address", new_adress.getText().toString().trim());
                 param.put("FullName", sharedPrefUtil.getString(FULL_NAME_SHARED_PREF));
-                param.put("Id", String.valueOf(idSaredPref));
+                param.put("Id",idSaredPref+"");
                 param.put("GUID", guidSaredPref);
                 return param;
             }

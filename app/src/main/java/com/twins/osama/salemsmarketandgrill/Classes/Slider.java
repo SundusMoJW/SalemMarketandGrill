@@ -12,8 +12,10 @@ import io.realm.annotations.RealmClass;
  */
 @RealmClass
 public class Slider extends RealmObject implements Parcelable {
-    String images;
-    String titels;
+    String FilePath;
+    String Link;
+    String Description;
+    String Titel;
     @PrimaryKey
     int Id;
     boolean isDeleted;
@@ -22,18 +24,35 @@ public class Slider extends RealmObject implements Parcelable {
     public Slider() {
     }
 
-    public Slider(String images, String titels, int id, boolean isDeleted, long updatedAt) {
-        this.images = images;
-        this.titels = titels;
-        Id = id;
+    public Slider(String FilePath, String Titel, int id, boolean isDeleted, long updatedAt, String Description,String Link) {
+        this.FilePath = FilePath;
+        this.Titel = Titel;
+        this.Id = id;
         this.isDeleted = isDeleted;
-        UpdatedAt = updatedAt;
+        this.UpdatedAt = updatedAt;
+        this.Description = Description;
+        this.Link = Link;
     }
 
-//    public Slider(String images, String titels) {
+    public String getLink() {
+        return Link;
+    }
+
+    public void setLink(String link) {
+        Link = link;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+//    public Slider(String FilePath, String Titel) {
 //
-//        this.images = images;
-//        this.titels = titels;
+//        this.FilePath = FilePath;
+//        this.Titel = Titel;
 //    }
 
     public int getId() {
@@ -60,20 +79,20 @@ public class Slider extends RealmObject implements Parcelable {
         UpdatedAt = updatedAt;
     }
 
-    public String getImages() {
-        return images;
+    public String getFilePath() {
+        return FilePath;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setFilePath(String FilePath) {
+        this.FilePath = FilePath;
     }
 
-    public String getTitels() {
-        return titels;
+    public String getTitel() {
+        return Titel;
     }
 
-    public void setTitels(String titels) {
-        this.titels = titels;
+    public void setTitel(String Titel) {
+        this.Titel = Titel;
     }
 
     @Override
@@ -83,7 +102,7 @@ public class Slider extends RealmObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(images);
-        dest.writeString(titels);
+        dest.writeString(FilePath);
+        dest.writeString(Titel);
     }
 }

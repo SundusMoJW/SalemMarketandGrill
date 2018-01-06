@@ -1,30 +1,18 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
-import android.app.Dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class CheckOutSteps extends Fragment implements View.OnClickListener {
@@ -47,7 +35,7 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
     private TextView cheque_draft;
     private TextView on_place;
     Resources res;
-    private EditText showPopupCheckout;
+//    private EditText showPopupCheckout;
     private SharedPrefUtil sharedPrefUtil=new SharedPrefUtil(this.getActivity());
 
     public static CheckOutSteps newInstance() {
@@ -157,34 +145,34 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
                 }
             });
         }
-        showPopupCheckout = (EditText) view.findViewById(R.id.showPopupCheckout);
-        showPopupCheckout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
-                dialog.setContentView(R.layout.spinner_layout);
-                ListView listView = (ListView) dialog.findViewById(R.id.showPopupCart);
-                final List<String> items = new ArrayList();
-                items.add("Country");
-                items.add("Country");
-                items.add("Country");
-                items.add("Country");
-                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
-//
-                listView.setAdapter(adapter);
-//
-                listView.setTextFilterEnabled(true);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        showPopupCheckout.setText(items.get(position));
-                        dialog.cancel();
-                    }
-                });
-                dialog.show();
-            }
-        });
+//        showPopupCheckout = (EditText) view.findViewById(R.id.showPopupCheckout);
+//        showPopupCheckout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Dialog dialog = new Dialog(getActivity());
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+//                dialog.setContentView(R.layout.spinner_layout);
+//                ListView listView = (ListView) dialog.findViewById(R.id.showPopupCart);
+//                final List<String> items = new ArrayList();
+//                items.add("Country");
+//                items.add("Country");
+//                items.add("Country");
+//                items.add("Country");
+//                ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,/* R.layout.spinner_layout, R.id.showPopupCart,*/items);
+////
+//                listView.setAdapter(adapter);
+////
+//                listView.setTextFilterEnabled(true);
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        showPopupCheckout.setText(items.get(position));
+//                        dialog.cancel();
+//                    }
+//                });
+//                dialog.show();
+//            }
+//        });
         return view;
     }
 
@@ -262,11 +250,13 @@ public class CheckOutSteps extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
     public void clearStylePaymentMethod(){
 direct_transfer.setBackground(getResources().getDrawable(R.drawable.edit_text));
         cheque_draft.setBackground(getResources().getDrawable(R.drawable.edit_text));
         pay_pal.setBackground(getResources().getDrawable(R.drawable.edit_text));
     }
+
     public void clearStyleDeliveryMethod() {
         res = getActivity().getResources();
         if (res.getConfiguration().locale.getDisplayLanguage().equalsIgnoreCase(res.getString(R.string.Arabic))) {
@@ -277,23 +267,8 @@ direct_transfer.setBackground(getResources().getDrawable(R.drawable.edit_text));
             delivery.setBackground(getResources().getDrawable(R.drawable.with_corner_left));
         }
     }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.frame_layout, new CartFragment()).commit();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
+
+
 
 }

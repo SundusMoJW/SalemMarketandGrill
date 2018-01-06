@@ -13,10 +13,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.WorkaroundMapFragment;
 import com.twins.osama.salemsmarketandgrill.R;
+
+import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 
 public class ContactUs extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -38,7 +39,7 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.contact_us));
         mScrollView = (ScrollView) view.findViewById(R.id.contact_us);
-
+        nav_back=1;
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.shopping).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.VISIBLE);

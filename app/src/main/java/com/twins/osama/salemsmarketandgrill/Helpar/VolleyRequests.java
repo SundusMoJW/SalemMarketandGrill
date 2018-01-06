@@ -36,9 +36,10 @@ public class VolleyRequests {
         return this;
     }
 
-    public void getMealsList() {
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMealsList", null
+    public void getMealsList(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("lastUpdate", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMealsList", new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -64,14 +65,16 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.getMessage()+"");
+                Log.d("error", "getMealsList");
             }
         });
         UIApplication.getAnInstance().addToRequestQueue(request);
     }
 
-    public void getMarketList() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMarketList", null
+    public void getMarketList(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("lastUpdate", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMarketList",new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -87,8 +90,8 @@ public class VolleyRequests {
                     if (iReceiveData != null) {
                         iReceiveData.onDataReceived(marketList);
                     }
-                    Log.i("OtherData", marketList.toString());
-                    Log.i("response", response.toString());
+//                    Log.i("OtherData", marketList.toString());
+//                    Log.i("response", response.toString());
                 } else {
                     Log.d("response", "Not Allo");
                 }
@@ -96,14 +99,19 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.getMessage()+"");
+                Log.d("error", "getMarketList");
             }
         });
-        UIApplication.getAnInstance().addToRequestQueue(request);
+        UIApplication.getAnInstance().
+
+                addToRequestQueue(request);
+
     }
 
-    public void getTypeList() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getTypeList", null
+    public void getTypeList(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("lastUpdate", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getTypeList", new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -122,14 +130,16 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.getMessage()+"");
+                Log.d("//error", "getTypeList");
             }
         });
         UIApplication.getAnInstance().addToRequestQueue(request);
-   }
+    }
 
-    public void getSliderImage() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URLF, null
+    public void getSliderImage(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("lastUpdate", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URLF, new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -156,15 +166,15 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.getMessage()+"");
+                Log.d("//error", "getSliderImage");
             }
         });
         UIApplication.getAnInstance().addToRequestQueue(request);
     }
 
     public void getMarketDetails(final int idMarket) {
-        HashMap<String,String> params = new HashMap<>();
-        params.put("IdMarket",idMarket+"");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("IdMarket", idMarket + "");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMarketDetails", new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -179,9 +189,9 @@ public class VolleyRequests {
 //                    realm.commitTransaction();
 //                } else realm.cancelTransaction();
                 if (Status) {
-                    Log.d("//Status", response.optJSONObject("OtherData")+"");
-                    Log.d("//Status", response.optString("OtherData")+"");
-                    Log.d("//Status", response.optString("Description")+"");
+                    Log.d("//Status", response.optJSONObject("OtherData") + "");
+                    Log.d("//Status1", response.optString("OtherData") + "");
+                    Log.d("//Status2", response.optString("Description") + "");
 
                     String description = response.optJSONObject("OtherData").optString("Description");
 //                    JSONObject description=marketList.getJSONObject()
@@ -197,15 +207,15 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.getMessage()+"");
+                Log.d("//error", "getMarketDetails");
             }
         });
         UIApplication.getAnInstance().addToRequestQueue(request);
     }
 
     public void getMealsDetails(final int idMarket) {
-        Log.d("getMealsDetails",idMarket+"");
-        HashMap<String,String> params = new HashMap<>();
+        Log.d("getMealsDetails", idMarket + "");
+        HashMap<String, String> params = new HashMap<>();
         params.put("IdMeals", String.valueOf(idMarket));
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getMealsDetails", new JSONObject(params)
                 , new Response.Listener<JSONObject>() {
@@ -215,17 +225,17 @@ public class VolleyRequests {
                 Log.i("//response", response.toString());
 
                 if (Status) {
-                    Log.d("//Status", response.optJSONObject("OtherData")+"");
-                    Log.d("//Status", response.optString("OtherData")+"");
-                    Log.d("//Status", response.optString("Description")+"");
+                    Log.d("//Status1", response.optJSONObject("OtherData") + "");
+                    Log.d("//Status2", response.optString("OtherData") + "");
+                    Log.d("//Status3", response.optString("Description") + "");
 
 //                    .optString("Description")
                     String description = response.optJSONObject("OtherData").optString("Description");
 
                     if (iReceiveData != null) {
-                        if(description!=null) {
+                        if (description != null) {
                             iReceiveData.onDataReceived(description);
-                        }else iReceiveData.onDataReceived("");
+                        } else iReceiveData.onDataReceived("");
                     }
                     Log.d("//description", description.toString());
                     Log.d("//responseDescription", response.toString());
@@ -236,7 +246,155 @@ public class VolleyRequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("//error", error.getMessage().toString()+"");
+                Log.d("//error", "getMealsDetails");
+            }
+        });
+        UIApplication.getAnInstance().addToRequestQueue(request);
+    }
+
+    public void getNewstList(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("UpdatedAt", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getNewsList",new JSONObject(params)
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+                Log.d("***StatusNewstList", Status+"");
+
+//                realm.beginTransaction();
+//                RealmResults<Meals> result = realm.where(Meals.class).findAll();
+//                if (!(result.isEmpty())) {
+//                    result.deleteAllFromRealm();
+//                    realm.commitTransaction();
+//                } else realm.cancelTransaction();
+                if (Status) {
+                    JSONArray marketList = response.optJSONArray("OtherData");
+                    if (iReceiveData != null) {
+                        iReceiveData.onDataReceived(marketList);
+                    }
+//                    Log.i("OtherData", marketList.toString());
+//                    Log.i("response", response.toString());
+                } else {
+                    Log.d("response", "Not Allo");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error","getNewstList");
+            }
+        });
+        UIApplication.getAnInstance().
+
+                addToRequestQueue(request);
+
+    }
+
+    public void getEventstList(final long lastUpdate) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("UpdatedAt", String.valueOf(lastUpdate));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getEventsList",new JSONObject(params)
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+//                Log.d("***StatusEventstList", Status+"");
+
+                if (Status) {
+                    JSONArray marketList = response.optJSONArray("OtherData");
+                    if (iReceiveData != null) {
+                        iReceiveData.onDataReceived(marketList);
+                        Log.d("***StatusEventstList", marketList.toString());
+
+                    }
+                } else {
+                    Log.d("response", "Not Allo");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error","getEventstList");
+            }
+        });
+        UIApplication.getAnInstance().
+                addToRequestQueue(request);
+    }
+
+    public void getNewsDetails(final int id) {
+        Log.d("getNewsDetails", id + "");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("Id", String.valueOf(id));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getNewsDetails", new JSONObject(params)
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+//                Log.i("//response", response.toString());
+
+                if (Status) {
+//                    Log.d("//Status1", response.optJSONObject("OtherData") + "");
+//                    Log.d("//Status2", response.optString("OtherData") + "");
+//                    Log.d("//Status3", response.optString("Description") + "");
+
+//                    .optString("Description")
+                    String description = response.optJSONObject("OtherData").optString("Body");
+
+                    if (iReceiveData != null) {
+                        if (description != null) {
+                            iReceiveData.onDataReceived(description);
+                        } else iReceiveData.onDataReceived("");
+                    }
+//                    Log.d("//descriptionNews", response.optJSONObject("OtherData").optString("Body").toString());
+//                    Log.d("//responseDescription", response.toString());
+                } else {
+                    Log.d("//responseDescription", "Not Allo");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error", "getNewsDetails");
+            }
+        });
+        UIApplication.getAnInstance().addToRequestQueue(request);
+    }
+
+    public void getEventsDetails(final int id) {
+        Log.d("getEventsDetails", id + "");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("Id", String.valueOf(id));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, STATIC_URL + "getEventsDetails", new JSONObject(params)
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean Status = response.optBoolean("Status");
+                Log.i("//response", response.toString());
+
+                if (Status) {
+//                    Log.d("//Status1", response.optJSONObject("OtherData") + "");
+//                    Log.d("//Status2", response.optString("OtherData") + "");
+//                    Log.d("//Status3", response.optString("Description") + "");
+
+//                    .optString("Description")
+                    String description = response.optJSONObject("OtherData").optString("Description");
+
+                    if (iReceiveData != null) {
+                        if (description != null) {
+                            iReceiveData.onDataReceived(description);
+                        } else iReceiveData.onDataReceived("");
+                    }
+//                    Log.d("//description", description.toString());
+//                    Log.d("//responseDescription", response.toString());
+                } else {
+                    Log.d("//responseDescription", "Not Allo");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error", "getEventsDetails");
             }
         });
         UIApplication.getAnInstance().addToRequestQueue(request);

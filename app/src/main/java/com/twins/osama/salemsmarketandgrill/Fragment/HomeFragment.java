@@ -3,6 +3,7 @@ package com.twins.osama.salemsmarketandgrill.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,21 +14,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.twins.osama.salemsmarketandgrill.Adapter.EventsAdapter;
 import com.twins.osama.salemsmarketandgrill.Adapter.HomeAdapter;
 import com.twins.osama.salemsmarketandgrill.Adapter.MarketAdapter;
+import com.twins.osama.salemsmarketandgrill.Adapter.NewsAdapter;
 import com.twins.osama.salemsmarketandgrill.Adapter.SliderAdapter;
 import com.twins.osama.salemsmarketandgrill.Classes.CartItem;
 import com.twins.osama.salemsmarketandgrill.Classes.Category;
+import com.twins.osama.salemsmarketandgrill.Classes.Events;
 import com.twins.osama.salemsmarketandgrill.Classes.Market;
 import com.twins.osama.salemsmarketandgrill.Classes.Meals;
+import com.twins.osama.salemsmarketandgrill.Classes.News;
 import com.twins.osama.salemsmarketandgrill.Classes.Slider;
 import com.twins.osama.salemsmarketandgrill.Classes.TypeList;
-import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.RealmController;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
+import com.twins.osama.salemsmarketandgrill.Interface.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -38,10 +44,9 @@ import java.util.TimerTask;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-//import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 
-
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener{
     private SliderAdapter adapter;
     public static boolean isSlider = false;
     private ViewPager mViewPager;
@@ -70,6 +75,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Market> meatsArrayList;
     private RealmResults<Market> realmMeatsResults;
     private MarketAdapter marketAdapter;
+    private ImageView more;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -86,9 +92,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        Const.setLangSettings(this.getActivity());
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        final View view = inflater.inflate(R.layout.fragment_home, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.coordinator));
-
+        nav_back=1;
         this.realm = RealmController.with(getActivity()).getRealm();
         RealmController.with(getActivity()).refresh();
         realm = Realm.getDefaultInstance();
@@ -167,15 +173,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         grocery = (TextView) view.findViewById(R.id.grocery);
         meat = (TextView) view.findViewById(R.id.meat);
         all_txt = (TextView) view.findViewById(R.id.all_txt);
+        more = view.findViewById(R.id.more);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+
         menu_tab.setOnClickListener(this);
         grocery.setOnClickListener(this);
         meat.setOnClickListener(this);
         all_txt.setOnClickListener(this);
+        more.setOnClickListener(this);
 
         RealmResults<TypeList> realmTypeListResults = realm.where(TypeList.class).equalTo("isDeleted", false).findAll();
         typeList = (ArrayList<TypeList>) realm.copyFromRealm(realmTypeListResults);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
 
         realmMealsResults = realm.where(Meals.class).equalTo("isDeleted", false).findAll();
         meals = (ArrayList<Meals>) realm.copyFromRealm(realmMealsResults);
@@ -201,7 +209,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 bundle.putInt("position", meals.get(position).getId());
                 Log.i("///*", meals.get(position).getId() + " ");
                 fragment.setArguments(bundle);
-                mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                mFragmentTransaction.add(R.id.frame_layout, fragment);
+                mFragmentTransaction.addToBackStack(null);
+                //add to back stake
                 mFragmentTransaction.commit();
             }
 
@@ -216,15 +226,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 int id = meals.get(position).getId();
                 RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                 ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                 CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                 if (cartItem == null) {
+                    ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                     CartItem putData = new CartItem(meals.get(position).getName(), meals.get(position).getId()
                             , meals.get(position).getFilePath(), meals.get(position).getIdTypeList()
-                            , 1, meals.get(position).getPrice(), null, null);
-                    realm.beginTransaction();
-                    realm.copyToRealm(putData);
-                    realm.commitTransaction();
+                            , 1, meals.get(position).getPrice(), false, null, meals.get(position).getListAdditions());
+                    RealmController.with(getActivity()).putInCartItem(putData);
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -254,7 +267,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         bundle.putInt("position", meals.get(position).getId());
                         Log.i("///*", meals.get(position).getId() + " ");
                         fragment.setArguments(bundle);
-                        mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                        mFragmentTransaction.add(R.id.frame_layout, fragment);
+                        mFragmentTransaction.addToBackStack(null);
                         mFragmentTransaction.commit();
                     }
 
@@ -269,15 +283,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         int id = realmMealsResults.get(position).getId();
                         RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                         ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                        ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                         CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                         if (cartItem == null) {
+                            ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                             CartItem putData = new CartItem(meals.get(position).getName(), meals.get(position).getId()
                                     , meals.get(position).getFilePath(), meals.get(position).getIdTypeList()
-                                    , 1, meals.get(position).getPrice(), null, null);
-                            realm.beginTransaction();
-                            realm.copyToRealm(putData);
-                            realm.commitTransaction();
+                                    , 1, meals.get(position).getPrice(), false, null, meals.get(position).getListAdditions());
+                            RealmController.with(getActivity()).putInCartItem(putData);
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -289,7 +306,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < typeList.size(); i++) {
                         if (typeList.get(i).getIdType() == 2) {
                             linearLayout.addView(getItem(new Category(typeList.get(i).getId(), typeList.get(i).getName())));
-
                         }
                         Log.i("///", typeList.get(i).getId() + " ");
                     }
@@ -310,7 +326,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Bundle bundle = new Bundle();
                         bundle.putInt("position", meatsArrayList.get(position).getId());
                         fragment.setArguments(bundle);
-                        mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                        mFragmentTransaction.add(R.id.frame_layout, fragment);
+                        mFragmentTransaction.addToBackStack(null);
                         mFragmentTransaction.commit();
                     }
 
@@ -325,15 +342,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         int id = meatsArrayList.get(position).getId();
                         RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                         ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                        ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                         CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                         if (cartItem == null) {
+                            ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                             CartItem putData = new CartItem(meatsArrayList.get(position).getName(), meatsArrayList.get(position).getId()
                                     , meatsArrayList.get(position).getFilePath(), meatsArrayList.get(position).getIdTypeList()
-                                    , 1, meatsArrayList.get(position).getPrice(), null, null);
-                            realm.beginTransaction();
-                            realm.copyToRealm(putData);
-                            realm.commitTransaction();
+                                    , 1, meatsArrayList.get(position).getPrice(), false, meatsArrayList.get(position).getListAdditions(), null);
+                            RealmController.with(getActivity()).putInCartItem(putData);
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -345,7 +365,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < typeList.size(); i++) {
                         if (typeList.get(i).getIdType() == 7) {
                             linearLayout.addView(getItem(new Category(typeList.get(i).getId(), typeList.get(i).getName())));
-
                         }
                         Log.i("///", typeList.get(i).getId() + " ");
                     }
@@ -368,7 +387,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         bundle.putInt("position", meatsArrayList.get(position).getId());
 //                Log.i("///*",  mealsArrayList.get(position).getId() + " ");
                         fragment.setArguments(bundle);
-                        mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                        mFragmentTransaction.add(R.id.frame_layout, fragment);
+                        mFragmentTransaction.addToBackStack(null);
                         mFragmentTransaction.commit();
                     }
 
@@ -383,15 +403,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         int id = meatsArrayList.get(position).getId();
                         RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                         ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                        ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                         CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                         if (cartItem == null) {
+                            ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                             CartItem putData = new CartItem(meatsArrayList.get(position).getName(), meatsArrayList.get(position).getId()
                                     , meatsArrayList.get(position).getFilePath(), meatsArrayList.get(position).getIdTypeList()
-                                    , 1, meatsArrayList.get(position).getPrice(), null, null);
-                            realm.beginTransaction();
-                            realm.copyToRealm(putData);
-                            realm.commitTransaction();
+                                    , 1, meatsArrayList.get(position).getPrice(), false, meatsArrayList.get(position).getListAdditions(), null);
+                            RealmController.with(getActivity()).putInCartItem(putData);
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            if (getView() != null)
+                                Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -410,7 +433,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
 
                 break;
+            case R.id.more:
+                constant = 4;
+                linearLayout.removeAllViews();
+                Category categoryAll = new Category(1, "News");
+                linearLayout.addView(getItem(categoryAll));
+                Category inside = new Category(2, "Inside Event");
+                linearLayout.addView(getItem(inside));
+                Category outside = new Category(3, "Outside Event");
+                linearLayout.addView(getItem(outside));
+                /*****  ne adapter    ********/
 
+                ArrayList<News> news = RealmController.with(getActivity()).getNewsList();
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                NewsAdapter newsAdapter = new NewsAdapter(getActivity(), news);
+                recyclerView.setAdapter(newsAdapter);
+                newsAdapter.notifyDataSetChanged();
+                break;
         }
     }
 
@@ -431,13 +470,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     getMeatList(item.getId());
                 } else if (constant == 3) {
                     getGroceryList(item.getId());
+                } else if (constant == 4) {
+                    getMore(item.getId());
                 }
             }
         });
         return ll;
     }
 
-    public void getMealItem(final int id) {
+    private void getMealItem(final int id) {
 
         if (id == -1) {
             realmMealsResults = realm.where(Meals.class).equalTo("isDeleted", false).findAll();
@@ -464,7 +505,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meals.get(position).getId());
                 fragment.setArguments(bundle);
-                mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                mFragmentTransaction.add(R.id.frame_layout, fragment);
+                mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
             }
 
@@ -479,15 +521,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 int id = meals.get(position).getId();
                 RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                 ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                 CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                 if (cartItem == null) {
+                    ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                     CartItem putData = new CartItem(meals.get(position).getName(), meals.get(position).getId()
                             , meals.get(position).getFilePath(), meals.get(position).getIdTypeList()
-                            , 1, meals.get(position).getPrice(), null, null);
-                    realm.beginTransaction();
-                    realm.copyToRealm(putData);
-                    realm.commitTransaction();
+                            , 1, meals.get(position).getPrice(), false, null, meals.get(position).getListAdditions());
+                    RealmController.with(getActivity()).putInCartItem(putData);
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -495,7 +541,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         melsadapter.notifyDataSetChanged();
     }
 
-    public void getMeatList(final int id) {
+    private void getMeatList(final int id) {
 
         if (id == -1) {
             realmMeatsResults = realm.where(Market.class).equalTo("type", 2).equalTo("isDeleted", false).findAll();
@@ -519,7 +565,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meatsArrayList.get(position).getId());
                 fragment.setArguments(bundle);
-                mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                mFragmentTransaction.add(R.id.frame_layout, fragment);
+                mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
             }
 
@@ -534,15 +581,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 int id = meatsArrayList.get(position).getId();
                 RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                 ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                 CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                 if (cartItem == null) {
+                    ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                     CartItem putData = new CartItem(meatsArrayList.get(position).getName(), meatsArrayList.get(position).getId()
                             , realmMeatsResults.get(position).getFilePath(), meatsArrayList.get(position).getIdTypeList()
-                            , 1, meatsArrayList.get(position).getPrice(), null, null);
-                    realm.beginTransaction();
-                    realm.copyToRealm(putData);
-                    realm.commitTransaction();
+                            , 1, meatsArrayList.get(position).getPrice(), false, meatsArrayList.get(position).getListAdditions(), null);
+                    RealmController.with(getActivity()).putInCartItem(putData);
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -550,7 +600,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         melsadapter.notifyDataSetChanged();
     }
 
-    public void getGroceryList(final int id) {
+    private void getGroceryList(final int id) {
 
         if (id == -1) {
             realmMeatsResults = realm.where(Market.class).equalTo("type", 1).equalTo("isDeleted", false).findAll();
@@ -574,7 +624,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", meatsArrayList.get(position).getId());
                 fragment.setArguments(bundle);
-                mFragmentTransaction.replace(R.id.frame_layout, fragment);
+                mFragmentTransaction.add(R.id.frame_layout, fragment);
+                mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
             }
 
@@ -587,21 +638,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onButtonClick(int position) {
                 int idTypeList = meatsArrayList.get(position).getIdTypeList();
                 int id = meatsArrayList.get(position).getId();
+
+                Log.d("//Id Button :", id + "   idType:" + idTypeList);
+
                 RealmResults cartItems = RealmController.with(getActivity()).getCartItems();
                 ArrayList cartItemsArr = (ArrayList<CartItem>) realm.copyFromRealm(cartItems);
-                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                 CartItem cartItem = RealmController.with(getActivity()).cheackCartItem(id, idTypeList);
                 if (cartItem == null) {
+                    ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(cartItemsArr.size() + 1 + "");
                     CartItem putData = new CartItem(meatsArrayList.get(position).getName(), meatsArrayList.get(position).getId()
                             , meatsArrayList.get(position).getFilePath(), meatsArrayList.get(position).getIdTypeList()
-                            , 1, meatsArrayList.get(position).getPrice(), null, null);
-                    realm.beginTransaction();
-                    realm.copyToRealm(putData);
-                    realm.commitTransaction();
+                            , 1, meatsArrayList.get(position).getPrice(), false, meatsArrayList.get(position).getListAdditions(), null);
+                    RealmController.with(getActivity()).putInCartItem(putData);
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.addToCart), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (getView() != null)
+                        Snackbar.make(mCoordinatorLayout, getString(R.string.beforeAddToCart), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
         recyclerView.setAdapter(marketAdapter);
         marketAdapter.notifyDataSetChanged();
     }
+
+    private void getMore(final int id) {
+        if (id == 1) {
+            ArrayList<News> news = RealmController.with(getActivity()).getNewsList();
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            NewsAdapter newsAdapter = new NewsAdapter(getActivity(), news);
+            recyclerView.setAdapter(newsAdapter);
+            newsAdapter.notifyDataSetChanged();
+        } else if (id == 2) {
+            ArrayList<Events> events = RealmController.with(getActivity()).getInEventsList();
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            EventsAdapter eventsAdapter = new EventsAdapter(getActivity(), events);
+            recyclerView.setAdapter(eventsAdapter);
+            eventsAdapter.notifyDataSetChanged();
+        } else if (id == 3) {
+            ArrayList<Events> events = RealmController.with(getActivity()).getOutEventsList();
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            EventsAdapter eventsAdapter = new EventsAdapter(getActivity(), events);
+            recyclerView.setAdapter(eventsAdapter);
+            eventsAdapter.notifyDataSetChanged();
+        }
+    }
+
+
 }

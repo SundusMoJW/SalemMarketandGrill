@@ -10,16 +10,14 @@ public class sendServerItems {
     private int idMarket;
     private int idMeals;
     private int count;
-    private List<MarketAdditionsAPI> marketListAdditions;
-    private List<MealsAdditionsAPI> mealListAdditions;
+    private List<Integer> listAdditions;
 
-    public sendServerItems(int idMarket, int idMeals, int count, List<MarketAdditionsAPI> marketListAdditions,
-                           List<MealsAdditionsAPI> mealListAdditions) {
+    public sendServerItems(int idMarket, int idMeals, int count,
+                           List<Integer> listAdditions) {
         this.idMarket = idMarket;
         this.idMeals = idMeals;
         this.count = count;
-        this.marketListAdditions = marketListAdditions;
-        this.mealListAdditions = mealListAdditions;
+        this.listAdditions = listAdditions;
     }
 
     public int getIdMarket() {
@@ -46,19 +44,11 @@ public class sendServerItems {
         this.count = count;
     }
 
-    public List<MarketAdditionsAPI> getMarketListAdditions() {
-        return marketListAdditions;
+    public List<Integer> getListAdditions() {
+        return listAdditions;
     }
 
-    public void setMarketListAdditions(List<MarketAdditionsAPI> marketListAdditions) {
-        this.marketListAdditions = marketListAdditions;
-    }
-
-    public List<MealsAdditionsAPI> getMealListAdditions() {
-        return mealListAdditions;
-    }
-
-    public void setMealListAdditions(List<MealsAdditionsAPI> mealListAdditions) {
-        this.mealListAdditions = mealListAdditions;
+    public void setListAdditions(List<Integer> listAdditions) {
+        this.listAdditions = listAdditions;
     }
 }

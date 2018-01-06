@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,11 +58,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUp.this, Login.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.right_enter,R.anim.left_out);
+                overridePendingTransition(R.anim.right_enter, R.anim.left_out);
                 finish();
             }
         });
- }
+    }
 
     public void SignUp() {
         //Adding the string request to the queue
@@ -78,8 +79,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONObject OtherData = jsonObject.optJSONObject("OtherData");
-                    if (OtherData == null) {
+                    boolean Status = jsonObject.optBoolean("Status");
+                    if (!Status) {
                         if (progressDialog != null && progressDialog.isShowing())
                             progressDialog.dismiss();
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
@@ -103,17 +104,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         finish();
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.i("////", e + "");
                 }
             }
-        }, new Response.ErrorListener()
-
-        {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 new CustomToast().Show_Toast(getApplicationContext(), view,
                         "You must check the network");
                 progressDialog.dismiss();
+                Log.i("////", error + "");
             }
         }) {
             @Override
@@ -133,7 +133,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(validate()){
+        if (validate()) {
             SignUp();
         }
     }
@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         String mobile = mobileSignup.getText().toString();
         String password = passswordSignup.getText().toString();
         String reEnterPassword = confirmPassswordSignup.getText().toString();
-        String ueserName=ueserNameSignup.getText().toString();
+        String ueserName = ueserNameSignup.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailSignup.setError("enter a valid email address");
@@ -167,7 +167,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         } else {
             emailSignup.setError(null);
         }
-        if (password.isEmpty() || password.length() < 4 ) {
+        if (password.isEmpty() || password.length() < 4) {
             passswordSignup.setError("At Least 4  alphanumeric characters");
             return false;
         } else {
@@ -197,7 +197,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         } else {
             adressSignup.setError(null);
         }
-        if (mobile.isEmpty() || mobile.length()<10) {
+        if (mobile.isEmpty() || mobile.length() < 10) {
             mobileSignup.setError("Enter Valid Mobile Number");
             return false;
         } else {

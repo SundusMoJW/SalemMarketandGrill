@@ -18,13 +18,14 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 
 public class BookEvent extends Fragment {
     private TextView event_date;
@@ -50,7 +51,7 @@ public class BookEvent extends Fragment {
         View view = inflater.inflate(R.layout.fragment_book_event, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.bookEvent));
         event_date = (TextView) view.findViewById(R.id.event_date);
-
+        nav_back=1;
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.shopping).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.VISIBLE);

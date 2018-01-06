@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.twins.osama.salemsmarketandgrill.Helpar.DrawerItem;
-import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
+import com.twins.osama.salemsmarketandgrill.Interface.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.SharedPrefUtil;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
@@ -37,7 +37,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private String email;
     private Activity context;
     OnDrawerItemClickListener listener;
-    public static int PROFILE = R.drawable.blank_profile_picture;
+    public static int PROFILE = R.drawable.logo;
+    private String NAME;
+    private String EMAILProfile;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int Holderid;
@@ -136,11 +138,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(MyAdapter.ViewHolder holder, final int position) {
 
         if (holder.Holderid == 0) {
-            name = sharedPref.getString(USER_NAME_SHARED_PREF);
-            email = sharedPref.getString(EMAIL_SHARED_PREF);
+            NAME = sharedPref.getString(USER_NAME_SHARED_PREF);
+            if(NAME.equals("null")){
+                NAME="Your Name";
+            }
+            EMAILProfile = sharedPref.getString(EMAIL_SHARED_PREF);
+            if(EMAILProfile.equals("null")){
+                EMAILProfile="Your Email";
+            }
+//            name = sharedPref.getString(USER_NAME_SHARED_PREF);
+//            email = sharedPref.getString(EMAIL_SHARED_PREF);
             holder.profile.setImageResource(PROFILE);
-            holder.Name.setText(name);
-            holder.email.setText(email);
+            holder.Name.setText(NAME);
+            holder.email.setText(EMAILProfile);
             holder.profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

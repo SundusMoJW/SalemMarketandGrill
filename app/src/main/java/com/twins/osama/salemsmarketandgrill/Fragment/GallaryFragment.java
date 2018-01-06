@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 
 import com.twins.osama.salemsmarketandgrill.Activity.MainActivity;
 import com.twins.osama.salemsmarketandgrill.Adapter.GallaryAdapter;
-import com.twins.osama.salemsmarketandgrill.Helpar.Const;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 import com.twins.osama.salemsmarketandgrill.Template.RVGallaryTemplate;
 
 import java.util.ArrayList;
+
+import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 
 public class GallaryFragment extends Fragment {
     ArrayList<RVGallaryTemplate> data;
@@ -43,7 +44,7 @@ public class GallaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gallary, container, false);
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.gallary_fragment));
         TypefaceUtil.applyFont(getActivity(),view.findViewById(R.id.cardView));
-
+        nav_back=1;
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.shopping).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.VISIBLE);

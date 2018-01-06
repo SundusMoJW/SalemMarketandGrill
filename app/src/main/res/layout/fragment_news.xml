@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollnewsFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:scrollbars="none"
+    android:textDirection="ltr"
+    tools:context=".Fragment.NewsFragment">
+
+    <LinearLayout
+        android:id="@+id/newsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/rest_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hight_slider"
+            android:scaleType="fitXY"
+            fresco:placeholderImage="@drawable/default_placeholder" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/backLogo" />
+            <TextView
+                android:id="@+id/ret_titel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="15dp"
+                android:padding="5dp"
+                android:text="Titel"
+                android:textSize="@dimen/titel"
+                android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rest_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:padding="5dp"
+            android:text=""
+            android:textSize="@dimen/textSize" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="SHARE THIS WITH FRIENDS "
+            android:textColor="@color/backLogo"
+            android:textSize="@dimen/titel" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_facebook_letter_logo" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_twitter" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                app:srcCompat="@drawable/ic_google_plus_logo" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape_black"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_digg" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_reddit_social_logo_character" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_delicious" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_stumbleupon" />
+
+            <ImageView
+                android:layout_width="@dimen/res_ic_size"
+                android:layout_height="@dimen/res_ic_size"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle_shape"
+                android:padding="@dimen/rest_ic_padding"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_envelope" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

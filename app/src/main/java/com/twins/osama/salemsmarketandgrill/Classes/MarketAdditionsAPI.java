@@ -14,15 +14,24 @@ public class MarketAdditionsAPI extends RealmObject {
     private int IdMarket ;
     private int IdAdditions;
     private String AdditionsText;
-
+    private boolean select =true;
     public MarketAdditionsAPI() {
     }
 
-    public MarketAdditionsAPI(int id, int idMarket, int idAdditions, String additionsText) {
+    public MarketAdditionsAPI(int id, int idMarket, int idAdditions, String additionsText,boolean select) {
         Id = id;
         IdMarket = idMarket;
         IdAdditions = idAdditions;
         AdditionsText = additionsText;
+        this.select=select;
+    }
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 
     public int getId() {

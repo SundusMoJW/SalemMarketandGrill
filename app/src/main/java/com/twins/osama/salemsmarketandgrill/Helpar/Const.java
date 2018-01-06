@@ -10,6 +10,9 @@ import android.util.DisplayMetrics;
 
 import com.twins.osama.salemsmarketandgrill.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -142,6 +145,34 @@ public class Const {
             }
         }, 3000);
     }
+//    public static String getDate(long time) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeInMillis(time);
+//        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+//        return date;
+//    }
 
+//    public static String getDate(long time) {
+//        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+//        cal.setTimeInMillis(time * 1000L);
+//        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+//        return date;
+//    }
+    public static String getDate(long time) {
+        Date d;
+        String s="";
+        try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+          d = sdf.parse(time+"");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+           s=  sdf2.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTimeInMillis(time);
+//        Date d = c.getTime();
+        return s;
+    }
 }
 //

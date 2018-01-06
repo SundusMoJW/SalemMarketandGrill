@@ -34,6 +34,9 @@ public class Slider extends RealmObject implements Parcelable {
         this.Link = Link;
     }
 
+    public Slider(Parcel source) {
+    }
+
     public String getLink() {
         return Link;
     }
@@ -95,6 +98,24 @@ public class Slider extends RealmObject implements Parcelable {
         this.Titel = Titel;
     }
 
+//    public readFromParcel(Parcel in) {
+//        this.FilePath = in.readString();
+//        this.Titel = in.readString();
+//    }
+//    public readFromParcel() {
+
+//    }
+private static final Parcelable.Creator<Slider> CREATOR = new Parcelable.Creator<Slider>() {
+    @Override
+    public Slider createFromParcel(Parcel source) {
+        return new Slider(source);
+    }
+
+    @Override
+    public Slider[] newArray(int size) {
+        return new Slider[size];
+    }
+};
     @Override
     public int describeContents() {
         return 0;

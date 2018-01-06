@@ -14,15 +14,17 @@ public class MealsAdditionsAPI extends RealmObject {
     private int IdMeals;
     private int IdAdditions;
     private String AdditionsText;
+    private boolean select = true;
 
     public MealsAdditionsAPI() {
     }
 
-    public MealsAdditionsAPI(int id, int idMeals, int idAdditions, String additionsText) {
+    public MealsAdditionsAPI(int id, int idMeals, int idAdditions, String additionsText, boolean select) {
         Id = id;
         IdMeals = idMeals;
         IdAdditions = idAdditions;
         AdditionsText = additionsText;
+        this.select = select;
     }
 
     public int getId() {
@@ -55,5 +57,13 @@ public class MealsAdditionsAPI extends RealmObject {
 
     public void setAdditionsText(String additionsText) {
         AdditionsText = additionsText;
+    }
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 }

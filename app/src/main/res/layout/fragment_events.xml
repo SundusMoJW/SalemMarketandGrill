@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/restaurant_id"
+    android:id="@+id/ScrolleventsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:scrollbars="none"
-    android:background="@color/white"
     android:textDirection="ltr"
-    tools:context=".Fragment.RestaurantFragment">
+    tools:context=".Fragment.EventsFragment">
 
     <LinearLayout
-        android:id="@+id/restaurant"
+        android:id="@+id/eventsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -25,125 +24,12 @@
             android:scaleType="fitXY"
             fresco:placeholderImage="@drawable/default_placeholder" />
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow_grey"
-            android:gravity="center"
-            android:padding="8dp">
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/backLogo" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Category"
-                android:textColor="@color/black"
-                android:textSize="@dimen/titel" />
-
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent" />
-
-            <TextView
-                android:id="@+id/rest_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Sweets"
-                android:textColor="@color/black"
-                android:textSize="@dimen/titel" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
-
-                <ImageView
-                    android:layout_width="@dimen/rest_icon"
-                    android:layout_height="@dimen/rest_icon"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    app:srcCompat="@drawable/ic_like" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center"
-                    android:text="Like"
-                    android:textSize="@dimen/textSize" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:padding="2dp">
-
-                <ImageView
-                    android:layout_width="@dimen/rest_icon"
-                    android:layout_height="@dimen/rest_icon"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    app:srcCompat="@drawable/ic_chat" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center"
-                    android:text="Comment"
-                    android:textSize="@dimen/textSize" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:padding="2dp">
-
-                <ImageView
-                    android:layout_width="@dimen/rest_icon"
-                    android:layout_height="@dimen/rest_icon"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    app:srcCompat="@drawable/ic_twitter_small" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center"
-                    android:text="Tweet this"
-                    android:textSize="@dimen/textSize" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
         <TextView
             android:id="@+id/ret_titel"
             android:layout_width="match_parent"
@@ -153,22 +39,83 @@
             android:layout_margin="15dp"
             android:padding="5dp"
             android:text="Titel"
-            android:textStyle="bold"
-            android:textSize="@dimen/titel" />
-        <TextView
-            android:id="@+id/add_to_cart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/titel"
+            android:textStyle="bold" />
+
+        <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="15dp"
-            android:layout_centerVertical="true"
-            android:background="@color/backLogo"
-            android:padding="10dp"
-            android:text="+ Add to cart"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize"
-            android:textStyle="bold" />
-        </RelativeLayout>
+            android:orientation="vertical"
+            android:shrinkColumns="*"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="From:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="To:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="MaxPeople:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/maxPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize" />
+            </TableRow>
+        </TableLayout>
+
         <TextView
             android:id="@+id/rest_description"
             android:layout_width="match_parent"
@@ -179,13 +126,7 @@
             android:text=""
             android:textSize="@dimen/textSize" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/addAddition"
-            android:orientation="vertical"/>
-
-            <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

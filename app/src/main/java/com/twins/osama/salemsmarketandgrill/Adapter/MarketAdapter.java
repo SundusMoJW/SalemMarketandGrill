@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.twins.osama.salemsmarketandgrill.Classes.Market;
-import com.twins.osama.salemsmarketandgrill.Helpar.OnDrawerItemClickListener;
+import com.twins.osama.salemsmarketandgrill.Interface.OnDrawerItemClickListener;
 import com.twins.osama.salemsmarketandgrill.Helpar.TypefaceUtil;
 import com.twins.osama.salemsmarketandgrill.R;
 

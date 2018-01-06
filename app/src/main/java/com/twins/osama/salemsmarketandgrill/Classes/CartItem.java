@@ -15,10 +15,12 @@ public class CartItem extends RealmObject {
     private int IdTypeList;
     private int count;
     private double Price;
+    private boolean select =false;
+
     private RealmList<MarketAdditionsAPI> marketListAdditions;
     private RealmList<MealsAdditionsAPI> mealListAdditions;
 
-    public CartItem(String name, int id, String filePath, int idTypeList, int count, double price,
+    public CartItem(String name, int id, String filePath, int idTypeList, int count, double price,boolean select,
                     RealmList<MarketAdditionsAPI> marketListAdditions, RealmList<MealsAdditionsAPI> mealListAdditions) {
         Name = name;
         Id = id;
@@ -28,9 +30,18 @@ public class CartItem extends RealmObject {
         Price = price;
         this.marketListAdditions = marketListAdditions;
         this.mealListAdditions = mealListAdditions;
+        this.select=select;
     }
 
     public CartItem() {}
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
+    }
 
     public String getName() {
         return Name;

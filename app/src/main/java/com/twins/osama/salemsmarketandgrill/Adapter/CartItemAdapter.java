@@ -122,10 +122,10 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                item.get(position).setSelect(b);
-                realm.beginTransaction();
-                cartItem.setSelect(b);
-                realm.commitTransaction();
+                item.get(holder.getAdapterPosition()).setSelect(b);
+//                realm.beginTransaction();
+//                cartItem.setSelect(b);
+//                realm.commitTransaction();
             }
         });
 

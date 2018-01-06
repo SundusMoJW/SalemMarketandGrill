@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (nav_back != 0 && getFragmentManager().getBackStackEntryCount() ==0 ) {
+        if (nav_back != 0 && getFragmentManager().getBackStackEntryCount() <=0 ) {
             Log.i("////*", nav_back + "");
             fragment = new HomeFragment();
             nav_back = 0;

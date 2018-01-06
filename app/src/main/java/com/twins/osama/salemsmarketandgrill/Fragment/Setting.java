@@ -241,7 +241,7 @@ public class Setting extends Fragment implements View.OnClickListener {
                 break;
         }
         fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.frame_layout, nextFragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout, nextFragment).addToBackStack(null).commit();
 
 
     }

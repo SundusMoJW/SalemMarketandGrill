@@ -36,7 +36,7 @@ import io.realm.RealmResults;
 import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 
 
-public class CartFragment extends Fragment  {
+public class CartFragment extends Fragment {
     private Button buPlus;
     private Button buMins;
     private TextView txtResult;
@@ -79,7 +79,7 @@ public class CartFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         TypefaceUtil.applyFont(getActivity(), view.findViewById(R.id.cart_fragment));
         this.realm = RealmController.with(getActivity()).getRealm();
-        nav_back=1;
+        nav_back = 1;
         getActivity().findViewById(R.id.menu).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.shopping).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.adding_to_cart).setVisibility(View.VISIBLE);
@@ -215,11 +215,11 @@ public class CartFragment extends Fragment  {
                 for (CartItem cartItem : list) {
                     cartItem.setSelect(b);
 
-                    final CartItem cheackCartItem = RealmController.with(getActivity()).cheackCartItem(cartItem.getId(),
-                            cartItem.getIdTypeList());
-                    realm.beginTransaction();
-                    cheackCartItem.setSelect(b);
-                    realm.commitTransaction();
+//                    final CartItem cheackCartItem = RealmController.with(getActivity()).cheackCartItem(cartItem.getId(),
+//                            cartItem.getIdTypeList());
+//                    realm.beginTransaction();
+//                    cheackCartItem.setSelect(b);
+//                    realm.commitTransaction();
                 }
             }
         });
@@ -234,6 +234,11 @@ public class CartFragment extends Fragment  {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 deleteFromCartItem();
+                                RealmResults<CartItem> realmResults=RealmController.with(getActivity()).getCartItems();
+                                list=new ArrayList<>();
+                                list=(ArrayList<CartItem>) realm.copyFromRealm(realmResults);
+                                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(list.size()+ "");
+                                rvadapter = new CartItemAdapter((MainActivity) getActivity(), list, subtotal, shipping, total);
                             }
                         });
 
@@ -321,16 +326,14 @@ public class CartFragment extends Fragment  {
         ListIterator<CartItem> listIterator = list.listIterator();
         while (listIterator.hasNext()) {
             CartItem item = listIterator.next();
-            if (!(item.isSelect())) {
+            if ((item.isSelect())) {
                 realm.beginTransaction();
                 final CartItem cheackCartItem = RealmController.with(getActivity()).cheackCartItem(item.getId(),
                         item.getIdTypeList());
                 cheackCartItem.deleteFromRealm();
                 realm.commitTransaction();
-                rvadapter.notifyDataSetChanged();
+
             }
         }
     }
-
-
 }

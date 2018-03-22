@@ -214,6 +214,8 @@ public class CartFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 for (CartItem cartItem : list) {
                     cartItem.setSelect(b);
+                    rvadapter.notifyDataSetChanged();
+//                    rvadapter = new CartItemAdapter((MainActivity) getActivity(), list, subtotal, shipping, total);
 
 //                    final CartItem cheackCartItem = RealmController.with(getActivity()).cheackCartItem(cartItem.getId(),
 //                            cartItem.getIdTypeList());
@@ -234,11 +236,13 @@ public class CartFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 deleteFromCartItem();
-                                RealmResults<CartItem> realmResults=RealmController.with(getActivity()).getCartItems();
-                                list=new ArrayList<>();
-                                list=(ArrayList<CartItem>) realm.copyFromRealm(realmResults);
-                                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(list.size()+ "");
-                                rvadapter = new CartItemAdapter((MainActivity) getActivity(), list, subtotal, shipping, total);
+                                RealmResults<CartItem> realmResults = RealmController.with(getActivity()).getCartItems();
+//                                list.clear();
+                                rvadapter.notifyDataSetChanged();
+                                list = (ArrayList<CartItem>) realm.copyFromRealm(realmResults);
+                                ((TextView) getActivity().findViewById(R.id.adding_to_cart)).setText(list.size() + "");
+//                                rvadapter = new CartItemAdapter((MainActivity) getActivity(), list, subtotal, shipping, total);
+                                rvadapter.notifyDataSetChanged();
                             }
                         });
 
@@ -332,6 +336,7 @@ public class CartFragment extends Fragment {
                         item.getIdTypeList());
                 cheackCartItem.deleteFromRealm();
                 realm.commitTransaction();
+//                rvadapter.notifyDataSetChanged();
 
             }
         }

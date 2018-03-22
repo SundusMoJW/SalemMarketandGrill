@@ -85,4 +85,6 @@ public class GallaryFragment extends Fragment {
         data.add(new RVGallaryTemplate(img1,suspendisse_gravida ,more_info,expand_photo));
         return data;
     }
+
+
 }

@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<DrawerItem> items;
     private ArrayList<String> itemsTitles;
     public static int nav_back = 0;
-    public static String NAME;
-    public static String EMAILProfile;
-    public static int PROFILE = R.drawable.blank_profile_picture;
+//    public static String NAME;
+//    public static String EMAILProfile;
+//    public static int PROFILE = R.drawable.blank_profile_picture;
     private Toolbar toolbar;
     public RecyclerView mRecyclerView;
     public static RecyclerView.Adapter mAdapter;

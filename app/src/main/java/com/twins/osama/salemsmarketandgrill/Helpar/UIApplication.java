@@ -5,6 +5,7 @@ import android.app.Application;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.facebook.FacebookSdk;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import io.realm.Realm;
@@ -23,6 +24,9 @@ public class UIApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /**********************FacebookSdk*********************/
+        FacebookSdk.sdkInitialize(this);
+
         /************ Initial Volley ****************/
         anInstance = this;
         requestQueue = Volley.newRequestQueue(this);

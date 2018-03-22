@@ -123,6 +123,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 item.get(holder.getAdapterPosition()).setSelect(b);
+//                                listener.onItemLongClicked(holder.getAdapterPosition());
+
 //                realm.beginTransaction();
 //                cartItem.setSelect(b);
 //                realm.commitTransaction();
@@ -171,6 +173,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         item.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, item.size());
+
     }
 
     @Override

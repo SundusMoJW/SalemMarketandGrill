@@ -5,5 +5,5 @@ package com.twins.osama.salemsmarketandgrill.Interface;
  */
 
 public interface OnClickedCartItem {
-    boolean onItemLongClicked(int position);
+    void onItemLongClicked(int position);
 }

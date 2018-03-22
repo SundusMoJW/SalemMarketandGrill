@@ -1,5 +1,6 @@
 package com.twins.osama.salemsmarketandgrill.Fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -10,10 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.twins.osama.salemsmarketandgrill.Classes.CartItem;
 import com.twins.osama.salemsmarketandgrill.Classes.Market;
 import com.twins.osama.salemsmarketandgrill.Classes.MarketAdditionsAPI;
@@ -26,11 +34,14 @@ import com.twins.osama.salemsmarketandgrill.Helpar.VolleyRequests;
 import com.twins.osama.salemsmarketandgrill.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.twins.osama.salemsmarketandgrill.Activity.MainActivity.nav_back;
 import static com.twins.osama.salemsmarketandgrill.Fragment.HomeFragment.constant;
 import static com.twins.osama.salemsmarketandgrill.Helpar.Const.IMG_URL;
@@ -51,6 +62,9 @@ public class RestaurantFragment extends Fragment {
     private String description;
     private TextView addToCart;
     private LinearLayout restaurant;
+    private CallbackManager callbackManager;
+    private LoginManager manager;
+    private ImageView facebook;
 
     public static RestaurantFragment newInstance() {
 
@@ -88,6 +102,8 @@ public class RestaurantFragment extends Fragment {
         restDescription = (TextView) view.findViewById(R.id.rest_description);
         addToCart = view.findViewById(R.id.add_to_cart);
         restaurant=view.findViewById(R.id.restaurant);
+        facebook=view.findViewById(R.id.facebook);
+
         Log.i("///**", position + " ");
         if (constant == 1) {
             /*****getData*******/
@@ -230,6 +246,45 @@ public class RestaurantFragment extends Fragment {
                 }
             }
         });
+
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FacebookSdk.sdkInitialize(getApplicationContext());
+
+                callbackManager = CallbackManager.Factory.create();
+
+                List<String> permissionNeeds = Arrays.asList("publish_actions");
+
+                //this loginManager helps you eliminate adding a LoginButton to your UI
+                manager = LoginManager.getInstance();
+
+                manager.logInWithPublishPermissions(getActivity(), permissionNeeds);
+
+                manager.registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+                {
+                    @Override
+                    public void onSuccess(LoginResult loginResult)
+                    {
+                        sharePhotoToFacebook();
+                    }
+
+                    @Override
+                    public void onCancel()
+                    {
+                        System.out.println("onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception)
+                    {
+                        System.out.println("onError");
+                    }
+                });
+            }
+        });
+
         return view;
     }
 
@@ -278,5 +333,28 @@ public class RestaurantFragment extends Fragment {
 
         return addition_item;
     }
+
+    private void sharePhotoToFacebook(){
+//        Bitmap image = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+//        SharePhoto photo = new SharePhoto.Builder()
+//                .setImageUrl(image)
+//                .setCaption("Give me my codez or I will ... you know, do that thing you don't like!")
+//                .build();
+//
+//        SharePhotoContent content = new SharePhotoContent.Builder()
+//                .addPhoto(photo)
+//                .build();
+//
+//        ShareApi.share(content, null);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int responseCode, Intent data)
+    {
+        super.onActivityResult(requestCode, responseCode, data);
+        callbackManager.onActivityResult(requestCode, responseCode, data);
+    }
+
 }
 

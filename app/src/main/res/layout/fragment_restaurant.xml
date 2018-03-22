@@ -202,6 +202,7 @@
             android:padding="10dp">
 
             <ImageView
+                android:id="@+id/facebook"
                 android:layout_width="@dimen/res_ic_size"
                 android:layout_height="@dimen/res_ic_size"
                 android:layout_margin="1dp"
@@ -210,6 +211,7 @@
                 app:srcCompat="@drawable/ic_facebook_letter_logo" />
 
             <ImageView
+                android:id="@+id/tweet"
                 android:layout_width="@dimen/res_ic_size"
                 android:layout_height="@dimen/res_ic_size"
                 android:layout_margin="1dp"
@@ -218,6 +220,7 @@
                 app:srcCompat="@drawable/ic_twitter" />
 
             <ImageView
+                android:id="@+id/google"
                 android:layout_width="@dimen/res_ic_size"
                 android:layout_height="@dimen/res_ic_size"
                 android:layout_margin="1dp"

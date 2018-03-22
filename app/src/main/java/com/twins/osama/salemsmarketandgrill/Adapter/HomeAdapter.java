@@ -49,7 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 //        if ((item.get(position).Description).equals("null"))
 //            holder.text_main.setText(" ");
 //        else holder.text_main.setText(item.get(position).Description);
-        holder.txt_salry.setText("" + item.get(position).getPrice());
+        holder.txt_salry.setText( item.get(position).getPrice()+" $");
         try {
 
         Uri uri = Uri.parse(IMG_URL + item.get(position).getFilePath().replace("~", ""));
